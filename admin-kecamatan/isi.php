@@ -31,4 +31,7 @@ else if ($_GET['module'] == "user") {
 else if ($_GET['module'] == "edit_user") {
 	include "module/user/user.php";	
 }
+else if ($_GET['module'] == "search") {
+	include STRING_MATCHING_DIR."search.php";
+}
 ?>

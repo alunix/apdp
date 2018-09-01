@@ -33,5 +33,4 @@ function form_tanggal($nama,$value=''){
 	";
 }
 
-
 ?>
