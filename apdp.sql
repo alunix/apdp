@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 30 Agu 2018 pada 07.57
+-- Generation Time: 01 Sep 2018 pada 08.21
 -- Versi Server: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -31,11 +31,11 @@ CREATE TABLE IF NOT EXISTS `data_warga` (
   `nik` bigint(16) unsigned zerofill DEFAULT NULL,
   `nama` varchar(50) NOT NULL,
   `no_kk` bigint(16) unsigned zerofill DEFAULT NULL,
-  `jk` enum('Laki - Laki','Perempuan') NOT NULL,
+  `jk` enum('Laki-laki','Perempuan') NOT NULL,
   `tempat_lhr` varchar(50) NOT NULL,
   `tanggal_lhr` date NOT NULL,
   `gol_dar` varchar(3) NOT NULL,
-  `kewarganegaraan` enum('WNI','WNA') NOT NULL,
+  `kewarganegaraan` enum('wni','wna') NOT NULL,
   `agama` varchar(10) NOT NULL,
   `pendidikan` varchar(30) NOT NULL,
   `pekerjaan` varchar(20) NOT NULL,
@@ -54,8 +54,9 @@ CREATE TABLE IF NOT EXISTS `data_warga` (
 --
 
 INSERT INTO `data_warga` (`id`, `nik`, `nama`, `no_kk`, `jk`, `tempat_lhr`, `tanggal_lhr`, `gol_dar`, `kewarganegaraan`, `agama`, `pendidikan`, `pekerjaan`, `status_nikah`, `status_keluarga`, `nama_ayah`, `nama_ibu`, `alamat`, `desa`, `rt`, `rw`) VALUES
-('ID001', 0123123123123123, 'Firsa Faruq Riyadi', 0123123123123123, 'Perempuan', 'Tasikmalaya', '0000-00-00', 'O', 'WNA', 'Islam', 'Diploma I/II', 'PNS', 'Kawin', 'Kepala Keluarga', 'Marsudi', 'Popong', 'Kawalu', 'Gunung Tandala', 002, 007),
-('ID002', 0123123123123129, 'rere', 0123123123123123, 'Perempuan', 'Tasikmalaya', '0000-00-00', 'O', 'WNI', 'Islam', 'Diploma IV/Strata I', 'PNS', 'Kawin', 'Istri', 'Haryanto', 'Nurliah', 'Kawalu', 'Gunung Tandala', 002, 007);
+('ID001', 24723647362482382, 'jojo', 63547326478427389, 'Laki-laki', 'jakarta', '1997-08-09', 'O', 'wna', 'Islam', 'Diploma I/II', 'Pegawai Swasta', 'Kawin', 'Kepala Keluarga', 'jeje', 'een', 'cilolohan', 'Kahuripan', 002, 007),
+('ID002', 0026482364823682, 'cici', 0067347623642368, 'Perempuan', 'tasik', '1996-03-09', 'O', 'wni', 'Islam', 'Diploma IV/Strata I', 'PNS', 'Kawin', 'Istri', 'jiel', 'lisa', 'batu', 'indah', 009, 002),
+('ID003', 0834247923792920, 'ken', 0634572354283879, 'Laki-laki', 'kuningan', '2001-04-07', 'O', 'wni', 'Islam', 'SMA/Sederajat', 'Belum Bekerja', 'Belum Kawin', 'Anak', 'jojo', 'cici', 'batu', 'indah', 009, 002);
 
 -- --------------------------------------------------------
 
@@ -106,7 +107,8 @@ CREATE TABLE IF NOT EXISTS `kelahiran` (
 
 INSERT INTO `kelahiran` (`id_kelahiran`, `tempat_dilahirkan`, `pukul_lahir`, `jenis_kelahiran`, `kelahiran_ke`, `penolong`, `nama_penolong`, `berat_bayi`, `panjang_bayi`, `id`) VALUES
 ('ID001', 'PILIH TEMP', '00:00:00', 'PILIH JENI', '', 'PENOLONG KELAHI', '', 0, 0, 'ID001'),
-('ID002', 'PILIH TEMP', '00:00:00', 'PILIH JENI', '', 'PENOLONG KELAHI', '', 0, 0, 'ID002');
+('ID002', 'PILIH TEMP', '00:00:00', 'PILIH JENI', '', 'PENOLONG KELAHI', '', 0, 0, 'ID002'),
+('ID003', 'PILIH TEMP', '00:00:00', 'PILIH JENI', '', 'PENOLONG KELAHI', '', 0, 0, 'ID003');
 
 -- --------------------------------------------------------
 
@@ -128,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `kematian` (
 --
 
 INSERT INTO `kematian` (`id_kematian`, `status_hidup`, `tanggal_wafat`, `pukul_wafat`, `sebab_kematian`, `id`) VALUES
-('IDK001', 'Mati', '2018-08-30', '21:09:00', 'Sakit', 'ID002');
+('IDK001', 'Mati', '2018-08-31', '02:01:00', 'Sakit', 'ID002');
 
 -- --------------------------------------------------------
 
@@ -149,7 +151,8 @@ CREATE TABLE IF NOT EXISTS `pendatang` (
 
 INSERT INTO `pendatang` (`id_pendatang`, `tanggal_datang`, `alamat_datang`, `id`) VALUES
 ('IDP001', '0000-00-00', '', 'ID001'),
-('IDP002', '0000-00-00', '', 'ID002');
+('IDP002', '0000-00-00', '', 'ID002'),
+('IDP003', '0000-00-00', '', 'ID003');
 
 -- --------------------------------------------------------
 
@@ -164,6 +167,13 @@ CREATE TABLE IF NOT EXISTS `pindah` (
   `alamat_pindah` text NOT NULL,
   `id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pindah`
+--
+
+INSERT INTO `pindah` (`id_pindah`, `status_pindah`, `tanggal_pindah`, `alamat_pindah`, `id`) VALUES
+('IDP001', 'Pindah', '2018-08-31', 'jonggol', 'ID003');
 
 -- --------------------------------------------------------
 
@@ -186,9 +196,8 @@ CREATE TABLE IF NOT EXISTS `surat_keterangan` (
 --
 
 INSERT INTO `surat_keterangan` (`id_surat_keterangan`, `tanggal`, `masa_berlaku`, `pernyataan`, `keperluan`, `keterangan`, `id`) VALUES
-('23/KE/08/18/0001', '2018-08-27', '08/25/2018 - 08/25/2018', 'sdfsdf', 'sad', 'sdfsdf', 'ID003'),
 ('23/KE/08/18/0002', '2018-08-25', '08/25/2018 - 08/25/2018', 'sdfsdf', 'hvh', 'SDFSDF', 'ID004'),
-('23/KE/08/18/0003', '2018-08-30', '08/01/2018 - 08/01/2018', 'Berdasarakan surat pengantar', 'pembuatan skck', 'nama tersebut termasuk warga cilolohan berkelakuan baik', 'ID001');
+('23/KE/08/18/0003', '2018-08-31', '08/31/2018 - 08/31/2018', 'Berdasarakan surat pengantar', 'pembuatan skck', 'nama tersebut termasuk warga cilolohan berkelakuan baik', 'ID002');
 
 -- --------------------------------------------------------
 
