@@ -41,7 +41,7 @@ default:
 		<i class="fa  fa-plus"></i> Tambah data Warga</a>		
 		</div>		
 	<div class="box-body">
-	<table id="example1" class="table table-bordered table-striped">
+	<table id="example2" class="table table-bordered table-striped">
 <thead>
 	<tr class="text-red">
 		<th class="col-sm-1">NO</th>
@@ -117,7 +117,7 @@ $sql ="SELECT max(id) as terakhir from data_warga";
   <div class="form-group">
     <label class="col-sm-4 control-label">ID </label>
     <div class="col-sm-5">
-      <input type="text" class="form-control"  name="id" value="<?php echo  $nextID; ?>" >
+      <input type="text" class="form-control"  readonly name="id" value="<?php echo  $nextID; ?>" >
     </div>
   </div>
   <div class="form-group">
@@ -296,169 +296,7 @@ $sql ="SELECT max(id) as terakhir from data_warga";
    </div></div> 
    
    
-    <!----- ------------------------- FORM DATA ISTRI ------------------------- ----->
-  <div class="box-body">
-	<div class="box box-solid box-primary">
-<div class="box-header">
-<h3 class="btn btn disabled box-title">
-<i class="fa fa-book"></i> Tambah Data Istri </h3>
-	<a class="btn btn-default btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
-	<i class="fa fa-minus"></i></a>
-		</div>	
-	<div class="box-body">     
-<?php  
-$sql7 ="SELECT max(id_istri) as terakhir from istri";
-  $hasil7 = mysql_query($sql7);
-  $data7 = mysql_fetch_array($hasil7);
-  $lastID7 = $data7['terakhir'];
-  $lastNoUrut7 = substr($lastID7, 3, 9);
-  $nextNoUrut7 = $lastNoUrut7 + 1;
-  $nextID7 = "IST".sprintf("%03s",$nextNoUrut7);
-?>
-  <div class="form-group">
-    <label class="col-sm-4 control-label">ID ISTRI</label>
-    <div class="col-sm-5">
-    <input type="text" class="form-control" name="id_pendatang" value="<?php echo $nextID9;?>">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-4 control-label">NIK ISTRI</label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control" name="nik istri" placeholder="nik istri ...">
-    </div>
-  </div>
-<div class="form-group">
-    <label class="col-sm-4 control-label">NAMA ISTRI</label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control"  name="alamat_datang" placeholder="Masukan Nama Lengkap ...">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-4 control-label">TEMPAT LAHIR</label>
-    <div class="col-sm-5">
-      <textarea rowspan="2" class="form-control" name="tempat_lhr_istri"placeholder="Tempat Lahir"></textarea>
-    </div>
-  </div>
-  <div class="form-group">
-     <label class="col-sm-4 control-label">TANGGAL LAHIR</label>
-	 <div class="col-sm-5">
-    <input type="date" class="form-control" placeholder="Masukan tanggal lahir" name="tanggal_lhr">
-	</div>
-  </div>
-<div class="form-group">
-                                            <label class="col-sm-4 control-label">GOLONGAN DARAH</label>
-											<div class="col-sm-5">
-                                            <select class="form-control" name="gol_dar_istri">
-                                                <option>Pilih Golongan Darah</option>
-                                                <option>O</option>
-                                                <option>A</option>
-                                                <option>B</option>
-                                                <option>AB</option>
-                                                <option>Lainnya</option> 
-                                            </select>
-                                        </div>
-										</div>
- <div class="form-group">
-	  <label class="col-sm-4 control-label">KEWARGANEGARAAN</label>
-	  <label class="radio-inline">
-	  <input type="radio" name="kewarganegaraan_istri" value="WNI" checked>WNI
-	  </label>
-	  <label class="radio-inline">
-	  <input type="radio" name="kewarganegaraan_istri" value="WNA">WNA
-		</label>
-  </div>
-  <div class="form-group">
-                                            <label class="col-sm-4 control-label">AGAMA</label>
-											<div class="col-sm-5">
-                                            <select class="form-control" name="agama_istri">
-                                                <option>Pilih Agama</option>
-                                                <option>Islam</option>
-                                                <option>Kristen</option>
-                                                <option>Hindu</option>
-                                                <option>Budha</option>
-                                                <option>Konghucu</option>
-                                                <option>Lainnya</option>
-                                            </select>
-											</div>
-   </div>
- <div class="form-group">
-                                            <label class="col-sm-4 control-label">PENDIDIKAN</label>
-											<div class="col-sm-5">
-                                            <select class="form-control" name="pendidikan_istri">
-                                                <option>Pilih Pendidikan</option>
-                                                <option>Tidak/Belum Sekolah</option>
-                                                <option>Belum Tamat SD/Sederajat</option>
-                                                <option>SMP/Sederajat</option>
-                                                <option>SMA/Sederajat</option>
-                                                <option>Diploma I/II</option>
-                                                <option>Akademi/Diploma III/Sarjana Muda</option>
-                                                <option>Diploma IV/Strata I</option>
-                                                <option>Strata II</option>
-                                                <option>Strata III</option>
-                                                <option>Tidak Tamat SD/Sederajat</option>
-                                            </select>
-											</div>
-   </div>
-  <div class="form-group">
-                                            <label class="col-sm-4 control-label">PEKERJAAN</label>
-											<div class="col-sm-5">
-                                            <select class="form-control" name="pekerjaan_istri">
-                                                <option>Pilih Pekerjaan</option>
-                                                <option>PNS</option>
-                                                <option>TNI</option>
-                                                <option>POLRI</option>
-                                                <option>Pegawai Swasta</option>
-                                                <option>Wiraswasta</option>
-                                                <option>Buruh</option>
-                                                <option>Pejabat Negara</option>
-                                                <option>Tenaga Profesi</option>
-                                                <option>Pensiunan</option>
-                                                <option>IRT</option>
-                                                <option>Belum Bekerja</option>
-                                                <option>Tidak Bekerja</option>
-                                                <option>Lainnya</option>
-                                            </select>
-											</div>
-   </div>
- <div class="form-group">
-                                            <label class="col-sm-4 control-label">STATUS PERNIKAHAN</label>
-											<div class="col-sm-5">
-                                            <select class="form-control" name="status_nikah_istri">
-                                                <option>Pilih Status Pernikahan</option>
-                                                <option>Kawin</option>
-                                                <option>Belum Kawin</option>
-                                                <option>Cerai Hidup</option>
-                                                <option>Cerai Mati</option>
-                                            </select>
-                                        </div>
-										</div>
-  <div class="form-group">
-                                            <label class="col-sm-4 control-label">STATUS KELUARGA</label>
-											<div class="col-sm-5">
-                                            <select class="form-control" name="status_keluarga_istri">
-                                                <option>Pilih Status Keluarga</option>
-                                                <option>Kepala Keluarga</option>
-                                                <option>Istri</option>
-                                                <option>Anak</option>
-                                                <option>Cucu</option>
-                                                <option>Famili Lain</option>
-                                            </select>
-                                        </div>
-										</div>
- <div class="form-group">
-    <label class="col-sm-4 control-label">NAMA AYAH</label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control" name="nama_ayah_istri" placeholder="Nama Ayah">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-4 control-label">NAMA IBU</label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control" name="nama_ibu_istri" placeholder="Nama Ibu">
-    </div>
-  </div>
-  </div>
-  </div>
+
    
    
    
@@ -469,7 +307,7 @@ $sql7 ="SELECT max(id_istri) as terakhir from istri";
 	<div class="box box-solid box-primary">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
-<i class="fa fa-book"></i> Tambah Data Anak </h3>
+<i class="fa fa-book"></i> Tambah Data Kelahiran </h3>
 	<a class="btn btn-default btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
 	<i class="fa fa-minus"></i></a>
 		</div>	
@@ -489,7 +327,7 @@ $sql6 ="SELECT max(id_kelahiran) as terakhir from kelahiran";
   <div class="form-group">
     <label class="col-sm-4 control-label">ID KELAHIRAN</label>
     <div class="col-sm-5">
-    <input type="text" class="form-control"  name="id_kelahiran" value="<?php echo $nextID6;?>">
+    <input type="text" class="form-control"  readonly name="id_kelahiran" value="<?php echo $nextID6;?>">
     </div>
   </div>
 
@@ -586,7 +424,7 @@ $sql9 ="SELECT max(id_pendatang) as terakhir from pendatang";
   <div class="form-group">
     <label class="col-sm-4 control-label">ID pendatang</label>
     <div class="col-sm-5">
-    <input type="text" class="form-control" required="required" name="id_pendatang" value="<?php echo $nextID9;?>">
+    <input type="text" class="form-control" required="required" readonly name="id_pendatang" value="<?php echo $nextID9;?>">
     </div>
   </div>
   <div class="form-group">
@@ -632,9 +470,9 @@ $edit=mysql_fetch_array($data);
 		</div>	
 	<div class="box-body">
   <div class="form-group">
-    <label class="col-sm-4 control-label">NO</label>
+    <label class="col-sm-4 control-label">ID</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" name="id" value="<?php echo $edit['id']; ?>" >
+      <input type="text" class="form-control" readonly name="id" value="<?php echo $edit['id']; ?>" >
     </div>
   </div> 
     <div class="form-group">
@@ -847,7 +685,7 @@ $edit=mysql_fetch_array($data);
   </div>
 
   
-  
+  <!----- ------------------------- EDIT DATA KELAHIRAN ------------------------- ----->
 <div class="box box-solid box-danger">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
@@ -863,7 +701,7 @@ while ($edit = mysql_fetch_array($a)) { ?>
 <div class="form-group">
     <label class="col-sm-4 control-label">ID KELAHIRAN</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" name="id_pendatang" value="<?php echo $edit['id_kelahiran'];?>">	  
+      <input type="text" class="form-control" readonly name="id_pendatang" value="<?php echo $edit['id_kelahiran'];?>">	  
     </div>
 	</div>
 <div class="form-group">
@@ -887,7 +725,7 @@ while ($edit = mysql_fetch_array($a)) { ?>
 <div class="form-group">
      <label class="col-sm-4 control-label">PUKUL LAHIR</label>
 	 <div class="col-sm-5">
- <input type="time" class="form-control" required="required" value="<?php echo $edit['pukul_lahir'];?>" name="pukul_lahir">
+ <input type="time" class="form-control" value="<?php echo $edit['pukul_lahir'];?>" name="pukul_lahir">
 	</div>
 </div>
 <div class="form-group">
@@ -962,7 +800,7 @@ while ($edi = mysql_fetch_array($a)) { ?>
 <div class="form-group">
     <label class="col-sm-4 control-label">ID PENDATANG</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" name="id_pendatang" value="<?php echo $edi['id_pendatang'];?>">	  
+      <input type="text" class="form-control" readonly name="id_pendatang" value="<?php echo $edi['id_pendatang'];?>">	  
     </div>
 	</div>
 <div class="form-group">

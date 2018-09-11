@@ -79,7 +79,7 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
 </script>
 	
   </head>
-  <body class="skin-green sidebar-mini fixed">
+  <body class="skin-red sidebar-mini fixed">
     <!-- Site wrapper -->
     <div class="wrapper">
       
@@ -154,15 +154,15 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
 			<table>
 			<tr>
 			<td rowspan="3"><img src="../aset/dist/img/admin.jpg"style="margin-right:15px;width:45px;height:45px;" class="img-circle" alt="User Image" /></td>
-			<th><h5 class="text-green"> <?php echo $_SESSION['nama']; ?><p>((ADMIN KELURAHAN))</p></h5>
+			<th><h5 class="text-red"> <?php echo $_SESSION['nama']; ?><p>((ADMIN KELURAHAN))</p></h5>
 			</th>
 			
 			<tr>
-			<td><i class="text-green">
-				<a href="index.php?module=edit_user&id_user=<?php echo $_SESSION['id'];?>" class="btn btn-xs btn-success ">&nbsp;<i class="fa fa-user"></i>&nbsp;</a> 
+			<td><i class="text-red">
+				<a href="index.php?module=edit_user&id_user=<?php echo $_SESSION['id'];?>" class="btn btn-xs btn-danger ">&nbsp;<i class="fa fa-user"></i>&nbsp;</a> 
 				&nbsp;&nbsp;
 			
-				<a href="../logout.php" class="btn btn-xs btn-success ">&nbsp;<i class="fa fa-power-off"></i>&nbsp;</a>&nbsp;&nbsp;
+				<a href="../logout.php" class="btn btn-xs btn-danger ">&nbsp;<i class="fa fa-power-off"></i>&nbsp;</a>&nbsp;&nbsp;
 			</td>
 			</tr>
 			</tr>
@@ -175,17 +175,14 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
 <ul class="sidebar-menu">
             <li class="header">MENU NAVIGASI</li>
 			<li><a href="?module=home"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
+			<li><a href="?module=user"><i class="fa fa-user"></i> <span>User</span></a></li>
 			<li class="active treeview">
 			 <a href="#">
-                <i class="fa fa-tasks"></i> <span>Data Penduduk</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-tasks"></i> <span>Data Master</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
 <ul class="treeview-menu">			  
-				<li><a href='?module=warga' ><i class="fa fa-user"></i><span>Data Warga</span></a></li>
-				<li><a href='?module=kk' ><i class="fa fa-institution"></i><span>Kepala Keluarga</span></a></li>
-				<li><a href='?module=kematian' ><i class="fa fa-street-view"></i><span>Kematian</span></a></li>
-				<li><a href='?module=pindah' ><i class="fa fa-book"></i><span>Pindah</span></a></li>
-				<li><a href='?module=surat_keterangan'><i class="fa fa-files-o"></i><span>Surat Keterangan</span></a></li>
-				<li><a href='?module=grafik'><i class="fa fa-bar-chart"></i><span>Grafik</span></a></li>
+				<li><a href='?module=kelurahan' ><i class="fa fa-user"></i><span>Data Kelurahan</span></a></li>
+				
 			
 </ul>
 				 <!-- <li class="active treeview"> -->
@@ -293,7 +290,7 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
           </li>
           <li>
             <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
+              <i class="menu-icon fa fa-file-code-o bg-red"></i>
 
               <div class="menu-info">
                 <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>

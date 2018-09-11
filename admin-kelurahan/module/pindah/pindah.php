@@ -42,13 +42,14 @@ default:
 		<i class="fa  fa-plus"></i> Tambah Data Pindah Warga </a>	
 		</div>		
 	<div class="box-body">
-	<table id="example1" class="table table-bordered table-striped">
+	<table id="example2" class="table table-bordered table-striped">
 <thead>
 	<tr class="text-red">
 		<th class="col-sm-1">NO</th>
 		<th class="col-sm-1">NO. KK</th>
 		<th class="col-sm-1">NIK</th> 
 		<th class="col-sm-2">NAMA</th>	
+		<th class="col-sm-2">STATUS PINDAH</th>	
 		<th class="col-sm-2">TANGGAL PINDAH</th>	
 		<th class="col-sm-2">ALAMAT PINDAH</th>	
 		<th class="col-sm-1">AKSI</th> 	
@@ -70,6 +71,7 @@ $Kode = $k['id'];?>
 	<td><?php echo $k['no_kk']; ?></td>
 	<td><?php echo $k['nik']; ?></td>
 	<td><?php echo $k['nama']; ?></td>
+	<td><?php echo $k['status_pindah']; ?></td>
 	<td><?php echo $k['tanggal_pindah']; ?></td>
 	<td><?php echo $k['alamat_pindah']; ?></td>
 	<td align="center">
@@ -171,7 +173,7 @@ $sql6 ="SELECT max(id_pindah) as terakhir from pindah";
   <div class="form-group">
     <label class="col-sm-4 control-label">ID PINDAH</label>
     <div class="col-sm-5">
-    <input type="text" class="form-control" required="required" name="id_pindah" value="<?php echo $nextID6;?>">
+    <input type="text" class="form-control" required="required" readonly name="id_pindah" value="<?php echo $nextID6;?>">
     </div>
   </div>
   <div class="form-group">
@@ -261,7 +263,7 @@ $edit=mysql_fetch_array($data);
  <div class="form-group">
     <label class="col-sm-4 control-label">ID PINDAH / TANGGAL PINDAH</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" name="id_pindah" value="<?php echo $edit['id_pindah'];?>">	  
+      <input type="text" class="form-control" readonly name="id_pindah" value="<?php echo $edit['id_pindah'];?>">	  
     </div>
 	<div class="col-sm-2">
 	  <div class="input-group">
@@ -278,18 +280,33 @@ $edit=mysql_fetch_array($data);
 	<?php 
 	$s=mysql_fetch_array(mysql_query("SELECT nama FROM data_warga WHERE id='$edit[id]'"));
 	?>
-      <input type="text" class="form-control" value="<?php echo $s['nama'];?>">
+      <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>
   </div>
- <div class="form-group">
-    <label class="col-sm-4 control-label">JK</label>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">STATUS PINDAH</label>
+    <div class="col-sm-3">	
+    <select name="status_pindah" class="form-control"><option> PILIH STATUS PINDAH</option>
+	<option name="status_pindah" value="Pindah" <?php if(($edit['status_pindah'])== "Pindah")
+				{echo "selected=\"selected\"";};?>> Pindah </option>
+	<option name="status_pindah" value="Tetap" <?php if(($edit['status_pindah'])== "Tetap")
+				{echo "selected=\"selected\"";};?>> Tetap </option>
+	</select>
+    </div>
+  </div>
+  <div class="form-group">
+     <label class="col-sm-4 control-label">TANGGAL PINDAH</label>
+	 <div class="col-sm-5">
+    <input type="date" class="form-control" value="<?php echo $edit['tanggal_pindah']; ?>" name="tanggal_pindah" placeholder="Masukan tanggal pindah">
+	</div>
+  </div>
+    <div class="form-group">
+    <label class="col-sm-4 control-label">ALAMAT PINDAH</label>
     <div class="col-sm-5">
-	<?php 
-	
-	?>
-      <input type="text" class="form-control" value="<?php echo $s['nama'];?>">
+      <input type="text" class="form-control" value="<?php echo $edit['alamat_pindah']; ?>" name="alamat_pindah" placeholder="Masukan Alamat Pindah">
     </div>
   </div>
+  
 <div class="form-group">
     <label class="col-sm-4"></label>
     <div class="col-sm-5">

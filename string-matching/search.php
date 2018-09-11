@@ -35,7 +35,7 @@ if ($q) {
             if ($find !== false) {
                 ?>
                 <tr>
-                    <td><a href=""><?php echo $tampilkan['nama']; ?></a> </td>
+                    <td><a href="?module=warga&aksi=detail_warga&id=<?php echo $tampilkan['id']; ?>"><?php echo $tampilkan['nama']; ?></a> </td>
                 </tr>
                 <?php
                 $count++;

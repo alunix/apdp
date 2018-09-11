@@ -2,13 +2,16 @@
 include "include/koneksi.php";
 
 if ($_GET['module'] == "home") {
-	include "module/home.php";
+	include "module/home/home.php";
 }
 else if ($_GET['module'] == "warga") {
 	include "module/warga/warga.php";	
 }
 else if ($_GET['module'] == "kk") {
 	include "module/kk/kk.php";	
+}
+else if ($_GET['module'] == "grafik") {
+	include "module/grafik/grafik.php";	
 }
 else if ($_GET['module'] == "kematian") {
 	include "module/kematian/kematian.php";	
@@ -29,7 +32,7 @@ else if ($_GET['module'] == "user") {
 	include "module/user/user.php";	
 }
 else if ($_GET['module'] == "edit_user") {
-	include "module/user/user.php";	
+	include "module/edit_user.php";	
 }
 else if ($_GET['module'] == "search") {
 	include STRING_MATCHING_DIR."search.php";

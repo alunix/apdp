@@ -7,21 +7,25 @@ function sukses_masuk($username,$pass){
 	if ($ketemu > 0){
 	  session_start();
 	  include "timeout.php";
-		$_SESSION['id']     = $r['id_user']; 
 		$_SESSION['username']     = $r['user']; 
 		$_SESSION['passuser']     = $r['pass'];
 		$_SESSION['level']    = $r['level'];
-		$_SESSION['nama']    = $r['nama'];
 
 		
 if ($r['level'] == "admin-kelurahan")
-{  header('location:admin-kelurahan/?module=home');
+{  header('location:admin-kelurahan/');
+/*input ke file log
+$y= date('Y');
+$m= date ('m'); 
+$d=date('h');
+file_put_contents('log.txt',"'".$r['username']."','".$r['nama_lengkap']."','".$y."'\n",FILE_APPEND);*/
+}
+
+else if ($r['level'] == "admin-kelurahan")
+{ header('location:admin-kelurahan/?module=home'); 
 }
 else if ($r['level'] == "admin-kecamatan")
 { header('location:admin-kecamatan/?module=home'); 
-}
-else if ($r['level'] == "admin")
-{ header('location:admin/?module=home'); 
 }
 		// session timeout
 		$_SESSION['login'] = 1;
@@ -80,7 +84,6 @@ function blokir($username){
 	 return false;
 }    
 
-
 //mengambil status benfit/cost dari tabel kriteria
 function getStatusKriteria($idkriteria){
   $q = mysql_query("SELECT * FROM kriteria where id_kriteria = '$idkriteria'");
@@ -112,5 +115,12 @@ function GetNormalisasi($data, $maxmin, $status){
   }else{
       return round($maxmin / $data, 2);
   }
+}
+
+function getSelectedNilai($nis, $kriteria)
+{
+  $q = mysql_query("SELECT id_nilai from rangking where nis = '$nis' and id_kriteria = '$kriteria'");
+  $d = mysql_fetch_array($q);
+  return $d['id_nilai'];
 }
 ?>

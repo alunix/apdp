@@ -18,7 +18,8 @@ header('location:../../index.php?module='.$module);
 }
 // EDIT
 else if($module=='pindah' AND $aksi=='edit' ){ 
-$query = mysql_query("UPDATE pindah SET				  
+$query = mysql_query("UPDATE pindah SET	
+                  status_pindah	= '$status_pindah',		  
 				  tanggal_pindah = '$tanggal_pindah',
 				  alamat_pindah  = '$alamat_pindah'
 				  WHERE id_pindah = '$id_pindah'");

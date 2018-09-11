@@ -124,23 +124,6 @@ $alamat_datang = $_POST['alamat_datang'];
 $sql2 = "INSERT INTO pendatang (id_pendatang, tanggal_datang, alamat_datang, id) VALUES ('$id_pendatang', '$tanggal_datang', '$alamat_datang', '$id')";
 $simpan2 = mysql_query($sql2);
 
-$id_istri = $_POST['id_istri'];
-$nik_istri= $_POST['nik_istri'];
-$tempat_lhr_istri = $_POST['tempat_lhr_istri'];
-$tanggal_lhr_istri = $_POST['tanggal_lhr_istri'];
-$gol_dar_istri = $_POST['gol_dar_istri'];
-$kewarganegaraan_istri = $_POST['kewarganegaraan_istri'];
-$agama_istri = $_POST['agama_istri'];
-$pendidikan_istri = $_POST['pendidikan_istri'];
-$pekerjaan_istri = $_POST['pekerjaan_istri'];
-$status_nikah_istri = $_POST['status_nikah_istri'];
-$status_keluarga_istri = $_POST['status_keluarga_istri'];
-$nama_ayah_istri = $_POST['nama_ayah_istri'];
-$nama_ibu_istri = $_POST['nama_ibu_istri'];
-$sql3 = "INSERT INTO istri (id_istri, nikl_istri, tempat_lhr_istri, tanggal_lhr_istri, gol_dar_istri, kewarganegaraan_istri, agama_istri, pendidikan_istri, pekerjaan_istri, status_nikah_istri, status_keluarga_istri, nama_ayah_istri, nama_ibu_istri,  id) VALUES ('$id_istri', '$nik_istri', '$tempat_lhr_istri', '$tanggal_lhr_istri', '$gol_dar_istri', '$kewarganegaraan_istri', '$agama_istri', '$pendidikan_istri', '$pekerjaan_istri', '$status_nikah_istri', '$status_keluarga_istri', '$nama_ayah_istri', '$nama_ibu_istri', '$id')";
-$simpan3 = mysql_query($sql3);
-
-
 
 }
 

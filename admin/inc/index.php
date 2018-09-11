@@ -1,9 +1,10 @@
 <?php
-include '../define.php';
 include 'inc/cek_session.php';
 include 'inc/fungsi_hdt.php';
 include 'inc/inc.library.php';
 include 'koneksi.php';
+
+
 
 ?>
 
@@ -11,7 +12,7 @@ include 'koneksi.php';
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Aplikasi Pengolahan Data Penduduk</title>
+    <title>Sistem Pendukung Keputusan</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     
     <!-- daterange picker -->
@@ -38,15 +39,15 @@ include 'koneksi.php';
     <link href="../aset/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="../aset/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-    
-    
+    <link href="../aset/css/mdb.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
     <link href="../aset/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />	
 	<script type="text/javascript" src="//code.jquery.com/jquery-latest.js"></script>
 	<script src="../aset/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-  
- 
+	<script src="../aset/js/mdb.min.js"></script>
+	<script src="../aset/js/popper.min.js"></script>
+	
 	<script type="text/javascript">
 // 1 detik = 1000
 window.setTimeout("waktu()",1000);  
@@ -79,7 +80,7 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
 </script>
 	
   </head>
-  <body class="skin-green sidebar-mini fixed">
+  <body class="skin-red sidebar-mini fixed">
     <!-- Site wrapper -->
     <div class="wrapper">
       
@@ -88,9 +89,9 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
         <!-- Logo -->
         <a href="" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>APDP</b> APDP</span>
+          <span class="logo-mini"><b>SPK</b> SPK</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>APDP&nbsp;</b> </span>
+          <span class="logo-lg"><b>Sistem&nbsp;</b> Pendukung Keputusan</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -129,7 +130,7 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
                       <a href="index.php?module=edit_user&id_user=<?php echo $_SESSION['id'];?>" class="btn btn-default btn-flat">&nbsp;<i class="fa fa-user"></i>&nbsp;Profil</a>
                     </div>
                     <div class="pull-right">
-				
+					<a href="../lockscreen.php" class="btn btn-default btn-flat"><i class="glyphicon glyphicon-lock"></i> Kunci</a>&nbsp;&nbsp;
                       <a href="../logout.php" class="btn btn-default btn-flat">&nbsp;<i class="fa fa-power-off"></i>&nbsp;Keluar</a>
                     </div>
                   </li>
@@ -154,51 +155,87 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
 			<table>
 			<tr>
 			<td rowspan="3"><img src="../aset/dist/img/admin.jpg"style="margin-right:15px;width:45px;height:45px;" class="img-circle" alt="User Image" /></td>
-			<th><h5 class="text-green"> <?php echo $_SESSION['nama']; ?><p>((ADMIN KELURAHAN))</p></h5>
+			<th><h4 class="text-red"> <?php echo $_SESSION['nama']; ?><p>(( ADMIN))</p></h4>
 			</th>
 			
 			<tr>
-			<td><i class="text-green">
-				<a href="index.php?module=edit_user&id_user=<?php echo $_SESSION['id'];?>" class="btn btn-xs btn-success ">&nbsp;<i class="fa fa-user"></i>&nbsp;</a> 
+			<td><i class="text-red">
+				<a href="index.php?module=edit_user&id_user=<?php echo $_SESSION['id'];?>" class="btn btn-xs btn-danger ">&nbsp;<i class="fa fa-user"></i>&nbsp;</a> 
 				&nbsp;&nbsp;
-			
-				<a href="../logout.php" class="btn btn-xs btn-success ">&nbsp;<i class="fa fa-power-off"></i>&nbsp;</a>&nbsp;&nbsp;
+				
+				<a href="../logout.php" class="btn btn-xs btn-danger ">&nbsp;<i class="fa fa-power-off"></i>&nbsp;</a>&nbsp;&nbsp;
 			</td>
 			</tr>
 			</tr>
 			</table>
 			</li>
-            <?php
-            include STRING_MATCHING_DIR."/form.php";
-            ?>
+          <!-- search form -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search..."/>
+              <span class="input-group-btn">
+                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
-<ul class="sidebar-menu">
-            <li class="header">MENU NAVIGASI</li>
+          <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+			<span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
 			<li><a href="?module=home"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
+			<span class="pull-right-container">
+							<?php $user = mysql_num_rows(mysql_query("SELECT * FROM user")); ?>
+              <small class="label pull-right bg-red"><?php echo $user; ?></small>
+			  </span>
+			<li><a href='?module=user' ><i class="fa fa-user-secret"></i><span>Data <i>User Login</i></span></a></li>
 			<li class="active treeview">
 			 <a href="#">
-                <i class="fa fa-tasks"></i> <span>Data Penduduk</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-tasks"></i> <span>Data Master</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
-<ul class="treeview-menu">			  
-				<li><a href='?module=warga' ><i class="fa fa-user"></i><span>Data Warga</span></a></li>
-				<li><a href='?module=kk' ><i class="fa fa-institution"></i><span>Kepala Keluarga</span></a></li>
-				<li><a href='?module=kematian' ><i class="fa fa-street-view"></i><span>Kematian</span></a></li>
-				<li><a href='?module=pindah' ><i class="fa fa-book"></i><span>Pindah</span></a></li>
-				<li><a href='?module=surat_keterangan'><i class="fa fa-files-o"></i><span>Surat Keterangan</span></a></li>
-				<li><a href='?module=grafik'><i class="fa fa-bar-chart"></i><span>Grafik</span></a></li>
+			<ul class="treeview-menu">
 			
-</ul>
-				 <!-- <li class="active treeview"> -->
-						<!--<a href="#"> --> 
-							<!--<i class="fa fa-files-o"></i> <span>Surat Keterangan</span> <i class="fa fa-angle-left pull-right"></i>-->
-						<!--</a> -->
-						<!--<ul class="treeview-menu"> -->
-							<!--<?php include "report.php"; ?>  -->
-							<!--<li><a href='module/laporan/matrik_awal.php' ><i class="fa fa-print"></i><span>Cetak Surat Keterangan</span></a></li>  -->
-						<!--</ul>  -->
-					<!-- </li> -->
-					<!-- </li> -->
-</ul>			
+			<span class="pull-right-container">
+							<?php $siswa = mysql_num_rows(mysql_query("SELECT * FROM siswa")); ?>
+              <small class="label pull-right bg-red"><?php echo $siswa; ?></small>
+			  </span>
+			  
+				<li><a href='?module=siswa' ><i class="fa fa-user"></i><span>Siswa OSN</span></a></li>
+				<span class="pull-right-container">
+							<?php $kelas = mysql_num_rows(mysql_query("SELECT * FROM kelas")); ?>
+              <small class="label pull-right bg-red"><?php echo $kelas; ?></small>
+			  </span>
+			  
+				<li><a href='?module=kelas' ><i class="fa fa-institution"></i><span>Kelas</span></a></li>
+				<span class="pull-right-container">
+							<?php $kriteria = mysql_num_rows(mysql_query("SELECT * FROM kriteria")); ?>
+              <small class="label pull-right bg-red"><?php echo $kriteria; ?></small>
+			  </span>
+				<li><a href='?module=kriteria' ><i class="fa fa-street-view"></i><span>Kriteria</span></a></li>
+				<li><a href='?module=bobot-kriteria' ><i class="fa fa-book"></i><span>Sub Kriteria</span></a></li>
+				<li><a href='?module=rangking' ><i class="fa fa-male"></i><span>Rangking</span></a></li>
+				<li><a href='?module=analisa' ><i class=" fa fa-users"></i><span>Analisa</span></a></li>
+				
+				 </ul>
+				 <li class="active treeview">
+						<a href="#"> 
+							<i class="fa fa-files-o"></i> <span>Laporan</span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<?php include "report.php"; ?>
+							<li><a href='module/laporan/matrik_awal.php' ><i class="fa fa-print"></i><span>Cetak Laporan</span></a></li>
+							<li><a href="?module=grafik"><i class="fa fa-pie-chart"></i><span>Grafik</span></a></li>
+						</ul>
+					</li>
+					</li>
+				</ul>
+				
+				
+			</ul>
+			</li>
+			
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -210,7 +247,8 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
       <div style="background:url(../images/0.png)repeat;" class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section  class="content-header">
-          <h1> Aplikasi Pengolahan Data Penduduk (APDP)
+          <h1> SPK Pemilihan Calon Peserta Lomba OSN
+            <small>SMPN 6 Kota Tasikmalaya</small>
           </h1>
           <ol class="breadcrumb">
 		  <div>
@@ -233,10 +271,10 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
 
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          Aplikasi Pengolahan Data Penduduk (APDP) Menggunakan Algoritma String Matching
+          Sistem Pendukung Keputusan Menggunakan Metode SAW <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2018 <a href="#">Edited by Rellita Fikka Rahajeng</a>.</strong> All rights reserved.
-		
+        <strong>Copyright &copy; 2017 <a href="#">Andiska Pranata</a>.</strong> All rights reserved.
+		 || <a href="#"><i class="fa fa-facebook"></i></a>&nbsp;&nbsp;<a href="#"><i class="fa fa-twitter"></i></a>&nbsp;&nbsp;<a href="#"><i class="fa fa-instagram"></i></a>
       </footer>
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
