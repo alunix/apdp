@@ -22,7 +22,7 @@ while ($k = mysql_fetch_array($data)) {
 </div><!-- /.row -->
 <div class="box box-solid box-primary">
 <div class="box-header">
-<i class="fa fa-info"></i>Informasi
+<i class="fa fa-info"></i>Informasi Kecamatan Tawang
 </div>
 <div class="box-body">
 		<div class="row">
@@ -36,10 +36,12 @@ while ($k = mysql_fetch_array($data)) {
 			</div>		
 		<div class="callout callout-info "  style="margin:20px 20px 20px 20px">
 				<h4><?php echo "Misi Kantor Kecamatan Tawang"; ?> </h4>
-				<p><?php echo "1. Meningkatkan kualitas Sumber Daya Manusia, Aparatur. Meningkatkan Koordinasi dan Pengawasan penyelenggaraan Pemerintah dalam rangka pelayanan 
-				<br/>   	 prima kepada Masyarakat. <br/>
-2. Meningkatkan potensi, peran serta dan partisipasi masyarakat dalam pembangunan. <br/>
-3. Meningkatkan Pembangunan Infrastruktur yang berbasiskan partisipasi Masyarakat."; ?></p>
+				
+					<p>1. Meningkatkan kualitas Sumber Daya Manusia, Aparatur. Meningkatkan Koordinasi dan Pengawasan penyelenggaraan Pemerintah dalam rangka pelayanan prima kepada Masyarakat</p>
+					<p>2. Meningkatkan potensi, peran serta dan partisipasi masyarakat dalam pembangunan.</p>
+					<p>3. Meningkatkan Pembangunan Infrastruktur yang berbasiskan partisipasi Masyarakat.</p>
+				
+				<br>
 			</div>		
 		<div class="col-lg-3 col-xs-6">
 		</div><!-- ./col -->
