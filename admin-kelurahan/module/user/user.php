@@ -58,8 +58,8 @@ default:
 <?php 
 // Tampilkan data dari Database
 $sql = "SELECT * FROM user";
-$tampil = mysql_query($sql);
-while ($tampilkan = mysql_fetch_array($tampil)) { 
+$tampil = _query($sql);
+while ($tampilkan = _fetch_array($tampil)) { 
 $Kode = $tampilkan['id_user'];
 $blokir = $tampilkan['blokir'];?>
 
@@ -97,8 +97,8 @@ break;
  case "tambah": 
 //ID
 $sql ="SELECT max(id_user) as terakhir from user";
-  $hasil = mysql_query($sql);
-  $data = mysql_fetch_array($hasil);
+  $hasil = _query($sql);
+  $data = _fetch_array($hasil);
   $lastID = $data['terakhir'];
   $lastNoUrut = substr($lastID, 3, 9);
   $nextNoUrut = $lastNoUrut + 1;
@@ -172,8 +172,8 @@ $sql ="SELECT max(id_user) as terakhir from user";
 <?php	
 break;
 case "edit" :
-$data=mysql_query("select * from user where id_user='$_GET[id_user]'");
-$edit=mysql_fetch_array($data);
+$data=_query("select * from user where id_user='$_GET[id_user]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- EDIT DATA USER ------------------------- ----->
 <h3 class="box-title margin text-center">Edit Data User "<?php echo $_GET['id_user']; ?>"</h3>

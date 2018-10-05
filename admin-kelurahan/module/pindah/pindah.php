@@ -61,9 +61,9 @@ default:
 // Tampilkan data dari Database
 $sql = "SELECT * FROM data_warga a, pindah b where a.id=b.id ";
 
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($k = mysql_fetch_array($tampil)) { 
+while ($k = _fetch_array($tampil)) { 
 $Kode = $k['id'];?>
 
 	<tr>	
@@ -119,9 +119,9 @@ case "list_pindah":
 <?php 
 // Tampilkan data dari Database
 $sql = "select * from data_warga ";
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($data = mysql_fetch_array($tampil)) { 
+while ($data = _fetch_array($tampil)) { 
 $Kode = $data['id'];?>
 
 	<tr>
@@ -148,8 +148,8 @@ case "tambah":
 <!----- ------------------------- TAMBAH DATA PINDAH WARGA ------------------------- ----->
 <?php
 $sql6 ="SELECT max(id_pindah) as terakhir from pindah";
-  $hasil6 = mysql_query($sql6);
-  $data6 = mysql_fetch_array($hasil6);
+  $hasil6 = _query($sql6);
+  $data6 = _fetch_array($hasil6);
   $lastID6 = $data6['terakhir'];
   $lastNoUrut6 = substr($lastID6, 3, 9);
   $nextNoUrut6 = $lastNoUrut6 + 1;
@@ -187,7 +187,7 @@ $sql6 ="SELECT max(id_pindah) as terakhir from pindah";
     <label class="col-sm-4 control-label">NAMA</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("select nama from data_warga where id='$_GET[id]'"));
+	$s=_fetch_array(_query("select nama from data_warga where id='$_GET[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>
@@ -211,7 +211,7 @@ $sql6 ="SELECT max(id_pindah) as terakhir from pindah";
     <label class="col-sm-4 control-label">ALAMAT ASAL</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("select alamat from data_warga where id='$_GET[id]'"));
+	$s=_fetch_array(_query("select alamat from data_warga where id='$_GET[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['alamat'];?>">
     </div>
@@ -242,8 +242,8 @@ $sql6 ="SELECT max(id_pindah) as terakhir from pindah";
 break;
 case "edit" :
 
-$data=mysql_query("SELECT * FROM pindah WHERE id_pindah='$_GET[id_pindah]'");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM pindah WHERE id_pindah='$_GET[id_pindah]'");
+$edit=_fetch_array($data);
 
 ?>
 <!----- ------------------------- EDIT DATA PINDAH WARGA ------------------------- ----->
@@ -278,7 +278,7 @@ $edit=mysql_fetch_array($data);
     <label class="col-sm-4 control-label">NAMA</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("SELECT nama FROM data_warga WHERE id='$edit[id]'"));
+	$s=_fetch_array(_query("SELECT nama FROM data_warga WHERE id='$edit[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>
@@ -324,8 +324,8 @@ $edit=mysql_fetch_array($data);
 <?php	
 break;
 case "detail_pindah" :
-$data=mysql_query("SELECT * FROM pindah WHERE id_pindah='$_GET[id_pindah]'");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM pindah WHERE id_pindah='$_GET[id_pindah]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- LIHAT DATA PINDAH ------------------------- ----->
 <h3 class="box-title margin text-center">Detail Pindah Warga "<?php echo $_GET['id_pindah']; ?>"</h3>
@@ -359,7 +359,7 @@ $edit=mysql_fetch_array($data);
     <label class="col-sm-4 control-label">NAMA</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("SELECT nama FROM data_warga WHERE id='$edit[id]'"));
+	$s=_fetch_array(_query("SELECT nama FROM data_warga WHERE id='$edit[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>

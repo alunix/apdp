@@ -61,9 +61,9 @@ default:
 // Tampilkan data dari Database
 $sql = "SELECT * FROM data_warga a, kematian b where a.id=b.id ";
 
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($k = mysql_fetch_array($tampil)) { 
+while ($k = _fetch_array($tampil)) { 
 $Kode = $k['id'];?>
 
 	<tr>	
@@ -118,9 +118,9 @@ case "list_kematian":
 <?php 
 // Tampilkan data dari Database
 $sql = "SELECT * FROM data_warga ";
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($data = mysql_fetch_array($tampil)) { 
+while ($data = _fetch_array($tampil)) { 
 $Kode = $data['id'];?>
 
 	<tr>
@@ -147,8 +147,8 @@ case "tambah":
 <!----- ------------------------- TAMBAH DATA MASTER kematian ------------------------- ----->
 <?php
 $sql6 ="SELECT max(id_kematian) as terakhir from kematian";
-  $hasil6 = mysql_query($sql6);
-  $data6 = mysql_fetch_array($hasil6);
+  $hasil6 = _query($sql6);
+  $data6 = _fetch_array($hasil6);
   $lastID6 = $data6['terakhir'];
   $lastNoUrut6 = substr($lastID6, 3, 9);
   $nextNoUrut6 = $lastNoUrut6 + 1;
@@ -186,7 +186,7 @@ $sql6 ="SELECT max(id_kematian) as terakhir from kematian";
     <label class="col-sm-4 control-label">NAMA</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("select nama from data_warga where id='$_GET[id]'"));
+	$s=_fetch_array(_query("select nama from data_warga where id='$_GET[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>
@@ -242,8 +242,8 @@ $sql6 ="SELECT max(id_kematian) as terakhir from kematian";
 <?php	
 break;
 case "edit" :
-$data=mysql_query("SELECT * FROM kematian WHERE id_kematian='$_GET[id_kematian]'");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM kematian WHERE id_kematian='$_GET[id_kematian]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- EDIT DATA KEMATIAN ------------------------- ----->
 <h3 class="box-title margin text-center">Edit Data kematian "<?php echo $_GET['id_kematian']; ?>"</h3>
@@ -277,7 +277,7 @@ $edit=mysql_fetch_array($data);
     <label class="col-sm-4 control-label">Nama kematian</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("select nama from data_warga where id='$edit[id]'"));
+	$s=_fetch_array(_query("select nama from data_warga where id='$edit[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>
@@ -319,8 +319,8 @@ $edit=mysql_fetch_array($data);
 <?php	
 break;
 case "detail_kematian" :
-$data=mysql_query("SELECT * FROM data_warga a, kematian b where a.id=b.id");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM data_warga a, kematian b where a.id=b.id");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- LIHAT DATA KEMATIAN WARGA ------------------------- ----->
 <h3 class="box-title margin text-center">Lihat Data Warga "<?php echo $_GET['id']; ?>"</h3>

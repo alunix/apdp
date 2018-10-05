@@ -1,9 +1,5 @@
 <?php
-include '../define.php';
-include 'inc/cek_session.php';
-include 'inc/fungsi_hdt.php';
-include 'inc/inc.library.php';
-include 'koneksi.php';
+include '../bootstrap.php';
 
 
 ?>
@@ -173,32 +169,34 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
             include STRING_MATCHING_DIR."form.php";
             ?>
           <!-- sidebar menu: : style can be found in sidebar.less -->
-<ul class="sidebar-menu">
+        <ul class="sidebar-menu">
             <li class="header">MENU NAVIGASI</li>
 			<li><a href="?module=home"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
 			<li class="active treeview">
 			 <a href="#">
                 <i class="fa fa-tasks"></i> <span>Data Penduduk</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
-<ul class="treeview-menu">			  
+                <ul class="treeview-menu">
 				<li><a href='?module=warga' ><i class="fa fa-user"></i><span>Data Warga</span></a></li>
 				<li><a href='?module=kk' ><i class="fa fa-institution"></i><span>Kepala Keluarga</span></a></li>
 				<li><a href='?module=kematian' ><i class="fa fa-street-view"></i><span>Kematian</span></a></li>
 				<li><a href='?module=pindah' ><i class="fa fa-book"></i><span>Pindah</span></a></li>
 				<li><a href='?module=surat_keterangan'><i class="fa fa-files-o"></i><span>Surat Keterangan</span></a></li>
 			
-</ul>
-				 <!-- <li class="active treeview"> -->
-						<!--<a href="#"> --> 
-							<!--<i class="fa fa-files-o"></i> <span>Surat Keterangan</span> <i class="fa fa-angle-left pull-right"></i>-->
-						<!--</a> -->
-						<!--<ul class="treeview-menu"> -->
-							<!--<?php include "report.php"; ?>  -->
-							<!--<li><a href='module/laporan/matrik_awal.php' ><i class="fa fa-print"></i><span>Cetak Surat Keterangan</span></a></li>  -->
-						<!--</ul>  -->
-					<!-- </li> -->
-					<!-- </li> -->
-</ul>			
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-print"></i> <span>Cetak Laporan</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href='<?=moduleUrlByLevel('cetak/lkbpj');?>' ><i class="fa fa-circle-o"></i><span>LKBPJ</span></a></li>
+                    <li><a href='<?=moduleUrlByLevel('cetak/lpba');?>' ><i class="fa fa-circle-o"></i><span>LPBA</span></a></li>
+                    <li><a href='<?=moduleUrlByLevel('cetak/lkbpd');?>' ><i class="fa fa-circle-o"></i><span>LKBPD</span></a></li>
+                    <li><a href='<?=moduleUrlByLevel('cetak/lpbku');?>' ><i class="fa fa-circle-o"></i><span>LPBKU</span></a></li>
+                    <li><a href='<?=moduleUrlByLevel('cetak/lampid');?>' ><i class="fa fa-circle-o"></i><span>LAMPID</span></a></li>
+                </ul>
+            </li>
           </ul>
         </section>
         <!-- /.sidebar -->

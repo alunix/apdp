@@ -61,9 +61,9 @@ default:
 // Tampilkan data dari Database
 $sql = "SELECT * FROM data_warga a, kematian b where a.id=b.id ";
 
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($k = mysql_fetch_array($tampil)) { 
+while ($k = _fetch_array($tampil)) { 
 $Kode = $k['id'];?>
 
 	<tr>	
@@ -119,9 +119,9 @@ case "list_kematian":
 <?php 
 // Tampilkan data dari Database
 $sql = "select * from data_warga ";
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($data = mysql_fetch_array($tampil)) { 
+while ($data = _fetch_array($tampil)) { 
 $Kode = $data['id'];?>
 
 	<tr>
@@ -146,7 +146,7 @@ case "tambah":
 ?>
 <!----- ------------------------- TAMBAH DATA MASTER kematian ------------------------- ----->
 <?php
-$hasil = mysql_query("SELECT max(id_kematian) as terakhir from kematian"); $data = mysql_fetch_array($hasil);
+$hasil = _query("SELECT max(id_kematian) as terakhir from kematian"); $data = _fetch_array($hasil);
   $lastID = $data['terakhir']; $lastNoUrut = substr($lastID,13, 20); $nextNoUrut = $lastNoUrut + 1;
   $nextID = "PRS/BZ/".date('m/y')."/".sprintf("%04s",$nextNoUrut);
 ?>
@@ -181,7 +181,7 @@ $hasil = mysql_query("SELECT max(id_kematian) as terakhir from kematian"); $data
     <label class="col-sm-4 control-label">Nama Warga</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("select nama from data_warga where id='$_GET[id]'"));
+	$s=_fetch_array(_query("select nama from data_warga where id='$_GET[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>
@@ -248,8 +248,8 @@ $hasil = mysql_query("SELECT max(id_kematian) as terakhir from kematian"); $data
 break;
 case "edit" :
 
-$data=mysql_query("select * from kematian where id_kematian='$_GET[id_kematian]'");
-$edit=mysql_fetch_array($data);
+$data=_query("select * from kematian where id_kematian='$_GET[id_kematian]'");
+$edit=_fetch_array($data);
 
 ?>
 <!----- ------------------------- EDIT DATA KEMATIAN ------------------------- ----->
@@ -270,7 +270,7 @@ $edit=mysql_fetch_array($data);
     <label class="col-sm-4 control-label">Nama Warga</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("select nama from data_warga where id='$edit[id]'"));
+	$s=_fetch_array(_query("select nama from data_warga where id='$edit[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>

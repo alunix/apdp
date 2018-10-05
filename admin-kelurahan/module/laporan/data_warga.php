@@ -32,8 +32,8 @@ include "head.php";
 // Tampilkan data dari Database
 $sql2 = "SELECT * FROM data_warga where id='$_GET[id]'";
 $no=1;
-$tampil = mysql_query($sql2);
-while ($edit = mysql_fetch_array($tampil)) { 
+$tampil = _query($sql2);
+while ($edit = _fetch_array($tampil)) { 
 $Kode = $edit['id'];
 ?>
 

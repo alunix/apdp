@@ -61,8 +61,8 @@ switch($_GET[aksi]){
                     // Tampilkan data dari Database
                     $sql = "SELECT * FROM data_warga WHERE status_keluarga = 'Kepala Keluarga'";
                     $no=1;
-                    $tampil = mysql_query($sql);
-                    while ($tampilkan = mysql_fetch_array($tampil)) {
+                    $tampil = _query($sql);
+                    while ($tampilkan = _fetch_array($tampil)) {
                     $Kode = $tampilkan['id'];
                     $blokir = $tampilkan['blokir'];?>
 
@@ -124,8 +124,8 @@ case "detail_warga2" :
 					</div>	
 	<div class="box-body">
 		<?php 
-			$data=mysql_query("select * from data_warga where id='$_GET[id]'");
-			$edit=mysql_fetch_array($data);
+			$data=_query("select * from data_warga where id='$_GET[id]'");
+			$edit=_fetch_array($data);
 		?>	
 	<div class="form-group">
 		<label class="col-sm-4 control-label">NO</label>
@@ -196,8 +196,8 @@ case "detail_warga2" :
             // Tampilkan data dari Database
             $sql = "select * from data_istri where id_suami='$id_suami'";
             $no=1;
-            $tampil = mysql_query($sql);
-            while ($tampilkan = mysql_fetch_array($tampil)) {
+            $tampil = _query($sql);
+            while ($tampilkan = _fetch_array($tampil)) {
             $Kode = $tampilkan['id'];
             $blokir = $tampilkan['blokir'];?>
 
@@ -260,8 +260,8 @@ case "detail_warga2" :
             // Tampilkan data dari Database
             $sql = "select * from data_anak where id_ayah='$id_ayah'";
             $no=1;
-            $tampil = mysql_query($sql);
-            while ($tampilkan = mysql_fetch_array($tampil)) {
+            $tampil = _query($sql);
+            while ($tampilkan = _fetch_array($tampil)) {
             $Kode = $tampilkan['id'];
             $blokir = $tampilkan['blokir'];?>
 
@@ -300,8 +300,8 @@ case "detail_warga2" :
 
 <?php 
 // Tampilkan data dari Database
-$a = mysql_query(" SELECT FROM data_warga a where and");
-while ($e = mysql_fetch_array($a)) { ?>
+$a = _query(" SELECT FROM data_warga a where and");
+while ($e = _fetch_array($a)) { ?>
 	
 	<div class="form-group">
 		<label class="col-sm-4 control-label">NO</label>

@@ -1,13 +1,8 @@
 <?php
-include "inc/inc.koneksi.php";
-include "inc/fungsi_hdt.php";
+include './bootstrap.php';
 
-function anti_injection($data){
-  $filter = mysql_real_escape_string(stripslashes(strip_tags(htmlspecialchars($data,ENT_QUOTES))));
-  return $filter;
-}
-$username= anti_injection($_POST['username']);
-$pass	 = anti_injection($_POST['password']);
+$username= antiInjection($_POST['username']);
+$pass	 = antiInjection($_POST['password']);
 #$pass = anti_injection($_POST['password']);
 // pastikan username dan password adalah berupa huruf atau angka.
 if (!ctype_alnum($username) OR !ctype_alnum($pass)){
@@ -19,10 +14,10 @@ if (!ctype_alnum($username) OR !ctype_alnum($pass)){
 </script>
 <?php
 }else{
-	$login	=mysql_query("SELECT * FROM user WHERE user='$username'");
-	$ketemu	=mysql_num_rows($login);
+	$login	=_query("SELECT * FROM user WHERE user='$username'");
+	$ketemu	=_num_rows($login);
 	if ($ketemu>0){
-		$r		=mysql_fetch_array($login);
+		$r		=_fetch_array($login);
 		$pwd	=$r['pass'];
 		if ($r['blokir'] == 'Y'){
 			salah_blokir($username);

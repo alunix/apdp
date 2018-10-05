@@ -28,16 +28,16 @@ include "head.php";
 			  
 <div class="text-center"> <h4><u> Surat Keterangan </u></h4>
 <p> <?php 
-	$s=mysql_fetch_array(mysql_query("select id_surat_keterangan, pernyataan, keperluan, masa_berlaku, keterangan from surat_keterangan where id='$_GET[id]'"));
+	$s=_fetch_array(_query("select id_surat_keterangan, pernyataan, keperluan, masa_berlaku, keterangan from surat_keterangan where id='$_GET[id]'"));
 	?>
       <?php echo $s['id_surat_keterangan'];?> </p> 
 </div>
 <div class="text-left">
 <?php 
-	$b=mysql_fetch_array(mysql_query("select rt, rw, nama, nik, tempat_lhr, tanggal_lhr, jk, agama, pekerjaan, status_nikah, alamat from data_warga where id='$_GET[id]'"));
+	$b=_fetch_array(_query("select rt, rw, nama, nik, tempat_lhr, tanggal_lhr, jk, agama, pekerjaan, status_nikah, alamat from data_warga where id='$_GET[id]'"));
 	?>
 <?php 
-	$c=mysql_fetch_array(mysql_query("select tanggal from surat_keterangan where id='$_GET[id]'"));
+	$c=_fetch_array(_query("select tanggal from surat_keterangan where id='$_GET[id]'"));
 	?>	
 		  <p > <?php echo $s['pernyataan'];?> RT   <?php echo $b['rt'];?>  / RW   <?php echo $b['rw'];?> pada tanggal  <?php echo IndonesiaTgl ($c['tanggal']);?> dengan ini menerangkan bahwa :</p>
 

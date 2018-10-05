@@ -13,12 +13,12 @@ $id = $_POST['id'];
 // HAPUS
 if($module=='kematian' AND $aksi=='hapus' ){ 
 $mySql = "DELETE FROM kematian WHERE id_kematian='".$_GET['id_kematian']."'";
-$myQry = mysql_query($mySql);
+$myQry = _query($mySql);
 header('location:../../index.php?module='.$module);
 }
 // EDIT
 else if($module=='kematian' AND $aksi=='edit' ){ 
-$query = mysql_query("UPDATE kematian SET				  
+$query = _query("UPDATE kematian SET				  
 				  status_hidup = '$status_hidup',
 				  pukul_wafat = '$pukul_wafat',
 				  tanggal_wafat = '$tanggal_wafat',
@@ -30,6 +30,6 @@ header('location:../../index.php?module='.$module);
 else if($module=='kematian' AND $aksi=='tambah' ){ 
 	header('location:../../index.php?module='.$module);
 $sql = "INSERT INTO kematian  (id_kematian, status, status_hidup, tanggal_wafat, sebab_kematian, id) VALUES ('$id_kematian', '$status', '$status_hidup', '$tanggal_wafat', '$sebab_kematian', '$id')";
-$simpan = mysql_query($sql);
+$simpan = _query($sql);
 }
 ?>
