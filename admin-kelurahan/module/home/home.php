@@ -11,7 +11,7 @@ Anda berada di halaman "<?php echo $_SESSION['level']; ?>"
 </div> 
 <div class="box box-solid box-success">
 <div class="box-header">
-<i class="fa fa-info"></i>Informasi
+<i class="fa fa-info"></i>Informasi Kelurahan
 </div>
 
 <div class="box-body">
