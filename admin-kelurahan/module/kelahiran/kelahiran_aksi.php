@@ -33,15 +33,15 @@ $rw = $_POST['rw'];
 
 // HAPUS
 if($module=='kelahiran' AND $aksi=='hapus' ){ 
-$mySql = mysql_query("DELETE FROM data_warga WHERE id='".$_GET['id']."'");
+$mySql = _query("DELETE FROM data_warga WHERE id='".$_GET['id']."'");
 $mySql1 = "DELETE FROM kelahiran WHERE id='".$_GET['id']."'";
-$myQry = mysql_query($mySql);
+$myQry = _query($mySql);
 header('location:../../index.php?module='.$module);
 }
 
 // EDIT
 else if($module=='kelahiran' AND $aksi=='edit' ){ 
-$query = mysql_query("UPDATE kelahiran SET				  
+$query = _query("UPDATE kelahiran SET				  
 				  id_kelahiran = '$id_kelahiran',
 				  
 				  tempat_dilahirkan = '$tempat_dilahirkan',
@@ -74,6 +74,6 @@ else if($module=='kelahiran' AND $aksi=='tambah' ){
 
 $sql = "INSERT INTO kelahiran (id_kelahiran, tempat_dilahirkan, pukul_lahir, jenis_kelahiran, kelahiran_ke, penolong, nama_penolong, berat_bayi, panjang_bayi ) VALUES ('$id_kelahiran', '$tempat_dilahirkan', '$pukul_lahir', '$jenis_kelahiran', '$kelahiran_ke', '$penolong', '$nama_penolong', '$berat_bayi', '$panjang_bayi')";
 $sql1= "INSERT INTO data_warga (id, nik, no_kk, nama, jk, tempat_lhr, tanggal_lhr, gol_dar, kewarganegaraan, agama, status_keluarga, nama_ayah, nama_ibu, alamat, rt, rw) VALUES ('$id_kelahiran', '$nik', '$no_kk', '$nama', '$jk', '$tempat_lhr', '$tanggal_lhr', '$gol_dar', '$kewarganegaraan', '$agama', '$status_keluarga', '$nama_ayah', '$nama_ibu', '$alamat', '$desa', '$rt', '$rw')";
-$simpan = mysql_query($sql);
+$simpan = _query($sql);
 }
 ?>

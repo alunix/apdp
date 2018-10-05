@@ -1,9 +1,9 @@
 <?php
 function sukses_masuk($username,$pass){
 	// Apabila username dan password ditemukan
-	$login=mysql_query("SELECT * FROM user WHERE user='$username' AND pass='$pass' AND blokir='N'");
-	$ketemu=mysql_num_rows($login);
-	$r=mysql_fetch_array($login);
+	$login=_query("SELECT * FROM user WHERE user='$username' AND pass='$pass' AND blokir='N'");
+	$ketemu=_num_rows($login);
+	$r=_fetch_array($login);
 	if ($ketemu > 0){
 	  session_start();
 	  include "timeout.php";
@@ -79,21 +79,21 @@ function salah_password(){
 }
 
 function blokir($username){
-	mysql_query($sql);	 
+	_query($sql);	 
 	session_destroy();
 	 return false;
 }    
 
 //mengambil status benfit/cost dari tabel kriteria
 function getStatusKriteria($idkriteria){
-  $q = mysql_query("SELECT * FROM kriteria where id_kriteria = '$idkriteria'");
-  $d = mysql_fetch_array($q);
+  $q = _query("SELECT * FROM kriteria where id_kriteria = '$idkriteria'");
+  $d = _fetch_array($q);
   return $d['tipe_kriteria'];
 }
 
 function getBobotKriteria($idkriteria){
-  $q = mysql_query("SELECT * FROM kriteria where id_kriteria = '$idkriteria'");
-  $d = mysql_fetch_array($q);
+  $q = _query("SELECT * FROM kriteria where id_kriteria = '$idkriteria'");
+  $d = _fetch_array($q);
   return round($d['bobot']/100, 2);
 }
 
@@ -119,8 +119,8 @@ function GetNormalisasi($data, $maxmin, $status){
 
 function getSelectedNilai($nis, $kriteria)
 {
-  $q = mysql_query("SELECT id_nilai from rangking where nis = '$nis' and id_kriteria = '$kriteria'");
-  $d = mysql_fetch_array($q);
+  $q = _query("SELECT id_nilai from rangking where nis = '$nis' and id_kriteria = '$kriteria'");
+  $d = _fetch_array($q);
   return $d['id_nilai'];
 }
 ?>

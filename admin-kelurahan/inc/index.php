@@ -187,7 +187,7 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
             </span>
 			<li><a href="?module=home"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
 			<span class="pull-right-container">
-							<?php $user = mysql_num_rows(mysql_query("SELECT * FROM user")); ?>
+							<?php $user = _num_rows(_query("SELECT * FROM user")); ?>
               <small class="label pull-right bg-red"><?php echo $user; ?></small>
 			  </span>
 			<li><a href='?module=user' ><i class="fa fa-user-secret"></i><span>Data <i>User Login</i></span></a></li>
@@ -198,19 +198,19 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
 			<ul class="treeview-menu">
 			
 			<span class="pull-right-container">
-							<?php $siswa = mysql_num_rows(mysql_query("SELECT * FROM siswa")); ?>
+							<?php $siswa = _num_rows(_query("SELECT * FROM siswa")); ?>
               <small class="label pull-right bg-red"><?php echo $siswa; ?></small>
 			  </span>
 			  
 				<li><a href='?module=siswa' ><i class="fa fa-user"></i><span>Siswa OSN</span></a></li>
 				<span class="pull-right-container">
-							<?php $kelas = mysql_num_rows(mysql_query("SELECT * FROM kelas")); ?>
+							<?php $kelas = _num_rows(_query("SELECT * FROM kelas")); ?>
               <small class="label pull-right bg-red"><?php echo $kelas; ?></small>
 			  </span>
 			  
 				<li><a href='?module=kelas' ><i class="fa fa-institution"></i><span>Kelas</span></a></li>
 				<span class="pull-right-container">
-							<?php $kriteria = mysql_num_rows(mysql_query("SELECT * FROM kriteria")); ?>
+							<?php $kriteria = _num_rows(_query("SELECT * FROM kriteria")); ?>
               <small class="label pull-right bg-red"><?php echo $kriteria; ?></small>
 			  </span>
 				<li><a href='?module=kriteria' ><i class="fa fa-street-view"></i><span>Kriteria</span></a></li>

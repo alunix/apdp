@@ -28,12 +28,12 @@ $rw = $_POST['rw'];
 // HAPUS
 if($module=='kk' AND $aksi=='hapus' ){ 
 $mySql = "DELETE FROM data_warga WHERE id='".$_GET['id']."'";
-$myQry = mysql_query($mySql);
+$myQry = _query($mySql);
 header('location:../../index.php?module='.$module);
 }
 // EDIT
 else if($module=='kk' AND $aksi=='edit' ){ 
-$query = mysql_query("UPDATE data_warga SET
+$query = _query("UPDATE data_warga SET
 				  no_kk = '$no_kk',
 				  nik = '$nik',
 				  nama = '$nama',
@@ -61,10 +61,10 @@ header('location:../../index.php?module='.$module);
 else if($module=='kk' AND $aksi=='tambah' ){ 
 	header('location:../../index.php?module='.$module);
 $sql = "INSERT INTO data_warga  (id, no_kk, nik, nama, jk, tempat_lhr, tanggal_lhr, kewarganegaraan, agama, pendidikan, pekerjaan, status_nikah, status_keluarga, gol_dar, nama_ayah, nama_ibu, alamat, desa, rt, rw ) VALUES ('$id', '$no_kk', '$nik', '$nama', '$jk', '$tempat_lhr', '$tanggal_lhr', '$kewarganegaraan', '$agama', '$pendidikan', '$pekerjaan', '$status_nikah', '$status_keluarga', '$gol_dar', '$nama_ayah', '$nama_ibu', '$alamat', '$desa', '$rt', '$rw')";
-$simpan = mysql_query($sql);
+$simpan = _query($sql);
 }
 else if($module=='user' AND $aksi=='edit' ){ 
-mysql_query("UPDATE user SET 
+_query("UPDATE user SET 
 nama='$nama',
 no_hp='$no_hp',
 level='$level',

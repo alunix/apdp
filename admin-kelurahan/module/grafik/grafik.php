@@ -1,9 +1,8 @@
 
 <?php
-include "koneksi.php";
 $aksi="module/grafik/grafik_aksi.php";
 
-switch($_GET[aksi]){
+switch(@$_GET['aksi']){
 default:
 ?>
 

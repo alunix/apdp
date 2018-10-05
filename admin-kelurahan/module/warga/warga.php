@@ -2,7 +2,7 @@
 $aksi="module/warga/warga_aksi.php";
 
 
-switch($_GET[aksi]){
+switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- Menampilkan Data Warga ------------------------- ----->	
@@ -59,8 +59,8 @@ default:
 // Tampilkan data dari Database
 $sql = "SELECT * FROM data_warga";
 $no=1;
-$tampil = mysql_query($sql);
-while ($tampilkan = mysql_fetch_array($tampil)) { 
+$tampil = _query($sql);
+while ($tampilkan = _fetch_array($tampil)) {
 $Kode = $tampilkan['id'];
 ?>
 
@@ -93,8 +93,8 @@ break;
  case "tambah": 
 //ID
 $sql ="SELECT max(id) as terakhir from data_warga";
-  $hasil = mysql_query($sql);
-  $data = mysql_fetch_array($hasil);
+  $hasil = _query($sql);
+  $data = _fetch_array($hasil);
   $lastID = $data['terakhir'];
   $lastNoUrut = substr($lastID, 3, 9);
   $nextNoUrut = $lastNoUrut + 1;
@@ -275,10 +275,41 @@ $sql ="SELECT max(id) as terakhir from data_warga";
       <textarea rowspan="2" class="form-control" name="alamat"placeholder="Alamat"></textarea>
     </div>
   </div>
+
+  <?php
+  include BASE_DIR."/inc/desa_selector.php";
+  load_scripts();
+  ?>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">PROVINSI</label>
+    <div class="col-sm-5">
+        <select name="provinsi_id" id="provinsi_id" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id');">
+            <?php
+            $provinsis = get_provinsi();
+            echo optionLoop($provinsis);
+            ?>
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">KABUPATEN</label>
+    <div class="col-sm-5">
+        <select name="kabupaten_id" id="kabupaten_id" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id');">
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">KECAMATAN</label>
+    <div class="col-sm-5">
+        <select name="kecamatan_id" id="kecamatan_id" class="form-control" onchange="changeKecamatan(event, this, '#desa_id');">
+        </select>
+    </div>
+  </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">DESA</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" name="desa" placeholder="Desa">
+        <select name="desa_id" id="desa_id" class="form-control">
+        </select>
     </div>
   </div>
   <div class="form-group">
@@ -315,8 +346,8 @@ $sql ="SELECT max(id) as terakhir from data_warga";
 <form class="form-horizontal" action="<?php echo $aksi?>?module=kelahiran&aksi=tambah" role="form" method="post">        
 <?php
 $sql6 ="SELECT max(id_kelahiran) as terakhir from kelahiran";
-  $hasil6 = mysql_query($sql6);
-  $data6 = mysql_fetch_array($hasil6);
+  $hasil6 = _query($sql6);
+  $data6 = _fetch_array($hasil6);
   $lastID6 = $data6['terakhir'];
   $lastNoUrut6 = substr($lastID6, 3, 9);
   $nextNoUrut6 = $lastNoUrut6 + 1;
@@ -414,8 +445,8 @@ $sql6 ="SELECT max(id_kelahiran) as terakhir from kelahiran";
 <form class="form-horizontal" action="<?php echo $aksi?>?module=pendatang&aksi=tambah" role="form" method="post">        
 <?php  
 $sql9 ="SELECT max(id_pendatang) as terakhir from pendatang";
-  $hasil9 = mysql_query($sql9);
-  $data9 = mysql_fetch_array($hasil9);
+  $hasil9 = _query($sql9);
+  $data9 = _fetch_array($hasil9);
   $lastID9 = $data9['terakhir'];
   $lastNoUrut9 = substr($lastID9, 3, 9);
   $nextNoUrut9 = $lastNoUrut9 + 1;
@@ -453,8 +484,8 @@ $sql9 ="SELECT max(id_pendatang) as terakhir from pendatang";
 <?php	
 break;
 case "edit" :
-$data=mysql_query("select * from data_warga where id='$_GET[id]'");
-$edit=mysql_fetch_array($data);
+$data=_query("select * from data_warga where id='$_GET[id]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- EDIT DATA WARGA ------------------------- ----->
 <h3 class="box-title margin text-center">Edit Data Warga "<?php echo $_GET['id']; ?>"</h3>
@@ -696,8 +727,8 @@ $edit=mysql_fetch_array($data);
 <div class="box-body">
 <?php 
 // Tampilkan data dari Database
-$a = mysql_query("SELECT * FROM kelahiran where id='$_GET[id]'");
-while ($edit = mysql_fetch_array($a)) { ?>
+$a = _query("SELECT * FROM kelahiran where id='$_GET[id]'");
+while ($edit = _fetch_array($a)) { ?>
 <div class="form-group">
     <label class="col-sm-4 control-label">ID KELAHIRAN</label>
     <div class="col-sm-3">
@@ -795,8 +826,8 @@ while ($edit = mysql_fetch_array($a)) { ?>
 		</div>	
 <div class="box-body">
 <?php
-$a = mysql_query("SELECT * FROM pendatang where id='$_GET[id]'");
-while ($edi = mysql_fetch_array($a)) { ?>
+$a = _query("SELECT * FROM pendatang where id='$_GET[id]'");
+while ($edi = _fetch_array($a)) { ?>
 <div class="form-group">
     <label class="col-sm-4 control-label">ID PENDATANG</label>
     <div class="col-sm-3">
@@ -858,8 +889,8 @@ case "detail_warga" :
 	</a></div>	</div>	
 	<div class="box-body">
 <?php 
-$data=mysql_query("select * from data_warga where id='$_GET[id]'");
-$edit=mysql_fetch_array($data);
+$data=_query("select * from data_warga where id='$_GET[id]'");
+$edit=_fetch_array($data);
 ?>	
   <div class="form-group">
     <label class="col-sm-4 control-label">NO</label>
@@ -992,8 +1023,8 @@ $edit=mysql_fetch_array($data);
 	<i class="fa fa-minus"></i>
 	</a></div>	
 	<div class="box-body">
-<?php $d=mysql_query("select * from kelahiran where  id='$_GET[id]'");
-$e=mysql_fetch_array($d);
+<?php $d=_query("select * from kelahiran where  id='$_GET[id]'");
+$e=_fetch_array($d);
 ?>	
 	
 <div class="form-group">
@@ -1055,8 +1086,8 @@ $e=mysql_fetch_array($d);
 	<i class="fa fa-minus"></i>
 	</a></div>	
 	<div class="box-body">
-<?php $d=mysql_query("select * from pendatang where  id='$_GET[id]'");
-$f=mysql_fetch_array($d);
+<?php $d=_query("select * from pendatang where  id='$_GET[id]'");
+$f=_fetch_array($d);
 ?>
 <div class="form-group">
     <label class="col-sm-4 control-label">ID Pendatang</label>

@@ -5,7 +5,7 @@ if (isset($_POST['submit'])){
 if ((!empty($_POST['nama']))) {
 $sql = "UPDATE user SET nama= '".$_POST['nama']."', user = '".$_POST['user']."', 
 		pass = '".$_POST['pass']."', no_hp= '".$_POST['no_hp']."' WHERE id_user = '".$_SESSION['id']."'";
-$simpan = mysql_query($sql);
+$simpan = _query($sql);
 
 if ($simpan) {
 echo "<script>alert('Data Berhasil di Update');</script>";
@@ -16,8 +16,8 @@ echo "<script>alert('Gagal Di Update');</script>";
 }
 
 
-$data=mysql_query("select * from user where id_user='$_GET[id_user]'");
-$edit=mysql_fetch_array($data);
+$data=_query("select * from user where id_user='$_GET[id_user]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- EDIT DATA MASTER user ------------------------- ----->
 <div class="box-body">

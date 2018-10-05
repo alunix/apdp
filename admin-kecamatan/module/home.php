@@ -10,8 +10,8 @@ Anda berada di halaman "<?php echo $_SESSION['level']; ?>"
 </div>
 <!-- <div class="">
 <?php 
-$data=mysql_query("SELECT * FROM lokasi_krj");
-while ($k = mysql_fetch_array($data)) { 
+$data=_query("SELECT * FROM lokasi_krj");
+while ($k = _fetch_array($data)) {
 ?>
 
 <div class="col-xs-1 text-center">

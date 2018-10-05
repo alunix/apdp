@@ -60,9 +60,9 @@ default:
 // Tampilkan data dari Database
 $sql = "SELECT * FROM pendatang ";
 
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($k = mysql_fetch_array($tampil)) { 
+while ($k = _fetch_array($tampil)) { 
 $Kode = $k['id'];?>
 
 	<tr>	
@@ -96,8 +96,8 @@ break;
  case "tambah": 
 //ID
 $sql ="SELECT max(id_pendatang) as terakhir from pendatang";
-  $hasil = mysql_query($sql);
-  $data = mysql_fetch_array($hasil);
+  $hasil = _query($sql);
+  $data = _fetch_array($hasil);
   $lastID = $data['terakhir'];
   $lastNoUrut = substr($lastID, 3, 9);
   $nextNoUrut = $lastNoUrut + 1;
@@ -174,8 +174,8 @@ $sql ="SELECT max(id_pendatang) as terakhir from pendatang";
 break;
 case "edit" :
 
-$data=mysql_query("SELECT * FROM pendatang WHERE id_pendatang='$_GET[id_pendatang]'");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM pendatang WHERE id_pendatang='$_GET[id_pendatang]'");
+$edit=_fetch_array($data);
 
 ?>
 <!----- ------------------------- EDIT DATA Pendatang ------------------------- ----->
@@ -248,8 +248,8 @@ $edit=mysql_fetch_array($data);
 <?php	
 break;
 case "detail_pendatang" :
-$data=mysql_query("SELECT * FROM pendatang WHERE id_pendatang='$_GET[id_pendatang]'");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM pendatang WHERE id_pendatang='$_GET[id_pendatang]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- LIHAT DATA PENDATANG ------------------------- ----->
 <h3 class="box-title margin text-center">Edit Data Pendatang "<?php echo $_GET['id_pendatang']; ?>"</h3>

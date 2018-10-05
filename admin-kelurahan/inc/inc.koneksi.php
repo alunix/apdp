@@ -4,7 +4,7 @@ $username = "root";  //
 $password = ""; //
 $database = "saw-spk";
 
-$konek = mysql_connect($server, $username, $password) or die ("Gagal konek ke server MySQL" .mysql_error());
-$bukadb = mysql_select_db($database) or die ("Gagal membuka database $database" .mysql_error());
+$konek = _connect($server, $username, $password) or die ("Gagal konek ke server MySQL" ._error());
+$bukadb = _select_db($database) or die ("Gagal membuka database $database" ._error());
 
 ?>

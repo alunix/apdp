@@ -15,12 +15,12 @@ $id = $_POST['id'];
 // HAPUS
 if($module=='surat_keterangan' AND $aksi=='hapus' ){ 
 $mySql = "DELETE FROM surat_keterangan WHERE id_surat_keterangan='".$_GET['id_surat_keterangan']."'";
-$myQry = mysql_query($mySql);
+$myQry = _query($mySql);
 header('location:../../index.php?module='.$module);
 }
 // EDIT
 else if($module=='surat_keterangan' AND $aksi=='edit' ){ 
-$query = mysql_query("UPDATE surat_keterangan SET				  
+$query = _query("UPDATE surat_keterangan SET				  
 				  tanggal = '$tanggal',
 				  pernyataan = '$pernyataan',
 				  keperluan = '$keperluan',
@@ -34,6 +34,6 @@ else if($module=='surat_keterangan' AND $aksi=='tambah' ){
 	header('location:../../index.php?module='.$module);
 $sql = "INSERT INTO surat_keterangan (id_surat_keterangan,tanggal, pernyataan, keperluan, keterangan, masa_berlaku, id) VALUES ('$id_surat_keterangan', '$tanggal', '$pernyataan', '$keperluan', '$keterangan', '$masa_berlaku', '$id')";
 
-$simpan = mysql_query($sql);
+$simpan = _query($sql);
 }
 ?>
