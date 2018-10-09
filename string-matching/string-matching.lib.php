@@ -22,6 +22,7 @@ if (!function_exists('preprocess_bmh')) {
 
 if (!function_exists('process_bmh')) {
     function process_bmh($pattern, $text){
+        $find = false;
         $pattern = strtolower($pattern);
         $patternArray = str_split($pattern);
         $lenPattern = strlen($pattern);
@@ -38,9 +39,9 @@ if (!function_exists('process_bmh')) {
             ++$looping;
             $loopingCheck = 0;
             for ($i = $lenPattern-1; $i>=0; $i--) {
-                if ($textArray[$currentShift-$loopingCheck] == $patternArray[$i]) {
+                if (@$textArray[$currentShift-$loopingCheck] == @$patternArray[$i]) {
                     ++$loopingCheck;
-                } else if (array_key_exists($textArray[$currentShift], $table_bad_match)) {
+                } else if (array_key_exists(@$textArray[$currentShift], $table_bad_match)) {
                     $shift = $table_bad_match[$textArray[$currentShift]];
                     $currentShift += $shift;
                     break;
