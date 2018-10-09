@@ -96,6 +96,7 @@ if ($only_one) {
                         // Tampilkan data dari Database
                         if (empty($desaIds)) $desaIds = array($selected_desa);
                         $sql = "SELECT pekerjaan, laki_laki, perempuan, jumlah from statistik_data_pekerjaan WHERE desa_id IN ('".implode("','", $desaIds)."') group by pekerjaan";
+
                         $datas = _fetchMultipleFromSql($sql);
                         $no=1;
                         foreach($datas as $data) { ?>

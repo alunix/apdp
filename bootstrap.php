@@ -14,3 +14,8 @@ include BASE_DIR.'/inc/inc.library.php';
 include BASE_DIR."/inc/database.php";
 include BASE_DIR."/inc/profile.php";
 include BASE_DIR.'/koneksi.php';
+
+
+if ($_SESSION['level'] == 'admin-kelurahan') {
+    $_SESSION['selected_desa'] = getSessionProfile()['id_kelurahan'];
+}

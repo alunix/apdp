@@ -10,6 +10,9 @@ function sukses_masuk($username,$pass){
 		$_SESSION['username']     = $r['user']; 
 		$_SESSION['passuser']     = $r['pass'];
 		$_SESSION['level']    = $r['level'];
+		if (strlen($r['desa_id']) == 10) {
+            $_SESSION['selected_desa']    = $r['desa_id'];
+        }
 
 		
 if ($r['level'] == "admin-kelurahan")
