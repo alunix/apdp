@@ -11,14 +11,14 @@ if ($find !== 1) {
     <div class="box box-solid box-success">
         <div class="box-header">
             <h3 class=" box-title">
-                Cetak Laporan Berdasarkan Agama
+                Cetak Laporan Berdasarkan LAMPID (Lahir, Mati, Pindah, Datang)
             </h3>
 
-            <a class="btn btn-default pull-right" href="<?=GENERAL_MODULE_URL.'cetak_lpba/pdf.php';?>">
+            <a class="btn btn-default pull-right" href="<?=GENERAL_MODULE_URL.'cetak_lampid/pdf.php';?>">
                 <i class="fa fa-print"></i> Cetak
             </a>
             <div class="pull-right" style="max-width: 100px">
-                <form action="<?=moduleUrlByLevel('cetak/lpba', 'aksi=filter_data');?>" method="post">
+                <form action="<?=moduleUrlByLevel('cetak/lampid', 'aksi=filter_data');?>" method="post">
                     <select name="selected_desa" id="" class="form-control" onchange="changeSelected(event, this)">
                         <?php
                         echo sprintf('<option value="%s" %s>%s</option>', '', 'selected="selected"', '--Pilih Salah Satu--');
@@ -45,18 +45,18 @@ if ($find !== 1) {
         <div class="box-body">
             <div class="row">
                 <div class="col-md-5">
-                    <div id="statistik-agama" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                    <div id="statistik-lampid" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
                     <script type="text/javascript">
                         $(function () {
 
-                            Highcharts.chart('statistik-agama', {
+                            Highcharts.chart('statistik-lampid', {
                                 chart: {
                                     plotBackgroundColor: null,
                                     plotBorderWidth: 1,//null,
                                     plotShadow: false,
                                 },
                                 title: {
-                                    text: 'Grafik Agama'
+                                    text: 'Grafik LAMPID'
                                 },
                                 plotOptions: {
                                     pie: {
@@ -70,18 +70,18 @@ if ($find !== 1) {
                                 },
                                 series: [{
                                     type: 'pie',
-                                    name: 'Data Agama ',
+                                    name: 'Data LAMPID ',
                                     data: [
                                         <?php
                                         $desaIds = getMultipleDesaId();
                                         $selected_desa = @$_SESSION['selected_desa'];
                                         if ($selected_desa) $desaIds = array($selected_desa);
                                         if (empty($desaIds)) $desaIds = array("false");
-                                        $sql = "SELECT agama, jumlah from statistik_data_agama WHERE desa_id IN ('".implode("','", $desaIds)."') group by agama";
+                                        $sql = "SELECT lampid, jumlah from statistik_data_lampid WHERE desa_id IN ('".implode("','", $desaIds)."') group by lampid";
                                         $datas = _fetchMultipleFromSql($sql);
                                         foreach($datas as $data)
                                         { ?>
-                                        ['<?php echo $data['agama']?>',   <?php echo $data['jumlah']?>],
+                                        ['<?php echo $data['lampid']?>',   <?php echo $data['jumlah']?>],
                                         <?php
                                         }//end while
                                         ?>
@@ -96,7 +96,7 @@ if ($find !== 1) {
                         <thead>
                         <tr class="text-red">
                             <th class="col-sm-4">NO</th>
-                            <th class="col-sm-4">Agama</th>
+                            <th class="col-sm-4">LAMPID</th>
                             <th class="col-sm-4">Laki-laki</th>
                             <th class="col-sm-4">Perempuan</th>
                             <th class="col-sm-4">Jumlah</th>
@@ -110,14 +110,14 @@ if ($find !== 1) {
                         $selected_desa = @$_SESSION['selected_desa'];
                         if ($selected_desa) $desaIds = array($selected_desa);
                         if (empty($desaIds)) $desaIds = array("false");
-                        $sql = "SELECT agama, laki_laki, perempuan, jumlah from statistik_data_agama WHERE desa_id IN ('".implode("','", $desaIds)."') group by agama";
+                        $sql = "SELECT lampid, laki_laki, perempuan, jumlah from statistik_data_lampid WHERE desa_id IN ('".implode("','", $desaIds)."') group by lampid";
                         $datas = _fetchMultipleFromSql($sql);
                         $no=1;
                         foreach($datas as $data) { ?>
 
                         <tr>
                             <td><?php echo $no++; ?></td>
-                            <td><?php echo $data['agama']; ?></td>
+                            <td><?php echo $data['lampid']; ?></td>
                             <td><?php echo $data['laki_laki']; ?> org</td>
                             <td><?php echo $data['perempuan']; ?> org</td>
                             <td><?php echo $data['jumlah']; ?> org</td>
