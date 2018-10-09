@@ -30,8 +30,8 @@ header('location:../../index.php?module='.$module);
 
 //Tambah
 else if($module=='kematian' AND $aksi=='tambah' ){ 
-	header('location:../../index.php?module='.$module);
-$sql = "INSERT INTO kematian  (id_kematian, status_hidup, tanggal_wafat, pukul_wafat, sebab_kematian, id) VALUES ('$id_kematian', '$status_hidup', '$tanggal_wafat', '$pukul_wafat', '$sebab_kematian', '$id')";
+$sql = "INSERT INTO kematian  (id_kematian, tanggal_wafat, pukul_wafat, sebab_kematian, id) VALUES ('$id_kematian', '$tanggal_wafat', '$pukul_wafat', '$sebab_kematian', '$id')";
 $simpan = _query($sql);
+    header('location:../../index.php?module='.$module);
 }
 ?>

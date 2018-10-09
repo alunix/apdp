@@ -109,11 +109,17 @@ case "detail_warga2" :
 
 	<form class="form-horizontal" action="<?php echo $aksi?>?module=kk&aksi=edit" role="form" method="post">
 			<div class="nav-tabs-custom">
+                <div class="pull-right">
+                    <ul class="nav nav-tabs">
+                        <li><a class="btn btn-default btn-sm pull-right" href="<?=moduleUrlByLevel('kk');?>" ><i class="fa fa-history"></i>  Kembali</a></li>
+                    </ul>
+                </div>
 				<ul class="nav nav-tabs">
 					<li class="active"><a class="text-red" href="#data" data-toggle="tab"><i class="fa fa-user-md"></i> Data Kepala Keluarga </h3> </a></li>
 					<li><a class="text-red" href="#data1" data-toggle="tab"><i class="fa fa-institution"></i> Data Istri</h3></a></li>
 					<li><a class="text-red" href="#data4" data-toggle="tab"><i class="fa fa-book"></i>  Data Anak</a></li>
 				</ul>
+
 <!--         <li><a href="javascript:history.back()" class="btn btn-sm btn-primary pull-right"><i class="fa fa-backward"></i> Kembali</a>	 </li> -->
     <div class="tab-content">
         <div class="tab-pane active" id="data">

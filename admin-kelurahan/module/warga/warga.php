@@ -495,7 +495,11 @@ $edit=_fetch_array($data);
 <div class="box box-solid box-success">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
-<i class="fa fa-user-md"></i> Edit Informasi Data Warga </h3>
+<i class="fa fa-user-md"></i>
+    Edit Informasi Data Warga
+    &nbsp;&nbsp;&nbsp;&nbsp;
+</h3>
+    <a class="btn btn-default btn-sm pull-right" href="<?=moduleUrlByLevel('warga');?>" ><i class="fa fa-history"></i>  Kembali</a>
 	<a class="btn btn-default btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
 	<i class="fa fa-minus"></i></a>
 		</div>	
@@ -921,6 +925,11 @@ case "detail_warga" :
 
 <form class="form-horizontal" action="<?php echo $aksi?>?module=warga&aksi=edit" role="form" method="post">             
 <div class="nav-tabs-custom">
+<div class="pull-right">
+    <ul class="nav nav-tabs">
+        <li><a class="btn btn-default btn-sm pull-right" href="<?=moduleUrlByLevel('warga');?>" ><i class="fa fa-history"></i>  Kembali</a></li>
+    </ul>
+</div>
 <ul class="nav nav-tabs">
 	<li class="active"><a class="text-red" href="#data" data-toggle="tab"><i class="fa fa-user-md"></i> Data Warga </h3> </a></li>
 	<li><a class="text-red" href="#data1" data-toggle="tab"><i class="fa fa-institution"></i> Data Kelahiran</h3></a></li>
@@ -1053,7 +1062,7 @@ $edit=_fetch_array($data);
         <div class="form-group">
             <label class="col-sm-4 control-label">PROVINSI</label>
             <div class="col-sm-5">
-                <select name="provinsi_id" id="provinsi_id" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id');" readonly="readonly">
+                <select name="provinsi_id" id="provinsi_id" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id');" readonly="readonly" disabled="disabled">
                     <?php
                     $provinsis = get_provinsi();
                     echo optionLoop($provinsis, substr($edit['desa_id'], 0, 2));
@@ -1064,7 +1073,7 @@ $edit=_fetch_array($data);
         <div class="form-group">
             <label class="col-sm-4 control-label">KABUPATEN</label>
             <div class="col-sm-5">
-                <select name="kabupaten_id" id="kabupaten_id" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id');" readonly="readonly">
+                <select name="kabupaten_id" id="kabupaten_id" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id');" readonly="readonly" disabled="disabled">
                     <?php
                     $kabupatens = get_kabupaten(substr($edit['desa_id'], 0, 2));
                     echo optionLoop($kabupatens, substr($edit['desa_id'], 0, 4));
@@ -1075,7 +1084,7 @@ $edit=_fetch_array($data);
         <div class="form-group">
             <label class="col-sm-4 control-label">KECAMATAN</label>
             <div class="col-sm-5">
-                <select name="kecamatan_id" id="kecamatan_id" class="form-control" onchange="changeKecamatan(event, this, '#desa_id');" readonly="readonly">
+                <select name="kecamatan_id" id="kecamatan_id" class="form-control" onchange="changeKecamatan(event, this, '#desa_id');" readonly="readonly" disabled="disabled">
                     <?php
                     $kecamatans = get_kecamatan(substr($edit['desa_id'], 0, 4));
                     echo optionLoop($kecamatans, substr($edit['desa_id'], 0, 7));
@@ -1086,7 +1095,7 @@ $edit=_fetch_array($data);
         <div class="form-group">
             <label class="col-sm-4 control-label">DESA</label>
             <div class="col-sm-5">
-                <select name="desa_id" id="desa_id" class="form-control" readonly="readonly">
+                <select name="desa_id" id="desa_id" class="form-control" readonly="readonly" disabled="disabled">
                     <?php
                     $desas = get_desa(substr($edit['desa_id'], 0, 7));
                     echo optionLoop($desas, $edit['desa_id']);

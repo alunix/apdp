@@ -39,12 +39,12 @@ include "head.php";
 <?php 
 	$c=_fetch_array(_query("select tanggal from surat_keterangan where id='$_GET[id]'"));
 	?>	
-		  <p > <?php echo $s['pernyataan'];?> RT   <?php echo $b['rt'];?>  / RW   <?php echo $b['rw'];?> pada tanggal  <?php echo IndonesiaTgl ($c['tanggal']);?> dengan ini menerangkan bahwa :</p>
+		  <p > <?php echo $s['pernyataan'];?> RT   <?php echo $b['rt'];?>  / RW   <?php echo $b['rw'];?> pada tanggal  <?php echo Indonesia2Tgl($c['tanggal']);?> dengan ini menerangkan bahwa :</p>
 
 
 <p>	Nama Lengkap 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  <?php echo $b['nama'];?> </p>
 <p> NIK 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  <?php echo $b['nik'];?> </p>
-<p> Tempat/Tanggal Lahir	&nbsp;&nbsp;&nbsp;:  <?php echo $b['tempat_lhr'] .", ". IndonesiaTgl($b['tanggal_lhr']); ?>  </p>
+<p> Tempat/Tanggal Lahir	&nbsp;&nbsp;&nbsp;:  <?php echo $b['tempat_lhr'] .", ". Indonesia2Tgl($b['tanggal_lhr']); ?>  </p>
 <p> Jenis Kelamin 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  <?php echo $b['jk'];?>  </p>
 <p> Agama 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  <?php echo $b['agama'];?>  </p>
 <p> Pekerjaan 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  <?php echo $b['pekerjaan'];?>  </p>
@@ -62,12 +62,55 @@ include "head.php";
               </div><!-- /.box-body -->
             </div>
           </section><!-- /.content -->
-		
-		  	Lurah Kelurahan Kahuripan Kota Tasikmalaya &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Camat Kecamatan Tawang Kota Tasikmalaya
-			 </div> 
-		  
-		              <br><br><br>
-					  ______H. BUDY RACHMAN, S.Sos., M.SI._____ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______H. BUDY RACHMAN, S.Sos., M.SI._____</br></br></br>
+
+
+          <?php
+
+          $desas = getMultipleDesa();
+          $selected_desa = @$_SESSION['selected_desa'];
+          if ($selected_desa) {
+              $desas = array_values(array_filter($desas, function ($desa) use($selected_desa) {
+                  return $desa['id'] == $selected_desa;
+              }));
+          }
+          $only_one = count($desas) == 1;
+          $have_desa = count($desas) > 0;
+
+          if ($only_one) {
+              $is_desa = 1;
+              $desa = $desas[0];
+              $profile = getProfileDesa($desa['id']);
+          } else {
+              $is_desa = 0;
+              $desa = $desas[0];
+              $profile = getProfileKecamatan(substr($desa['id'], 0, 7));
+          }
+
+          if ($only_one) {
+              echo sprintf(
+                  "Lurah Desa %s Kecamatan %s %s",
+                  ucwords(strtolower($desa['nama_desa'])),
+                  ucwords(strtolower($desa['nama_kecamatan'])),
+                  ucwords(strtolower($desa['nama_kabupaten']))
+              );
+              echo sprintf("<br/><br/><br/><span class='pejabat'>%s</span><br/><br/>", $profile['nama_lurah']);
+          } else {
+              echo sprintf(
+                  "Camat Kecamatan %s %s",
+                  ucwords(strtolower($desa['nama_kecamatan'])),
+                  ucwords(strtolower($desa['nama_kabupaten']))
+              );
+              echo sprintf("<br/><br/><br/><span class='pejabat'>%s</span><br/><br/>", $profile['nama_camat']);
+          }
+
+
+          ?>
+<!---->
+<!--		  	Lurah Kelurahan Kahuripan Kota Tasikmalaya &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Camat Kecamatan Tawang Kota Tasikmalaya-->
+<!--			 </div>-->
+<!---->
+<!--		              <br><br><br>-->
+<!--					  ______H. BUDY RACHMAN, S.Sos., M.SI._____ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______H. BUDY RACHMAN, S.Sos., M.SI._____</br></br></br>-->
 <?php
 include "tail.php";
 ?>

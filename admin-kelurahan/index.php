@@ -182,7 +182,7 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
                     <li><a href='?module=kematian' ><i class="fa fa-street-view"></i><span>Kematian</span></a></li>
                     <li><a href='?module=pindah' ><i class="fa fa-book"></i><span>Pindah</span></a></li>
                     <li><a href='?module=surat_keterangan'><i class="fa fa-files-o"></i><span>Surat Keterangan</span></a></li>
-                    <li><a href='?module=grafik'><i class="fa fa-bar-chart"></i><span>Grafik</span></a></li>
+<!--                    <li><a href='?module=grafik'><i class="fa fa-bar-chart"></i><span>Grafik</span></a></li>-->
 
                 </ul>
             </li>

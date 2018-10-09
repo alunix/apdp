@@ -2,7 +2,7 @@
 $aksi="module/user/user_aksi.php";
 
 
-switch($_GET[aksi]){
+switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- MENAMPILKAN DATA ADMIN ------------------------- ----->	

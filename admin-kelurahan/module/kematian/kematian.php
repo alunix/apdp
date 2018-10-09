@@ -98,9 +98,13 @@ case "list_kematian":
 
 	<div class="box box-solid box-success">
 		<div class="box-header">
-		<h3 class="btn btn disabled box-title">
-		<i class="fa fa-book"></i>
-		Data Kematian Warga  </h3>	
+		    <h3 class="btn btn disabled box-title">
+		        <i class="fa fa-book"></i>
+		        Data Kematian Warga
+            </h3>
+            <div class="pull-right">
+                <a href="<?=moduleUrlByLevel('kematian');?>" class="btn btn-default btn-md"> <i class="fa fa-close"></i> Batal </a>
+            </div>
 		</div>			
 	<div class="box-body">
 	<table id="example1" class="table table-bordered table-striped">
@@ -117,7 +121,7 @@ case "list_kematian":
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql = "SELECT * FROM data_warga ";
+$sql = "SELECT dw.* FROM data_warga dw left join kematian k on k.id=dw.id where k.id IS NULL ";
 $tampil = _query($sql);
 $no=1;
 while ($data = _fetch_array($tampil)) { 
@@ -191,15 +195,7 @@ $sql6 ="SELECT max(id_kematian) as terakhir from kematian";
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>
   </div> 
-  <div class="form-group">
-    <label class="col-sm-4 control-label">STATUS HIDUP</label>
-    <div class="col-sm-3">	
-    <select name="status_hidup" class="form-control"><option>-- Pilih Status Hidup --</option>
-	<option name="status_hidup" value="Hidup"> Hidup </option>
-	<option name="status_hidup" value="Mati"> Mati </option>
-	</select>
-    </div>
-  </div>
+
    <div class="form-group">
      <label class="col-sm-4 control-label">PUKUL WAFAT</label>
 	 <div class="col-sm-5">
