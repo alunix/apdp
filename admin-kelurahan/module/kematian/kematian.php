@@ -2,7 +2,7 @@
 $aksi="module/kematian/kematian_aksi.php";
 
 
-switch($_GET[aksi]){
+switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- MENAMPILKAN DATA MASTER kematian ------------------------- ----->			

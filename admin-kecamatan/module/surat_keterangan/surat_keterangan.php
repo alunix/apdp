@@ -2,7 +2,7 @@
 $aksi="module/surat_keterangan/surat_keterangan_aksi.php";
 
 
-switch($_GET[aksi]){
+switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- MENAMPILKAN DATA KETERANGAN WARGA ------------------------- ----->			
@@ -61,9 +61,9 @@ default:
 // Tampilkan data dari Database
 $sql = "SELECT * FROM data_warga a, surat_keterangan b where a.id=b.id ";
 
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($k = mysql_fetch_array($tampil)) { 
+while ($k = _fetch_array($tampil)) { 
 $Kode = $k['id'];?>
 
 	<tr>	

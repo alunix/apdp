@@ -25,10 +25,10 @@ if ($q) {
         // Tampilkan data dari Database
         $sql = "SELECT * FROM data_warga";
         $no=1;
-        $tampil = mysql_query($sql);
+        $tampil = _query($sql);
         $count = 0;
 
-        while ($tampilkan = mysql_fetch_array($tampil)) {
+        while ($tampilkan = _fetch_array($tampil)) {
             $Kode = $tampilkan['id'];
             $nama = $tampilkan['nama'];
             $find = process_bmh($q, $nama);
@@ -44,7 +44,8 @@ if ($q) {
         ?>
         </tbody>
     </table>
-    </div>
+   
+   </div>
     </div>
     <?php
 

@@ -2,7 +2,7 @@
 $aksi="module/warga/warga_aksi.php";
 
 
-switch($_GET[aksi]){
+switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- Menampilkan Data Warga ------------------------- ----->	
@@ -57,8 +57,8 @@ default:
 // Tampilkan data dari Database
 $sql = "SELECT * FROM data_warga";
 $no=1;
-$tampil = mysql_query($sql);
-while ($tampilkan = mysql_fetch_array($tampil)) { 
+$tampil = _query($sql);
+while ($tampilkan = _fetch_array($tampil)) { 
 $Kode = $tampilkan['id'];
 ?>
 

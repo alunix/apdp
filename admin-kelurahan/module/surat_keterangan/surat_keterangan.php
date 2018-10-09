@@ -2,7 +2,7 @@
 $aksi="module/surat_keterangan/surat_keterangan_aksi.php";
 
 
-switch($_GET[aksi]){
+switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- MENAMPILKAN DATA KETERANGAN WARGA ------------------------- ----->			

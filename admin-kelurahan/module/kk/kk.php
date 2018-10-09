@@ -2,7 +2,7 @@
 $aksi="module/kk/kk_aksi.php";
 
 
-switch($_GET[aksi]){
+switch(@$_GET['aksi']){
     default:
     ?>
     <!----- ------------------------- Menampilkan Data Kepala Keluarga ------------------------- ----->
@@ -64,7 +64,8 @@ switch($_GET[aksi]){
                     $tampil = _query($sql);
                     while ($tampilkan = _fetch_array($tampil)) {
                     $Kode = $tampilkan['id'];
-                    $blokir = $tampilkan['blokir'];?>
+                    //$blokir = @$tampilkan['blokir'];
+					?>
 
                         <tr>
                             <td><?php echo $no++; ?></td>

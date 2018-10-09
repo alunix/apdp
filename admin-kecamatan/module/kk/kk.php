@@ -2,7 +2,7 @@
 $aksi="module/kk/kk_aksi.php";
 
 
-switch($_GET[aksi]){
+switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- Menampilkan Data Kepala Keluarga ------------------------- ----->	
@@ -61,10 +61,10 @@ default:
 // Tampilkan data dari Database
 $sql = "SELECT * FROM data_warga WHERE status_keluarga = 'Kepala Keluarga'";
 $no=1;
-$tampil = mysql_query($sql);
-while ($tampilkan = mysql_fetch_array($tampil)) { 
+$tampil = _query($sql);
+while ($tampilkan = _fetch_array($tampil)) { 
 $Kode = $tampilkan['id'];
-$blokir = $tampilkan['blokir'];?>
+?>
 
 	<tr>
 	<td><?php echo $no++; ?></td> 
