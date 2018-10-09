@@ -61,9 +61,9 @@ default:
 // Tampilkan data dari Database
 $sql = "SELECT * FROM kelahiran ";
 
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($k = mysql_fetch_array($tampil)) { 
+while ($k = _fetch_array($tampil)) { 
 $Kode = $k['id'];?>
 
 	<tr>	
@@ -95,8 +95,8 @@ break;
  case "tambah": 
  
 $sql ="SELECT max(id_kelahiran) as terakhir from kelahiran";
-  $hasil = mysql_query($sql);
-  $data = mysql_fetch_array($hasil);
+  $hasil = _query($sql);
+  $data = _fetch_array($hasil);
   $lastID = $data['terakhir'];
   $lastNoUrut = substr($lastID, 3, 9);
   $nextNoUrut = $lastNoUrut + 1;
@@ -117,8 +117,8 @@ $sql ="SELECT max(id_kelahiran) as terakhir from kelahiran";
 <form class="form-horizontal" action="<?php echo $aksi?>?module=kelahiran&aksi=tambah" role="form" method="post">        
 <?php
 $sql6 ="SELECT max(id) as terakhir from kelahiran";
-  $hasil6 = mysql_query($sql6);
-  $data6 = mysql_fetch_array($hasil6);
+  $hasil6 = _query($sql6);
+  $data6 = _fetch_array($hasil6);
   $lastID6 = $data6['terakhir'];
   $lastNoUrut6 = substr($lastID6, 3, 9);
   $nextNoUrut6 = $lastNoUrut6 + 1;
@@ -334,8 +334,8 @@ $sql6 ="SELECT max(id) as terakhir from kelahiran";
 break;
 case "edit" :
 
-$data=mysql_query("SELECT * FROM kelahiran WHERE id_kelahiran='$_GET[id_kelahiran]'");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM kelahiran WHERE id_kelahiran='$_GET[id_kelahiran]'");
+$edit=_fetch_array($data);
 
 ?>
 <!----- ------------------------- EDIT DATA KELAHIRAN ------------------------- ----->
@@ -525,8 +525,8 @@ $edit=mysql_fetch_array($data);
 <?php	
 break;
 case "detail_kelahiran" :
-$data=mysql_query("SELECT * FROM kelahiran WHERE id_kelahiran='$_GET[id_kelahiran]'");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM kelahiran WHERE id_kelahiran='$_GET[id_kelahiran]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- DETAIL DATA KELAHIRAN ------------------------- ----->
 <h3 class="box-title margin text-center">Detail Data Kelahiran "<?php echo $_GET['id_kelahiran']; ?>"</h3>

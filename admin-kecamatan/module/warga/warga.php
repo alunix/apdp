@@ -6,7 +6,7 @@ switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- Menampilkan Data Warga ------------------------- ----->	
-<div style="margin-right:10%;margin-left:15%" class="alert alert-info alert-dismissable">
+<div style="margin-right:10%;margin-left:15%" class="alert alert-success alert-dismissable">
 <button type="button" class="btn btn-primary close" data-dismiss="alert" aria-hidden="true">&nbsp;<i class="fa fa-close "></i>&nbsp;</button>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -30,13 +30,15 @@ default:
 </div><!-- /.input group -->
 </div>
 <div class="col-sm-1">
-<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-info"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
+<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-success"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
 </div></div>  
 </form>
-	<div class="box box-solid box-info">
+	<div class="box box-solid box-success">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
-		<i class="fa  fa-user-secret"></i>Data Warga </h3>			
+		<i class="fa  fa-user-secret"></i>Data Warga </h3>	
+		<a class="btn btn-default pull-right"href="?module=warga&aksi=tambah">
+		<i class="fa  fa-plus"></i> Tambah data Warga</a>		
 		</div>		
 	<div class="box-body">
 	<table id="example2" class="table table-bordered table-striped">
@@ -58,7 +60,7 @@ default:
 $sql = "SELECT * FROM data_warga";
 $no=1;
 $tampil = _query($sql);
-while ($tampilkan = _fetch_array($tampil)) { 
+while ($tampilkan = _fetch_array($tampil)) {
 $Kode = $tampilkan['id'];
 ?>
 
@@ -71,6 +73,8 @@ $Kode = $tampilkan['id'];
 	<td><?php echo $tampilkan['alamat']; ?></td>
 	<td align="center">
 	<a class="btn btn-xs btn-success"data-toggle="tooltip" title="Lihat Data Warga <?php echo $tampilkan['id'];?>" href="?module=warga&aksi=detail_warga&id=<?php echo $tampilkan['id'];?>"><i class="glyphicon glyphicon-eye-open"></i></a>
+	<a class="btn btn-xs btn-danger"data-toggle="tooltip" title="Hapus Data Warga??"href="<?php echo $aksi ?>?module=warga&aksi=hapus&id=<?php echo $tampilkan['id'];?>"  alt="Delete Data" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA <?php echo $Kode; ?>	?')"> <i class="glyphicon glyphicon-trash"></i></a>
+	<a class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit Data Warga??"href="?module=warga&aksi=edit&id=<?php echo $tampilkan['id'];?>" alt="Edit Data"><i class="glyphicon glyphicon-pencil"></i></a>
 	<a class="btn btn-xs btn-warning" data-toggle="tooltip" title="Cetak Data Warga??"href="module/laporan/data_warga.php?module=laporan&aksi=edit&id=<?php echo $tampilkan['id'];?>" alt="Cetak Data"><i class="glyphicon glyphicon-print"></i></a>
 		
 		</td>
@@ -89,8 +93,8 @@ break;
  case "tambah": 
 //ID
 $sql ="SELECT max(id) as terakhir from data_warga";
-  $hasil = mysql_query($sql);
-  $data = mysql_fetch_array($hasil);
+  $hasil = _query($sql);
+  $data = _fetch_array($hasil);
   $lastID = $data['terakhir'];
   $lastNoUrut = substr($lastID, 3, 9);
   $nextNoUrut = $lastNoUrut + 1;
@@ -113,7 +117,7 @@ $sql ="SELECT max(id) as terakhir from data_warga";
   <div class="form-group">
     <label class="col-sm-4 control-label">ID </label>
     <div class="col-sm-5">
-      <input type="text" class="form-control"  name="id" value="<?php echo  $nextID; ?>" >
+      <input type="text" class="form-control"  readonly name="id" value="<?php echo  $nextID; ?>" >
     </div>
   </div>
   <div class="form-group">
@@ -134,35 +138,33 @@ $sql ="SELECT max(id) as terakhir from data_warga";
       <input type="text" class="form-control"  name="nama" placeholder="Masukan Nama Lengkap ...">
     </div>
   </div>
-  <div class="form-group">
+  
+     <div class="form-group">
     <label class="col-sm-4 control-label">JENIS KELAMIN</label>
-    <label class="radio-inline">
-    <input type="radio" name="jk" value="Laki - laki" checked>Laki - laki
-    </label>
-    <label class="radio-inline">
-    <input type="radio" name="jk" value="Perempuan">Perempuan
-    </label>
+    <div class="col-sm-5">
+	  <input name="jk" class="minimal" type="radio" value="Laki-laki" checked> Laki-laki &nbsp;&nbsp;
+	  <input name="jk" class="minimal" type="radio" value="Perempuan"> Perempuan
+    </div>
   </div>
+  
   <div class="form-group">
     <label class="col-sm-4 control-label">TEMPAT LAHIR</label>
     <div class="col-sm-5">
-      <textarea rowspan="2" class="form-control" name="tempat_lhr"placeholder="Tempat Lahir"></textarea>
+      <textarea rowspan="2" class="form-control" name="tempat_lhr" placeholder="Tempat Lahir"></textarea>
     </div>
   </div>
   <div class="form-group">
      <label class="col-sm-4 control-label">TANGGAL LAHIR</label>
 	 <div class="col-sm-5">
-    <input type="date" class="form-control" placeholder="Masukan tanggal lahir" name="tanggal_lhr">
+    <input type="date" class="form-control" name="tanggal_lhr" placeholder="Masukan tanggal lahir">
 	</div>
   </div>
   <div class="form-group">
-	  <label class="col-sm-4 control-label">KEWARGANEGARAAN</label>
-	  <label class="radio-inline">
-	  <input type="radio" name="kewarganegaraan" value="WNI" checked>WNI
-	  </label>
-	  <label class="radio-inline">
-	  <input type="radio" name="kewarganegaraan" value="WNA">WNA
-		</label>
+    <label class="col-sm-4 control-label">KEWARGANEGARAAN</label>
+    <div class="col-sm-5">
+	  <input name="kewarganegaraan" class="minimal" type="radio" value="wni" checked> WNI &nbsp;&nbsp;
+	  <input name="kewarganegaraan" class="minimal" type="radio" value="wna"> WNA
+    </div>
   </div>
   <div class="form-group">
                                             <label class="col-sm-4 control-label">AGAMA</label>
@@ -273,10 +275,41 @@ $sql ="SELECT max(id) as terakhir from data_warga";
       <textarea rowspan="2" class="form-control" name="alamat"placeholder="Alamat"></textarea>
     </div>
   </div>
+
+  <?php
+  include BASE_DIR."/inc/desa_selector.php";
+  load_scripts();
+  ?>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">PROVINSI</label>
+    <div class="col-sm-5">
+        <select name="provinsi_id" id="provinsi_id" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id');">
+            <?php
+            $provinsis = get_provinsi();
+            echo optionLoop($provinsis);
+            ?>
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">KABUPATEN</label>
+    <div class="col-sm-5">
+        <select name="kabupaten_id" id="kabupaten_id" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id');">
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">KECAMATAN</label>
+    <div class="col-sm-5">
+        <select name="kecamatan_id" id="kecamatan_id" class="form-control" onchange="changeKecamatan(event, this, '#desa_id');">
+        </select>
+    </div>
+  </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">DESA</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" name="desa" placeholder="Desa">
+        <select name="desa_id" id="desa_id" class="form-control">
+        </select>
     </div>
   </div>
   <div class="form-group">
@@ -292,6 +325,12 @@ $sql ="SELECT max(id) as terakhir from data_warga";
     </div>
   </div>
    </div></div> 
+   
+   
+
+   
+   
+   
 
    <!----- ------------------------- FORM DATA KELAHIRAN ------------------------- ----->
  
@@ -299,7 +338,7 @@ $sql ="SELECT max(id) as terakhir from data_warga";
 	<div class="box box-solid box-primary">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
-<i class="fa fa-book"></i> Tambah Data Anak </h3>
+<i class="fa fa-book"></i> Tambah Data Kelahiran </h3>
 	<a class="btn btn-default btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
 	<i class="fa fa-minus"></i></a>
 		</div>	
@@ -307,8 +346,8 @@ $sql ="SELECT max(id) as terakhir from data_warga";
 <form class="form-horizontal" action="<?php echo $aksi?>?module=kelahiran&aksi=tambah" role="form" method="post">        
 <?php
 $sql6 ="SELECT max(id_kelahiran) as terakhir from kelahiran";
-  $hasil6 = mysql_query($sql6);
-  $data6 = mysql_fetch_array($hasil6);
+  $hasil6 = _query($sql6);
+  $data6 = _fetch_array($hasil6);
   $lastID6 = $data6['terakhir'];
   $lastNoUrut6 = substr($lastID6, 3, 9);
   $nextNoUrut6 = $lastNoUrut6 + 1;
@@ -319,7 +358,7 @@ $sql6 ="SELECT max(id_kelahiran) as terakhir from kelahiran";
   <div class="form-group">
     <label class="col-sm-4 control-label">ID KELAHIRAN</label>
     <div class="col-sm-5">
-    <input type="text" class="form-control"  name="id_kelahiran" value="<?php echo $nextID6;?>">
+    <input type="text" class="form-control"  readonly name="id_kelahiran" value="<?php echo $nextID6;?>">
     </div>
   </div>
 
@@ -406,8 +445,8 @@ $sql6 ="SELECT max(id_kelahiran) as terakhir from kelahiran";
 <form class="form-horizontal" action="<?php echo $aksi?>?module=pendatang&aksi=tambah" role="form" method="post">        
 <?php  
 $sql9 ="SELECT max(id_pendatang) as terakhir from pendatang";
-  $hasil9 = mysql_query($sql9);
-  $data9 = mysql_fetch_array($hasil9);
+  $hasil9 = _query($sql9);
+  $data9 = _fetch_array($hasil9);
   $lastID9 = $data9['terakhir'];
   $lastNoUrut9 = substr($lastID9, 3, 9);
   $nextNoUrut9 = $lastNoUrut9 + 1;
@@ -416,7 +455,7 @@ $sql9 ="SELECT max(id_pendatang) as terakhir from pendatang";
   <div class="form-group">
     <label class="col-sm-4 control-label">ID pendatang</label>
     <div class="col-sm-5">
-    <input type="text" class="form-control" required="required" name="id_pendatang" value="<?php echo $nextID9;?>">
+    <input type="text" class="form-control" required="required" readonly name="id_pendatang" value="<?php echo $nextID9;?>">
     </div>
   </div>
   <div class="form-group">
@@ -445,8 +484,8 @@ $sql9 ="SELECT max(id_pendatang) as terakhir from pendatang";
 <?php	
 break;
 case "edit" :
-$data=mysql_query("select * from data_warga where id='$_GET[id]'");
-$edit=mysql_fetch_array($data);
+$data=_query("select * from data_warga where id='$_GET[id]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- EDIT DATA WARGA ------------------------- ----->
 <h3 class="box-title margin text-center">Edit Data Warga "<?php echo $_GET['id']; ?>"</h3>
@@ -456,15 +495,19 @@ $edit=mysql_fetch_array($data);
 <div class="box box-solid box-success">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
-<i class="fa fa-user-md"></i> Edit Informasi Data Warga </h3>
+<i class="fa fa-user-md"></i>
+    Edit Informasi Data Warga
+    &nbsp;&nbsp;&nbsp;&nbsp;
+</h3>
+    <a class="btn btn-default btn-sm pull-right" href="<?=moduleUrlByLevel('warga');?>" ><i class="fa fa-history"></i>  Kembali</a>
 	<a class="btn btn-default btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
 	<i class="fa fa-minus"></i></a>
 		</div>	
 	<div class="box-body">
   <div class="form-group">
-    <label class="col-sm-4 control-label">NO</label>
+    <label class="col-sm-4 control-label">ID</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" name="id" value="<?php echo $edit['id']; ?>" >
+      <input type="text" class="form-control" readonly name="id" value="<?php echo $edit['id']; ?>" >
     </div>
   </div> 
     <div class="form-group">
@@ -487,12 +530,12 @@ $edit=mysql_fetch_array($data);
   </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">JENIS KELAMIN</label>
-    <label class="radio-inline">
-    <input type="radio" name="jk" value="<?php echo $edit['jk']; ?>" checked>Laki - laki
-    </label>
-    <label class="radio-inline">
-    <input type="radio" name="jk" value="<?php echo $edit['jk']; ?>">Perempuan
-    </label>
+    <div class="col-sm-5">
+	  <input  class="minimal" name="jk" type="radio" value="Laki-laki" <?php if(($edit['jk'])== "Laki-laki")
+				{echo "checked=\"checked\"";};?>/> Laki-laki &nbsp;&nbsp;
+	  <input class="minimal" name="jk" type="radio" value="Perempuan" <?php if(($edit['jk'])== "Perempuan")
+				{echo "checked=\"checked\"";};?>/> Perempuan
+    </div>
   </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">TEMPAT LAHIR</label>
@@ -503,17 +546,17 @@ $edit=mysql_fetch_array($data);
   <div class="form-group">
      <label class="col-sm-4 control-label">TANGGAL LAHIR</label>
 	 <div class="col-sm-5">
-    <input type="date" class="form-control" value="<?php echo $edit['tanggal_lhr']; ?>" placeholder="Masukan tanggal lahir" name="tanggal_lhr">
+    <input type="date" class="form-control" value="<?php echo $edit['tanggal_lhr']; ?>" name="tanggal_lhr" placeholder="Masukan tanggal lahir">
 	</div>
   </div>
   <div class="form-group">
-	  <label class="col-sm-4 control-label">KEWARGANEGARAAN</label>
-	  <label class="radio-inline">
-	  <input type="radio" name="kewarganegaraan" value="<?php echo $edit['kewarganegaraan']; ?>" checked>WNI
-	  </label>
-	  <label class="radio-inline">
-	  <input type="radio" name="kewarganegaraan" value="<?php echo $edit['kewarganegaraan']; ?>">WNA
-		</label>
+    <label class="col-sm-4 control-label">KEWARGANEGARAAN</label>
+    <div class="col-sm-5">
+	  <input  class="minimal" name="kewarganegaraan" type="radio" value="wni" <?php if(($edit['kewarganegaraan'])== "wni")
+				{echo "checked=\"checked\"";};?>/> WNI &nbsp;&nbsp;
+	  <input class="minimal" name="kewarganegaraan" type="radio" value="wna" <?php if(($edit['kewarganegaraan'])== "wna")
+				{echo "checked=\"checked\"";};?>/> WNA
+    </div>
   </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">AGAMA</label>
@@ -650,6 +693,7 @@ $edit=mysql_fetch_array($data);
       <input type="text" class="form-control" value="<?php echo $edit['nama_ibu']; ?>" name="nama_ibu" placeholder="Nama Ibu">
     </div>
   </div>
+
   <div class="form-group">
     <label class="col-sm-4 control-label">ALAMAT</label>
     <div class="col-sm-5">
@@ -662,6 +706,56 @@ $edit=mysql_fetch_array($data);
       <input type="text" class="form-control" value="<?php echo $edit['desa']; ?>" name="desa" placeholder="Desa">
     </div>
   </div>
+
+        <?php
+        include BASE_DIR."/inc/desa_selector.php";
+        load_scripts();
+        ?>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">PROVINSI</label>
+            <div class="col-sm-5">
+                <select name="provinsi_id" id="provinsi_id" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id');">
+                    <?php
+                    $provinsis = get_provinsi();
+                    echo optionLoop($provinsis, substr($edit['desa_id'], 0, 2));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">KABUPATEN</label>
+            <div class="col-sm-5">
+                <select name="kabupaten_id" id="kabupaten_id" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id');">
+                    <?php
+                    $kabupatens = get_kabupaten(substr($edit['desa_id'], 0, 2));
+                    echo optionLoop($kabupatens, substr($edit['desa_id'], 0, 4));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">KECAMATAN</label>
+            <div class="col-sm-5">
+                <select name="kecamatan_id" id="kecamatan_id" class="form-control" onchange="changeKecamatan(event, this, '#desa_id');">
+                    <?php
+                    $kecamatans = get_kecamatan(substr($edit['desa_id'], 0, 4));
+                    echo optionLoop($kecamatans, substr($edit['desa_id'], 0, 7));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">DESA</label>
+            <div class="col-sm-5">
+                <select name="desa_id" id="desa_id" class="form-control">
+                    <?php
+                    $desas = get_desa(substr($edit['desa_id'], 0, 7));
+                    echo optionLoop($desas, $edit['desa_id']);
+                    ?>
+                </select>
+            </div>
+        </div>
+
   <div class="form-group">
     <label class="col-sm-4 control-label">RT</label>
     <div class="col-sm-5">
@@ -677,7 +771,7 @@ $edit=mysql_fetch_array($data);
   </div>
 
   
-  
+  <!----- ------------------------- EDIT DATA KELAHIRAN ------------------------- ----->
 <div class="box box-solid box-danger">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
@@ -688,12 +782,12 @@ $edit=mysql_fetch_array($data);
 <div class="box-body">
 <?php 
 // Tampilkan data dari Database
-$a = mysql_query("SELECT * FROM kelahiran where id='$_GET[id]'");
-while ($edit = mysql_fetch_array($a)) { ?>
+$a = _query("SELECT * FROM kelahiran where id='$_GET[id]'");
+while ($edit = _fetch_array($a)) { ?>
 <div class="form-group">
     <label class="col-sm-4 control-label">ID KELAHIRAN</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" name="id_pendatang" value="<?php echo $edit['id_kelahiran'];?>">	  
+      <input type="text" class="form-control" readonly name="id_pendatang" value="<?php echo $edit['id_kelahiran'];?>">	  
     </div>
 	</div>
 <div class="form-group">
@@ -717,7 +811,7 @@ while ($edit = mysql_fetch_array($a)) { ?>
 <div class="form-group">
      <label class="col-sm-4 control-label">PUKUL LAHIR</label>
 	 <div class="col-sm-5">
- <input type="time" class="form-control" required="required" value="<?php echo $edit['pukul_lahir'];?>" name="pukul_lahir">
+ <input type="time" class="form-control" value="<?php echo $edit['pukul_lahir'];?>" name="pukul_lahir">
 	</div>
 </div>
 <div class="form-group">
@@ -787,12 +881,12 @@ while ($edit = mysql_fetch_array($a)) { ?>
 		</div>	
 <div class="box-body">
 <?php
-$a = mysql_query("SELECT * FROM pendatang where id='$_GET[id]'");
-while ($edi = mysql_fetch_array($a)) { ?>
+$a = _query("SELECT * FROM pendatang where id='$_GET[id]'");
+while ($edi = _fetch_array($a)) { ?>
 <div class="form-group">
     <label class="col-sm-4 control-label">ID PENDATANG</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" name="id_pendatang" value="<?php echo $edi['id_pendatang'];?>">	  
+      <input type="text" class="form-control" readonly name="id_pendatang" value="<?php echo $edi['id_pendatang'];?>">	  
     </div>
 	</div>
 <div class="form-group">
@@ -831,6 +925,11 @@ case "detail_warga" :
 
 <form class="form-horizontal" action="<?php echo $aksi?>?module=warga&aksi=edit" role="form" method="post">             
 <div class="nav-tabs-custom">
+<div class="pull-right">
+    <ul class="nav nav-tabs">
+        <li><a class="btn btn-default btn-sm pull-right" href="<?=moduleUrlByLevel('warga');?>" ><i class="fa fa-history"></i>  Kembali</a></li>
+    </ul>
+</div>
 <ul class="nav nav-tabs">
 	<li class="active"><a class="text-red" href="#data" data-toggle="tab"><i class="fa fa-user-md"></i> Data Warga </h3> </a></li>
 	<li><a class="text-red" href="#data1" data-toggle="tab"><i class="fa fa-institution"></i> Data Kelahiran</h3></a></li>
@@ -840,7 +939,7 @@ case "detail_warga" :
 <div class="tab-content">
 <div class="tab-pane active" id="data">
 <section id="new">
-<div class="box box-solid box-info">
+<div class="box box-solid box-danger">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="fa fa-user-md"></i> Informasi Data Warga </h3>
@@ -850,8 +949,8 @@ case "detail_warga" :
 	</a></div>	</div>	
 	<div class="box-body">
 <?php 
-$data=mysql_query("select * from data_warga where id='$_GET[id]'");
-$edit=mysql_fetch_array($data);
+$data=_query("select * from data_warga where id='$_GET[id]'");
+$edit=_fetch_array($data);
 ?>	
   <div class="form-group">
     <label class="col-sm-4 control-label">NO</label>
@@ -880,7 +979,7 @@ $edit=mysql_fetch_array($data);
   <div class="form-group">
     <label class="col-sm-4 control-label">JENIS KELAMIN</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" value="<?php echo $edit['jk']; ?>" readonly name="nama" placeholder="Jenis Kelamin">
+      <input type="text" class="form-control" value="<?php echo $edit['jk']; ?>" readonly name="jk" placeholder="Jenis Kelamin">
     </div>
   </div>
   <div class="form-group">
@@ -892,7 +991,7 @@ $edit=mysql_fetch_array($data);
   <div class="form-group">
      <label class="col-sm-4 control-label">TANGGAL LAHIR</label>
 	 <div class="col-sm-5">
-    <input type="date" class="form-control" value="<?php echo $edit['tanggal_lhr']; ?>" placeholder="Masukan tanggal lahir" readonly name="tanggal_lhr">
+    <input type="date" class="form-control" value="<?php echo $edit['tanggal_lhr']; ?>" readonly name="tanggal_lhr" placeholder="Masukan tanggal lahir">
 	</div>
   </div>
   <div class="form-group">
@@ -955,12 +1054,56 @@ $edit=mysql_fetch_array($data);
       <input rowspan="2" class="form-control" value="<?php echo $edit['alamat']; ?>" readonly name="alamat" placeholder="Alamat">
     </div>
   </div>
-  <div class="form-group">
-    <label class="col-sm-4 control-label">DESA</label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control" value="<?php echo $edit['desa']; ?>" readonly name="desa" placeholder="Desa">
-    </div>
-  </div>
+
+        <?php
+        include BASE_DIR."/inc/desa_selector.php";
+        load_scripts();
+        ?>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">PROVINSI</label>
+            <div class="col-sm-5">
+                <select name="provinsi_id" id="provinsi_id" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id');" readonly="readonly" disabled="disabled">
+                    <?php
+                    $provinsis = get_provinsi();
+                    echo optionLoop($provinsis, substr($edit['desa_id'], 0, 2));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">KABUPATEN</label>
+            <div class="col-sm-5">
+                <select name="kabupaten_id" id="kabupaten_id" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id');" readonly="readonly" disabled="disabled">
+                    <?php
+                    $kabupatens = get_kabupaten(substr($edit['desa_id'], 0, 2));
+                    echo optionLoop($kabupatens, substr($edit['desa_id'], 0, 4));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">KECAMATAN</label>
+            <div class="col-sm-5">
+                <select name="kecamatan_id" id="kecamatan_id" class="form-control" onchange="changeKecamatan(event, this, '#desa_id');" readonly="readonly" disabled="disabled">
+                    <?php
+                    $kecamatans = get_kecamatan(substr($edit['desa_id'], 0, 4));
+                    echo optionLoop($kecamatans, substr($edit['desa_id'], 0, 7));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">DESA</label>
+            <div class="col-sm-5">
+                <select name="desa_id" id="desa_id" class="form-control" readonly="readonly" disabled="disabled">
+                    <?php
+                    $desas = get_desa(substr($edit['desa_id'], 0, 7));
+                    echo optionLoop($desas, $edit['desa_id']);
+                    ?>
+                </select>
+            </div>
+        </div>
+
   <div class="form-group">
     <label class="col-sm-4 control-label">RT</label>
     <div class="col-sm-5">
@@ -976,7 +1119,7 @@ $edit=mysql_fetch_array($data);
 	</div></div></section></div>
 <div class="tab-pane" id="data1">
 <section id="new1">
-<div class="box box-solid box-info">
+<div class="box box-solid box-danger">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="fa fa-institution"></i> Data Kelahiran </h3>
@@ -984,8 +1127,8 @@ $edit=mysql_fetch_array($data);
 	<i class="fa fa-minus"></i>
 	</a></div>	
 	<div class="box-body">
-<?php $d=mysql_query("select * from kelahiran where  id='$_GET[id]'");
-$e=mysql_fetch_array($d);
+<?php $d=_query("select * from kelahiran where  id='$_GET[id]'");
+$e=_fetch_array($d);
 ?>	
 	
 <div class="form-group">
@@ -1039,7 +1182,7 @@ $e=mysql_fetch_array($d);
 
 <div class="tab-pane" id="data4">
 <section id="new4">
-<div class="box box-solid box-info">
+<div class="box box-solid box-danger">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="fa fa-book"></i> Data Pendatang </h3>
@@ -1047,8 +1190,8 @@ $e=mysql_fetch_array($d);
 	<i class="fa fa-minus"></i>
 	</a></div>	
 	<div class="box-body">
-<?php $d=mysql_query("select * from pendatang where  id='$_GET[id]'");
-$f=mysql_fetch_array($d);
+<?php $d=_query("select * from pendatang where  id='$_GET[id]'");
+$f=_fetch_array($d);
 ?>
 <div class="form-group">
     <label class="col-sm-4 control-label">ID Pendatang</label>

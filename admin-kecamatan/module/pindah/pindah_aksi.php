@@ -1,5 +1,5 @@
 <?php
-include '../../koneksi.php';
+include '../../../bootstrap.php';
 
 $module=$_GET['module'];
 $aksi=$_GET['aksi'];
@@ -13,12 +13,13 @@ $id = $_POST['id'];
 // HAPUS
 if($module=='pindah' AND $aksi=='hapus' ){ 
 $mySql = "DELETE FROM pindah WHERE id_pindah='".$_GET['id_pindah']."'";
-$myQry = mysql_query($mySql);
+$myQry = _query($mySql);
 header('location:../../index.php?module='.$module);
 }
 // EDIT
 else if($module=='pindah' AND $aksi=='edit' ){ 
-$query = mysql_query("UPDATE pindah SET				  
+$query = _query("UPDATE pindah SET	
+                  status_pindah	= '$status_pindah',		  
 				  tanggal_pindah = '$tanggal_pindah',
 				  alamat_pindah  = '$alamat_pindah'
 				  WHERE id_pindah = '$id_pindah'");
@@ -28,6 +29,6 @@ header('location:../../index.php?module='.$module);
 else if($module=='pindah' AND $aksi=='tambah' ){ 
 	header('location:../../index.php?module='.$module);
 $sql = "INSERT INTO pindah (id_pindah, status_pindah, tanggal_pindah, alamat_pindah, id) VALUES ('$id_pindah', '$status_pindah', '$tanggal_pindah', '$alamat_pindah', '$id')";
-$simpan = mysql_query($sql);
+$simpan = _query($sql);
 }
 ?>

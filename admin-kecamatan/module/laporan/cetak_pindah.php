@@ -48,9 +48,9 @@ include "head.php";
 <?php 
 // Tampilkan data dari Database
 $sql = "SELECT * FROM data_warga a, pindah b where a.id=b.id ";
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($data = mysql_fetch_array($tampil)) { ?>
+while ($data = _fetch_array($tampil)) { ?>
 
 	<tr>
 	<td><?php echo $no++; ?></td>

@@ -6,7 +6,7 @@ switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- MENAMPILKAN DATA MASTER kematian ------------------------- ----->			
-<div style="margin-right:10%;margin-left:15%" class="alert alert-info alert-dismissable">
+<div style="margin-right:10%;margin-left:15%" class="alert alert-success alert-dismissable">
 <button type="button" class="btn btn-primary close" data-dismiss="alert" aria-hidden="true">&nbsp;<i class="fa fa-close "></i>&nbsp;</button>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -30,15 +30,16 @@ default:
 </div><!-- /.input group -->
 </div>
 <div class="col-sm-1">
-<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-info"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
+<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-success"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
 </div></div>  
 </form>
-	<div class="box box-solid box-info">
+	<div class="box box-solid box-success">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
 		<i class="glyphicon glyphicon-thumbs-up"></i>
 		Data Kematian Warga </h3>
-		
+		<a class="btn btn-default pull-right" href="?module=kematian&aksi=list_kematian">
+		<i class="fa  fa-plus"></i> Tambah Data Kematian Warga </a>	
 		</div>		
 	<div class="box-body">
 	<table id="example2" class="table table-bordered table-striped">
@@ -51,7 +52,7 @@ default:
 		<th class="col-sm-1">TANGGAL WAFAT</th>
 		<th class="col-sm-1">PUKUL WAFAT</th> 
 		<th class="col-sm-2">SEBAB KEMATIAN</th>
-		 	
+		<th class="col-sm-1">AKSI</th> 	
 	</tr>
 </thead>
 
@@ -74,7 +75,10 @@ $Kode = $k['id'];?>
 	<td><?php echo $k['pukul_wafat']; ?></td>
 	<td><?php echo $k['sebab_kematian']; ?></td>
 	
-	
+	<td align="center">
+	<a  class="btn btn-xs btn-info" href="?module=kematian&aksi=edit&id_kematian=<?php echo $k['id_kematian'];?>" alt="Edit Data"><i class="glyphicon glyphicon-pencil"></i></a>
+	<a class="btn btn-xs btn-warning" href="<?php echo $aksi ?>?module=kematian&aksi=hapus&id_kematian=<?php echo $k['id_kematian'];?>"  alt="Delete Data" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA <?php echo $Kode; ?>	?')"> <i class="glyphicon glyphicon-trash"></i></a>
+	</td>
 	<?php
 	}
 	?>
@@ -92,11 +96,15 @@ case "list_kematian":
 <h3 class="box-title margin text-center">Data Kematian Warga</h3>
 <hr/>
 
-	<div class="box box-solid box-info">
+	<div class="box box-solid box-success">
 		<div class="box-header">
-		<h3 class="btn btn disabled box-title">
-		<i class="fa fa-book"></i>
-		Data Kematian Warga  </h3>	
+		    <h3 class="btn btn disabled box-title">
+		        <i class="fa fa-book"></i>
+		        Data Kematian Warga
+            </h3>
+            <div class="pull-right">
+                <a href="<?=moduleUrlByLevel('kematian');?>" class="btn btn-default btn-md"> <i class="fa fa-close"></i> Batal </a>
+            </div>
 		</div>			
 	<div class="box-body">
 	<table id="example1" class="table table-bordered table-striped">
@@ -113,10 +121,10 @@ case "list_kematian":
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql = "SELECT * FROM data_warga ";
-$tampil = mysql_query($sql);
+$sql = "SELECT dw.* FROM data_warga dw left join kematian k on k.id=dw.id where k.id IS NULL ";
+$tampil = _query($sql);
 $no=1;
-while ($data = mysql_fetch_array($tampil)) { 
+while ($data = _fetch_array($tampil)) { 
 $Kode = $data['id'];?>
 
 	<tr>
@@ -143,8 +151,8 @@ case "tambah":
 <!----- ------------------------- TAMBAH DATA MASTER kematian ------------------------- ----->
 <?php
 $sql6 ="SELECT max(id_kematian) as terakhir from kematian";
-  $hasil6 = mysql_query($sql6);
-  $data6 = mysql_fetch_array($hasil6);
+  $hasil6 = _query($sql6);
+  $data6 = _fetch_array($hasil6);
   $lastID6 = $data6['terakhir'];
   $lastNoUrut6 = substr($lastID6, 3, 9);
   $nextNoUrut6 = $lastNoUrut6 + 1;
@@ -182,20 +190,12 @@ $sql6 ="SELECT max(id_kematian) as terakhir from kematian";
     <label class="col-sm-4 control-label">NAMA</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("select nama from data_warga where id='$_GET[id]'"));
+	$s=_fetch_array(_query("select nama from data_warga where id='$_GET[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>
   </div> 
-  <div class="form-group">
-    <label class="col-sm-4 control-label">STATUS HIDUP</label>
-    <div class="col-sm-3">	
-    <select name="status_hidup" class="form-control"><option>-- Pilih Status Hidup --</option>
-	<option name="status_hidup" value="Hidup"> Hidup </option>
-	<option name="status_hidup" value="Mati"> Mati </option>
-	</select>
-    </div>
-  </div>
+
    <div class="form-group">
      <label class="col-sm-4 control-label">PUKUL WAFAT</label>
 	 <div class="col-sm-5">
@@ -238,8 +238,8 @@ $sql6 ="SELECT max(id_kematian) as terakhir from kematian";
 <?php	
 break;
 case "edit" :
-$data=mysql_query("SELECT * FROM kematian WHERE id_kematian='$_GET[id_kematian]'");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM kematian WHERE id_kematian='$_GET[id_kematian]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- EDIT DATA KEMATIAN ------------------------- ----->
 <h3 class="box-title margin text-center">Edit Data kematian "<?php echo $_GET['id_kematian']; ?>"</h3>
@@ -247,7 +247,7 @@ $edit=mysql_fetch_array($data);
 	 	
 <form class="form-horizontal" action="<?php echo $aksi?>?module=kematian&aksi=edit" role="form" method="post">             
 
-<div class="box box-solid box-info">
+<div class="box box-solid box-danger">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="glyphicon glyphicon-thumbs-up"></i> Edit Informasi Data kematian </h3>
@@ -273,7 +273,7 @@ $edit=mysql_fetch_array($data);
     <label class="col-sm-4 control-label">Nama kematian</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("select nama from data_warga where id='$edit[id]'"));
+	$s=_fetch_array(_query("select nama from data_warga where id='$edit[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>
@@ -303,8 +303,7 @@ $edit=mysql_fetch_array($data);
     <div class="col-sm-5">
 	<hr/>
       <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
-<a href="?module=cancel">
-<button class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i> Cancel</button></a>	
+<a class="btn btn-warning" href="?module=kematian"><i class="glyphicon glyphicon-remove"></i> Cancel</a>
  
     </div>
   </div>   
@@ -315,8 +314,8 @@ $edit=mysql_fetch_array($data);
 <?php	
 break;
 case "detail_kematian" :
-$data=mysql_query("SELECT * FROM data_warga a, kematian b where a.id=b.id");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM data_warga a, kematian b where a.id=b.id");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- LIHAT DATA KEMATIAN WARGA ------------------------- ----->
 <h3 class="box-title margin text-center">Lihat Data Warga "<?php echo $_GET['id']; ?>"</h3>
@@ -326,7 +325,7 @@ $edit=mysql_fetch_array($data);
 
 <form class="form-horizontal" action="<?php echo $aksi?>?module=kematian&aksi=edit" role="form" method="post">             
 
-<div class="box box-solid box-info">
+<div class="box box-solid box-success">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="fa fa-user-md"></i> Lihat Informasi Data Warga </h3>

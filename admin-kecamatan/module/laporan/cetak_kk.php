@@ -49,10 +49,10 @@ include "head.php";
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql =  "SELECT * FROM data_warga";
-$tampil = mysql_query($sql);
+$sql =  "SELECT * FROM data_warga where status_keluarga='Kepala Keluarga' ";
+$tampil = _query($sql);
 $no=1;
-while ($data = mysql_fetch_array($tampil)) { ?>
+while ($data = _fetch_array($tampil)) { ?>
 
 	<tr>
 	<td><?php echo $no++; ?></td>
@@ -62,7 +62,7 @@ while ($data = mysql_fetch_array($tampil)) { ?>
 	<td> <?php echo $data['jk']; ?></td>
 	<td> <?php echo $data['agama']; ?></td>
 	<td> <?php echo $data['pekerjaan']; ?></td>
-	<td> <?php echo $data['status_keluraga']; ?></td>
+	<td> <?php echo $data['status_keluarga']; ?></td>
 	<td> <?php echo $data['alamat']; ?></td>
 	<td> <?php echo $data['desa']; ?></td>
 	<td> <?php echo $data['rt']; ?></td>
@@ -77,11 +77,48 @@ while ($data = mysql_fetch_array($tampil)) { ?>
               </div><!-- /.box-body -->
             </div>
           </section><!-- /.content -->
-		
-		  	  Camat Kecamatan Tawang Kota Tasikmalaya
-			 </div> 
-		  
-		              <br> ______H. BUDY RACHMAN, S.Sos., M.SI._____</br> 
+
+        <?php
+
+        $desas = getMultipleDesa();
+        $selected_desa = @$_SESSION['selected_desa'];
+        if ($selected_desa) {
+            $desas = array_values(array_filter($desas, function ($desa) use($selected_desa) {
+                return $desa['id'] == $selected_desa;
+            }));
+        }
+        $only_one = count($desas) == 1;
+        $have_desa = count($desas) > 0;
+
+        if ($only_one) {
+            $is_desa = 1;
+            $desa = $desas[0];
+            $profile = getProfileDesa($desa['id']);
+        } else {
+            $is_desa = 0;
+            $desa = $desas[0];
+            $profile = getProfileKecamatan(substr($desa['id'], 0, 7));
+        }
+
+
+        if ($only_one) {
+            echo sprintf(
+                "Lurah Desa %s Kecamatan %s %s",
+                ucwords(strtolower($desa['nama_desa'])),
+                ucwords(strtolower($desa['nama_kecamatan'])),
+                ucwords(strtolower($desa['nama_kabupaten']))
+            );
+            echo sprintf("<br/><br/><br/><span class='pejabat'>%s</span><br/><br/>", $profile['nama_lurah']);
+        } else {
+            echo sprintf(
+                "Camat Kecamatan %s %s",
+                ucwords(strtolower($desa['nama_kecamatan'])),
+                ucwords(strtolower($desa['nama_kabupaten']))
+            );
+            echo sprintf("<br/><br/><br/><span class='pejabat'>%s</span><br/><br/>", $profile['nama_camat']);
+        }
+
+        ?>
 		  
 <?php
 include "tail.php";

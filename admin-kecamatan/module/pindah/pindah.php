@@ -6,7 +6,7 @@ switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- MENAMPILKAN DATA PINDAH ------------------------- ----->			
-<div style="margin-right:10%;margin-left:15%" class="alert alert-info alert-dismissable">
+<div style="margin-right:10%;margin-left:15%" class="alert alert-success alert-dismissable">
 <button type="button" class="btn btn-primary close" data-dismiss="alert" aria-hidden="true">&nbsp;<i class="fa fa-close "></i>&nbsp;</button>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -30,15 +30,16 @@ default:
 </div><!-- /.input group -->
 </div>
 <div class="col-sm-1">
-<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-info"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
+<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-success"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
 </div></div>  
 </form>
-	<div class="box box-solid box-info">
+	<div class="box box-solid box-success">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
 		<i class="glyphicon glyphicon-thumbs-up"></i>
 		Data Pindah Warga </h3>
-			
+		<a class="btn btn-default pull-right" href="?module=pindah&aksi=list_pindah">
+		<i class="fa  fa-plus"></i> Tambah Data Pindah Warga </a>	
 		</div>		
 	<div class="box-body">
 	<table id="example2" class="table table-bordered table-striped">
@@ -48,9 +49,10 @@ default:
 		<th class="col-sm-1">NO. KK</th>
 		<th class="col-sm-1">NIK</th> 
 		<th class="col-sm-2">NAMA</th>	
+		<th class="col-sm-2">STATUS PINDAH</th>	
 		<th class="col-sm-2">TANGGAL PINDAH</th>	
 		<th class="col-sm-2">ALAMAT PINDAH</th>	
-		
+		<th class="col-sm-1">AKSI</th> 	
 	</tr>
 </thead>
 
@@ -69,11 +71,13 @@ $Kode = $k['id'];?>
 	<td><?php echo $k['no_kk']; ?></td>
 	<td><?php echo $k['nik']; ?></td>
 	<td><?php echo $k['nama']; ?></td>
+	<td><?php echo $k['status_pindah']; ?></td>
 	<td><?php echo $k['tanggal_pindah']; ?></td>
 	<td><?php echo $k['alamat_pindah']; ?></td>
 	<td align="center">
 	
-	
+	<a  class="btn btn-xs btn-info" href="?module=pindah&aksi=edit&id_pindah=<?php echo $k['id_pindah'];?>" alt="Edit Data"><i class="glyphicon glyphicon-pencil"></i></a>
+	<a class="btn btn-xs btn-warning" href="<?php echo $aksi ?>?module=pindah&aksi=hapus&id_pindah=<?php echo $k['id_pindah'];?>"  alt="Delete Data" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA <?php echo $Kode; ?>	?')"> <i class="glyphicon glyphicon-trash"></i></a>
 	</td>
 	<?php
 	}
@@ -84,7 +88,7 @@ $Kode = $k['id'];?>
 	</div><!-- /.box-body -->
 </div><!-- /.box -->
 
-<!----- ------------------------- END MENAMPILKAN DATA MASTER kematian ------------------------- ----->
+<!----- ------------------------- END MENAMPILKAN DATA PINDAH ------------------------- ----->
 <?php 
 break;
 case "list_pindah": 
@@ -115,9 +119,9 @@ case "list_pindah":
 <?php 
 // Tampilkan data dari Database
 $sql = "select * from data_warga ";
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($data = mysql_fetch_array($tampil)) { 
+while ($data = _fetch_array($tampil)) { 
 $Kode = $data['id'];?>
 
 	<tr>
@@ -144,8 +148,8 @@ case "tambah":
 <!----- ------------------------- TAMBAH DATA PINDAH WARGA ------------------------- ----->
 <?php
 $sql6 ="SELECT max(id_pindah) as terakhir from pindah";
-  $hasil6 = mysql_query($sql6);
-  $data6 = mysql_fetch_array($hasil6);
+  $hasil6 = _query($sql6);
+  $data6 = _fetch_array($hasil6);
   $lastID6 = $data6['terakhir'];
   $lastNoUrut6 = substr($lastID6, 3, 9);
   $nextNoUrut6 = $lastNoUrut6 + 1;
@@ -169,7 +173,7 @@ $sql6 ="SELECT max(id_pindah) as terakhir from pindah";
   <div class="form-group">
     <label class="col-sm-4 control-label">ID PINDAH</label>
     <div class="col-sm-5">
-    <input type="text" class="form-control" required="required" name="id_pindah" value="<?php echo $nextID6;?>">
+    <input type="text" class="form-control" required="required" readonly name="id_pindah" value="<?php echo $nextID6;?>">
     </div>
   </div>
   <div class="form-group">
@@ -183,7 +187,7 @@ $sql6 ="SELECT max(id_pindah) as terakhir from pindah";
     <label class="col-sm-4 control-label">NAMA</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("select nama from data_warga where id='$_GET[id]'"));
+	$s=_fetch_array(_query("select nama from data_warga where id='$_GET[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>
@@ -207,7 +211,7 @@ $sql6 ="SELECT max(id_pindah) as terakhir from pindah";
     <label class="col-sm-4 control-label">ALAMAT ASAL</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("select alamat from data_warga where id='$_GET[id]'"));
+	$s=_fetch_array(_query("select alamat from data_warga where id='$_GET[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['alamat'];?>">
     </div>
@@ -238,8 +242,8 @@ $sql6 ="SELECT max(id_pindah) as terakhir from pindah";
 break;
 case "edit" :
 
-$data=mysql_query("SELECT * FROM pindah WHERE id_pindah='$_GET[id_pindah]'");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM pindah WHERE id_pindah='$_GET[id_pindah]'");
+$edit=_fetch_array($data);
 
 ?>
 <!----- ------------------------- EDIT DATA PINDAH WARGA ------------------------- ----->
@@ -259,7 +263,7 @@ $edit=mysql_fetch_array($data);
  <div class="form-group">
     <label class="col-sm-4 control-label">ID PINDAH / TANGGAL PINDAH</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" name="id_pindah" value="<?php echo $edit['id_pindah'];?>">	  
+      <input type="text" class="form-control" readonly name="id_pindah" value="<?php echo $edit['id_pindah'];?>">	  
     </div>
 	<div class="col-sm-2">
 	  <div class="input-group">
@@ -274,20 +278,35 @@ $edit=mysql_fetch_array($data);
     <label class="col-sm-4 control-label">NAMA</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("SELECT nama FROM data_warga WHERE id='$edit[id]'"));
+	$s=_fetch_array(_query("SELECT nama FROM data_warga WHERE id='$edit[id]'"));
 	?>
-      <input type="text" class="form-control" value="<?php echo $s['nama'];?>">
+      <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>
   </div>
- <div class="form-group">
-    <label class="col-sm-4 control-label">JK</label>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">STATUS PINDAH</label>
+    <div class="col-sm-3">	
+    <select name="status_pindah" class="form-control"><option> PILIH STATUS PINDAH</option>
+	<option name="status_pindah" value="Pindah" <?php if(($edit['status_pindah'])== "Pindah")
+				{echo "selected=\"selected\"";};?>> Pindah </option>
+	<option name="status_pindah" value="Tetap" <?php if(($edit['status_pindah'])== "Tetap")
+				{echo "selected=\"selected\"";};?>> Tetap </option>
+	</select>
+    </div>
+  </div>
+  <div class="form-group">
+     <label class="col-sm-4 control-label">TANGGAL PINDAH</label>
+	 <div class="col-sm-5">
+    <input type="date" class="form-control" value="<?php echo $edit['tanggal_pindah']; ?>" name="tanggal_pindah" placeholder="Masukan tanggal pindah">
+	</div>
+  </div>
+    <div class="form-group">
+    <label class="col-sm-4 control-label">ALAMAT PINDAH</label>
     <div class="col-sm-5">
-	<?php 
-	
-	?>
-      <input type="text" class="form-control" value="<?php echo $s['nama'];?>">
+      <input type="text" class="form-control" value="<?php echo $edit['alamat_pindah']; ?>" name="alamat_pindah" placeholder="Masukan Alamat Pindah">
     </div>
   </div>
+  
 <div class="form-group">
     <label class="col-sm-4"></label>
     <div class="col-sm-5">
@@ -305,8 +324,8 @@ $edit=mysql_fetch_array($data);
 <?php	
 break;
 case "detail_pindah" :
-$data=mysql_query("SELECT * FROM pindah WHERE id_pindah='$_GET[id_pindah]'");
-$edit=mysql_fetch_array($data);
+$data=_query("SELECT * FROM pindah WHERE id_pindah='$_GET[id_pindah]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- LIHAT DATA PINDAH ------------------------- ----->
 <h3 class="box-title margin text-center">Detail Pindah Warga "<?php echo $_GET['id_pindah']; ?>"</h3>
@@ -340,7 +359,7 @@ $edit=mysql_fetch_array($data);
     <label class="col-sm-4 control-label">NAMA</label>
     <div class="col-sm-5">
 	<?php 
-	$s=mysql_fetch_array(mysql_query("SELECT nama FROM data_warga WHERE id='$edit[id]'"));
+	$s=_fetch_array(_query("SELECT nama FROM data_warga WHERE id='$edit[id]'"));
 	?>
       <input type="text" class="form-control" disabled value="<?php echo $s['nama'];?>">
     </div>

@@ -1,13 +1,17 @@
 <?php
+//include "include/koneksi.php";
 
 if ($_GET['module'] == "home") {
-	include "module/home.php";
+	include "module/home/home.php";
 }
 else if ($_GET['module'] == "warga") {
 	include "module/warga/warga.php";	
 }
 else if ($_GET['module'] == "kk") {
 	include "module/kk/kk.php";	
+}
+else if ($_GET['module'] == "grafik") {
+	include "module/grafik/grafik.php";	
 }
 else if ($_GET['module'] == "kematian") {
 	include "module/kematian/kematian.php";	

@@ -14,29 +14,29 @@ $level = $_POST['level'];
 // BLOKIR
 if($module=='user' AND $aksi=='no' ){ 
 $sql = "UPDATE user SET blokir='N' WHERE id_user = '".$_GET['id_user']."'";
-$hapus = mysql_query($sql);
+$hapus = _query($sql);
 header('location:../../index.php?module='.$module);
 }
 // HAPUS
 if($module=='user' AND $aksi=='hapus' ){ 
 $mySql = "DELETE FROM user WHERE id_user='".$_GET['id_user']."'";
-$myQry = mysql_query($mySql);
+$myQry = _query($mySql);
 header('location:../../index.php?module='.$module);
 }
 // EDIT
 else if($module=='user' AND $aksi=='yes' ){ 
 $sql = "UPDATE user SET blokir='Y' WHERE id_user = '".$_GET['id_user']."'";
-$hapus = mysql_query($sql);
+$hapus = _query($sql);
 header('location:../../index.php?module='.$module);
 }
 //Tambah
 else if($module=='user' AND $aksi=='tambah' ){ 
 	header('location:../../index.php?module='.$module);
 $sql = "INSERT INTO user  (id_user, user, pass, nama, no_hp, level ) VALUES ('$id', '$user', '$pass', '$nama', '$no_hp', '$level')";
-$simpan = mysql_query($sql);
+$simpan = _query($sql);
 }
 else if($module=='user' AND $aksi=='edit' ){ 
-mysql_query("UPDATE user SET 
+_query("UPDATE user SET 
 nama='$nama',
 no_hp='$no_hp',
 level='$level',

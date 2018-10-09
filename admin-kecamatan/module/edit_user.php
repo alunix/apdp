@@ -1,10 +1,10 @@
-<?php 
-if($_SESSION['level']!="walikelas" ){ header("location: ../logout.php"); }
+<?php
+//if($_SESSION['level']!="admin" ){ header("location: ../logout.php"); }
 if (isset($_POST['submit'])){
 if ((!empty($_POST['nama']))) {
 $sql = "UPDATE user SET nama= '".$_POST['nama']."', user = '".$_POST['user']."', 
 		pass = '".$_POST['pass']."', no_hp= '".$_POST['no_hp']."' WHERE id_user = '".$_SESSION['id']."'";
-$simpan = mysql_query($sql);
+$simpan = _query($sql);
 
 if ($simpan) {
 echo "<script>alert('Data Berhasil di Update');</script>";
@@ -15,22 +15,22 @@ echo "<script>alert('Gagal Di Update');</script>";
 }
 
 
-$data=mysql_query("select * from user where id_user='$_GET[id_user]'");
-$edit=mysql_fetch_array($data);
+$data=_query("select * from user where id_user='$_GET[id_user]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- EDIT DATA MASTER user ------------------------- ----->
 <div class="box-body">
-	<div class="box box-solid box-primary">
+	<div class="box box-solid box-success">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
-<i class="glyphicon glyphicon-pencil"></i> Edit Profile </h3>
+<i class="glyphicon glyphicon-pencil"></i> Ubah Profil </h3>
 	<a class="btn btn-default btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
 	<i class="fa fa-minus"></i></a>
 		</div>	
 	<div class="box-body">
-<form class="form-horizontal" role="form" method="post">          
+<form class="form-horizontal" role="form" method="post">             
   <div class="form-group">
-    <label class="col-sm-4 control-label">ID user </label>
+    <label class="col-sm-4 control-label">ID User </label>
     <div class="col-sm-5">
       <input type="text" class="form-control" readonly name="id_user" value="<?php echo $edit['id_user']; ?>" >
     </div>
@@ -41,6 +41,43 @@ $edit=mysql_fetch_array($data);
       <input type="text" class="form-control" required="required" name="nama" value="<?php echo $edit['nama']; ?>">
     </div>
   </div>
+
+    <?php
+    include BASE_DIR."/inc/desa_selector.php";
+    if ($edit['level'] == 'admin-kelurahan') {
+        ?>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">DESA</label>
+            <div class="col-sm-5">
+                <select name="desa_id" id="desa_id" class="form-control" readonly="readonly" disabled="disabled">
+                    <?php
+                    $desas = get_desa(substr($edit['id_kelurahan'], 0, 7));
+                    echo optionLoop($desas, $edit['id_kelurahan']);
+                    ?>
+                </select>
+            </div>
+        </div>
+        <?php
+    } else {
+        ?>
+        ?>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">KECAMATAN</label>
+            <div class="col-sm-5">
+                <select name="desa_id" id="desa_id" class="form-control" readonly="readonly" disabled="disabled">
+                    <?php
+                    $desas = get_kecamatan(substr($edit['id_kelurahan'], 0, 4));
+                    echo optionLoop($desas, substr($edit['id_kelurahan'], 0, 7));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
+
+
+
   <div class="form-group">
     <label class="col-sm-4 control-label">Nomor HP</label>
     <div class="col-sm-5">

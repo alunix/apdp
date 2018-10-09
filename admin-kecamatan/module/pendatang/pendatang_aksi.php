@@ -13,12 +13,12 @@ $alamat_datang = $_POST['alamat_datang'];
 // HAPUS
 if($module=='pendatang' AND $aksi=='hapus' ){ 
 $mySql = "DELETE FROM pendatang WHERE id_pendatang='".$_GET['id_pendatang']."'";
-$myQry = mysql_query($mySql);
+$myQry = _query($mySql);
 header('location:../../index.php?module='.$module);
 }
 // EDIT
 else if($module=='pendatang' AND $aksi=='edit' ){ 
-$query = mysql_query("UPDATE pendatang SET				  
+$query = _query("UPDATE pendatang SET				  
 				  nik = '$nik',
 				  no_kk = '$no_kk',
 				  nama = '$nama',
@@ -31,6 +31,6 @@ header('location:../../index.php?module='.$module);
 else if($module=='pendatang' AND $aksi=='tambah' ){ 
 	header('location:../../index.php?module='.$module);
 $sql = "INSERT INTO pendatang (id_pendatang, nik, no_kk, nama, tanggal_datang, alamat_datang ) VALUES ('$id_pendatang', '$nik', '$no_kk', '$nama', '$tanggal_datang', '$alamat_datang')";
-$simpan = mysql_query($sql);
+$simpan = _query($sql);
 }
 ?>
