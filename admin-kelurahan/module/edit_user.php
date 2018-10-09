@@ -1,6 +1,5 @@
-<?php 
-if($_SESSION['level']!="admin" ){ header("location: ../logout.php"); }
-include "user/inc.koneksi.php";
+<?php
+//if($_SESSION['level']!="admin" ){ header("location: ../logout.php"); }
 if (isset($_POST['submit'])){
 if ((!empty($_POST['nama']))) {
 $sql = "UPDATE user SET nama= '".$_POST['nama']."', user = '".$_POST['user']."', 
@@ -42,6 +41,43 @@ $edit=_fetch_array($data);
       <input type="text" class="form-control" required="required" name="nama" value="<?php echo $edit['nama']; ?>">
     </div>
   </div>
+
+    <?php
+    include BASE_DIR."/inc/desa_selector.php";
+    if ($edit['level'] == 'admin-kelurahan') {
+        ?>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">DESA</label>
+            <div class="col-sm-5">
+                <select name="desa_id" id="desa_id" class="form-control" readonly="readonly" disabled="disabled">
+                    <?php
+                    $desas = get_desa(substr($edit['id_kelurahan'], 0, 7));
+                    echo optionLoop($desas, $edit['id_kelurahan']);
+                    ?>
+                </select>
+            </div>
+        </div>
+        <?php
+    } else {
+        ?>
+        ?>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">KECAMATAN</label>
+            <div class="col-sm-5">
+                <select name="desa_id" id="desa_id" class="form-control" readonly="readonly" disabled="disabled">
+                    <?php
+                    $desas = get_kecamatan(substr($edit['id_kelurahan'], 0, 4));
+                    echo optionLoop($desas, substr($edit['id_kelurahan'], 0, 7));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <?php
+    }
+    ?>
+
+
+
   <div class="form-group">
     <label class="col-sm-4 control-label">Nomor HP</label>
     <div class="col-sm-5">

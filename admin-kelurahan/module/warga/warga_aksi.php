@@ -1,9 +1,6 @@
 <?php
 
-include '../../../define.php';
-var_dump('d');
-include "../../bootstrap.php";
-var_dump('d');die();
+include '../../../bootstrap.php';
 $module=$_GET['module'];
 $aksi=$_GET['aksi'];
 

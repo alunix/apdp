@@ -1,5 +1,5 @@
 <?php
-include '../../koneksi.php';
+include '../../../bootstrap.php';
 
 $module=$_GET['module'];
 $aksi=$_GET['aksi'];

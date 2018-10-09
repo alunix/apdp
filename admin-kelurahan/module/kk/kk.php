@@ -36,10 +36,10 @@ switch(@$_GET['aksi']){
 	<div class="box box-solid box-success">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
-		<i class="fa  fa-user-secret"></i>Data Kepala Keluarga </h3>	
+		<i class="fa  fa-user-secret"></i>Data Kepala Keluarga </h3>
 		<!--<a class="btn btn-default pull-right"href="?module=kk&aksi=tambah">
-		<i class="fa  fa-plus"></i> Tambah data Warga</a>-->		
-		</div>		
+		<i class="fa  fa-plus"></i> Tambah data Warga</a>-->
+		</div>
         <div class="box-body">
             <table id="example2" class="table table-bordered table-striped">
                 <thead>
@@ -81,6 +81,11 @@ switch(@$_GET['aksi']){
                                 >
                                     <i class="glyphicon glyphicon-eye-open"></i>
                                 </a>
+                                <a class="btn btn-xs btn-warning"data-toggle="tooltip" title="Cetak Data Kepala Keluarga <?php echo $tampilkan['id'];?>"
+                                   href="<?=baseUrlByLevel('module/laporan/cetak_kk_detail.php');?>?aksi=detail_warga2&id=<?php echo $tampilkan['id'];?>"
+                                >
+                                    <i class="fa fa-print"></i>
+                                </a>
 
                             </td>
                         </tr>
@@ -92,7 +97,7 @@ switch(@$_GET['aksi']){
         </div><!-- /.box-body -->
     </div><!-- /.box -->
         <!----- ------------------------- END MENAMPILKAN DATA WARGA ------------------------- ----->
- <?php	
+ <?php
 break;
 case "detail_warga2" :
 ?>
@@ -121,46 +126,49 @@ case "detail_warga2" :
 							<a class="btn btn-default btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
 								<i class="fa fa-minus"></i>
 							</a>
-						</div>	
-					</div>	
-	<div class="box-body">
-		<?php 
-			$data=_query("select * from data_warga where id='$_GET[id]'");
-			$edit=_fetch_array($data);
-		?>	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">NO</label>
-		<div class="col-sm-5">
-			<input type="text" class="form-control" readonly name="id" value="<?php echo $edit['id']; ?>" >
-		</div>
-	</div> 
-		<div class="form-group">
-			<label class="col-sm-4 control-label">NO. KK</label>
-			<div class="col-sm-5">
-				<input type="text" class="form-control" value="<?php echo $edit['no_kk']; ?>" readonly name="no_kk" placeholder="Masukan No KK ...">
-			</div>
-		</div>
-			<div class="form-group">
-			<label class="col-sm-4 control-label">NIK</label>
-				<div class="col-sm-5">
-					<input type="text" class="form-control" value="<?php echo $edit['nik']; ?>" readonly name="nik" placeholder="Masukan NIK ...">
-				</div>
-			</div>
-				<div class="form-group">
-					<label class="col-sm-4 control-label">NAMA</label>
-					<div class="col-sm-5">
-						<input type="text" class="form-control" value="<?php echo $edit['nama']; ?>" readonly name="nama" placeholder="Masukan Nama Lengkap">
-					</div>
-				</div>
-					<div class="form-group">
-						<label class="col-sm-4 control-label">Status Keluarga</label>
-						<div class="col-sm-5">
-							<input type="text" class="form-control" value="<?php echo $edit['status_keluarga']; ?>" readonly name="status_keluarga" placeholder="Status Keluarga">
 						</div>
 					</div>
-				</div>
-			</div>
-		</section>
+                    <div class="box-body">
+                        <?php
+                            $data=_query("select * from data_warga where id='$_GET[id]'");
+                            $edit=_fetch_array($data);
+                        ?>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">NO</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" readonly name="id" value="<?php echo $edit['id']; ?>" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">NO. KK</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" value="<?php echo $edit['no_kk']; ?>" readonly name="no_kk" placeholder="Masukan No KK ...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label class="col-sm-4 control-label">NIK</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" value="<?php echo $edit['nik']; ?>" readonly name="nik" placeholder="Masukan NIK ...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">NAMA</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" value="<?php echo $edit['nama']; ?>" readonly name="nama" placeholder="Masukan Nama Lengkap">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Status Keluarga</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" value="<?php echo $edit['status_keluarga']; ?>" readonly name="status_keluarga" placeholder="Status Keluarga">
+                            </div>
+                        </div>
+                    </div>
+			    </div>
+		    </section>
 </div>
 	<!----- ------------------------- LIST ISTRI ------------------------- ----->
 <div class="tab-pane" id="data1">
@@ -174,8 +182,8 @@ case "detail_warga2" :
     </div>
 	<div class="box-body">
 		<!--<a class="btn btn-default pull-right"href="?module=kk&aksi=tambah">
-		<i class="fa  fa-plus"></i> Tambah Data Warga</a>-->		
-		</div>		
+		<i class="fa  fa-plus"></i> Tambah Data Warga</a>-->
+		</div>
 	<div class="box-body">
 	<table id="example1" class="table table-bordered table-striped">
         <thead>
@@ -200,7 +208,7 @@ case "detail_warga2" :
             $tampil = _query($sql);
             while ($tampilkan = _fetch_array($tampil)) {
             $Kode = $tampilkan['id'];
-            $blokir = $tampilkan['blokir'];?>
+            $blokir = @$tampilkan['blokir'];?>
 
                 <tr>
                     <td><?php echo $no++; ?></td>
@@ -224,6 +232,7 @@ case "detail_warga2" :
         </tbody>
 	</table>
 	</div><!-- /.box-body -->
+</div>
 	</section>
 </div><!-- /.box -->
 
@@ -238,8 +247,8 @@ case "detail_warga2" :
     </div>
 	<div class="box-body">
 		<!--<a class="btn btn-default pull-right"href="?module=kk&aksi=tambah">
-		<i class="fa  fa-plus"></i> Tambah Data Warga</a>-->		
-		</div>		
+		<i class="fa  fa-plus"></i> Tambah Data Warga</a>-->
+		</div>
 	<div class="box-body">
 	<table id="example1" class="table table-bordered table-striped">
         <thead>
@@ -264,7 +273,7 @@ case "detail_warga2" :
             $tampil = _query($sql);
             while ($tampilkan = _fetch_array($tampil)) {
             $Kode = $tampilkan['id'];
-            $blokir = $tampilkan['blokir'];?>
+            $blokir = @$tampilkan['blokir'];?>
 
                 <tr>
                     <td><?php echo $no++; ?></td>
@@ -278,6 +287,10 @@ case "detail_warga2" :
                         <a class="btn btn-xs btn-success"data-toggle="tooltip" title="Lihat Data Anak <?php echo $tampilkan['id'];?>"
                             href="?module=warga&aksi=detail_warga&id=<?php echo $tampilkan['id']; ?>">
                             <i class="glyphicon glyphicon-eye-open"></i>
+                        </a>
+                        <a class="btn btn-xs btn-success"data-toggle="tooltip" title="Cetak Detail Keluarga"
+                            href="?module=laporan/data_kk_detail&id=<?php echo $tampilkan['id']; ?>">
+                            <i class="fa fa-print"></i>
                         </a>
                     </td>
                 </tr>
@@ -296,39 +309,9 @@ case "detail_warga2" :
 
 
 
-	
+
 <!----- ------------------------- END MENAMPILKAN DATA WARGA ------------------------- ----->
 
-<?php 
-// Tampilkan data dari Database
-$a = _query(" SELECT FROM data_warga a where and");
-while ($e = _fetch_array($a)) { ?>
-	
-	<div class="form-group">
-		<label class="col-sm-4 control-label">NO</label>
-		<div class="col-sm-5">
-			<input type="text" class="form-control" readonly name="id" value="<?php echo $e['id']; ?>" >
-		</div>
-	</div> 
-    <div class="form-group">
-		<label class="col-sm-4 control-label">NO. KK</label>
-		<div class="col-sm-5">
-			<input type="text" class="form-control" value="<?php echo $e['no_kk']; ?>" readonly name="no_kk" placeholder="Masukan No KK ...">
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">NIK</label>
-		<div class="col-sm-5">
-			<input type="text" class="form-control" value="<?php echo $e['nik']; ?>" readonly name="nik" placeholder="Masukan NIK ...">
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Status Keluarga</label>
-		<div class="col-sm-5">
-			<input type="text" class="form-control" value="<?php echo $e['status_keluarga']; ?>" readonly name="status_keluarga" placeholder="Status Keluarga">
-		</div>
-	</div>
-<?php } ?>
 </div>
 </div>
 </section>
@@ -337,8 +320,8 @@ while ($e = _fetch_array($a)) { ?>
 
 <!----- ------------------------- LIST ANAK ------------------------- ----->
 
-    
-<?php	
+
+<?php
 break;
 }
 ?>

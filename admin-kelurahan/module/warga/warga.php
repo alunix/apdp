@@ -689,6 +689,7 @@ $edit=_fetch_array($data);
       <input type="text" class="form-control" value="<?php echo $edit['nama_ibu']; ?>" name="nama_ibu" placeholder="Nama Ibu">
     </div>
   </div>
+
   <div class="form-group">
     <label class="col-sm-4 control-label">ALAMAT</label>
     <div class="col-sm-5">
@@ -701,6 +702,56 @@ $edit=_fetch_array($data);
       <input type="text" class="form-control" value="<?php echo $edit['desa']; ?>" name="desa" placeholder="Desa">
     </div>
   </div>
+
+        <?php
+        include BASE_DIR."/inc/desa_selector.php";
+        load_scripts();
+        ?>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">PROVINSI</label>
+            <div class="col-sm-5">
+                <select name="provinsi_id" id="provinsi_id" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id');">
+                    <?php
+                    $provinsis = get_provinsi();
+                    echo optionLoop($provinsis, substr($edit['desa_id'], 0, 2));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">KABUPATEN</label>
+            <div class="col-sm-5">
+                <select name="kabupaten_id" id="kabupaten_id" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id');">
+                    <?php
+                    $kabupatens = get_kabupaten(substr($edit['desa_id'], 0, 2));
+                    echo optionLoop($kabupatens, substr($edit['desa_id'], 0, 4));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">KECAMATAN</label>
+            <div class="col-sm-5">
+                <select name="kecamatan_id" id="kecamatan_id" class="form-control" onchange="changeKecamatan(event, this, '#desa_id');">
+                    <?php
+                    $kecamatans = get_kecamatan(substr($edit['desa_id'], 0, 4));
+                    echo optionLoop($kecamatans, substr($edit['desa_id'], 0, 7));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">DESA</label>
+            <div class="col-sm-5">
+                <select name="desa_id" id="desa_id" class="form-control">
+                    <?php
+                    $desas = get_desa(substr($edit['desa_id'], 0, 7));
+                    echo optionLoop($desas, $edit['desa_id']);
+                    ?>
+                </select>
+            </div>
+        </div>
+
   <div class="form-group">
     <label class="col-sm-4 control-label">RT</label>
     <div class="col-sm-5">
@@ -994,12 +1045,56 @@ $edit=_fetch_array($data);
       <input rowspan="2" class="form-control" value="<?php echo $edit['alamat']; ?>" readonly name="alamat" placeholder="Alamat">
     </div>
   </div>
-  <div class="form-group">
-    <label class="col-sm-4 control-label">DESA</label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control" value="<?php echo $edit['desa']; ?>" readonly name="desa" placeholder="Desa">
-    </div>
-  </div>
+
+        <?php
+        include BASE_DIR."/inc/desa_selector.php";
+        load_scripts();
+        ?>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">PROVINSI</label>
+            <div class="col-sm-5">
+                <select name="provinsi_id" id="provinsi_id" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id');" readonly="readonly">
+                    <?php
+                    $provinsis = get_provinsi();
+                    echo optionLoop($provinsis, substr($edit['desa_id'], 0, 2));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">KABUPATEN</label>
+            <div class="col-sm-5">
+                <select name="kabupaten_id" id="kabupaten_id" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id');" readonly="readonly">
+                    <?php
+                    $kabupatens = get_kabupaten(substr($edit['desa_id'], 0, 2));
+                    echo optionLoop($kabupatens, substr($edit['desa_id'], 0, 4));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">KECAMATAN</label>
+            <div class="col-sm-5">
+                <select name="kecamatan_id" id="kecamatan_id" class="form-control" onchange="changeKecamatan(event, this, '#desa_id');" readonly="readonly">
+                    <?php
+                    $kecamatans = get_kecamatan(substr($edit['desa_id'], 0, 4));
+                    echo optionLoop($kecamatans, substr($edit['desa_id'], 0, 7));
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">DESA</label>
+            <div class="col-sm-5">
+                <select name="desa_id" id="desa_id" class="form-control" readonly="readonly">
+                    <?php
+                    $desas = get_desa(substr($edit['desa_id'], 0, 7));
+                    echo optionLoop($desas, $edit['desa_id']);
+                    ?>
+                </select>
+            </div>
+        </div>
+
   <div class="form-group">
     <label class="col-sm-4 control-label">RT</label>
     <div class="col-sm-5">

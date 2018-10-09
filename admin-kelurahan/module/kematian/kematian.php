@@ -307,8 +307,7 @@ $edit=_fetch_array($data);
     <div class="col-sm-5">
 	<hr/>
       <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
-<a href="?module=cancel">
-<button class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i> Cancel</button></a>	
+<a class="btn btn-warning" href="?module=kematian"><i class="glyphicon glyphicon-remove"></i> Cancel</a>
  
     </div>
   </div>   
