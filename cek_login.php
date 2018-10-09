@@ -26,9 +26,8 @@ if (!ctype_alnum($username) OR !ctype_alnum($pass)){
 		if ($pwd==$pass){
 			sukses_masuk($username,$pass);
 		}else{
-			session_start();
 			$salah =1;
-			$_SESSION['salah']=$_SESSION['salah']+$salah;
+			$_SESSION['salah']=@$_SESSION['salah']+$salah;
 			if ($_SESSION['salah']>=3){
 				blokir($username);
 			}

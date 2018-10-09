@@ -72,7 +72,7 @@ function salah_password(){
 }
 
 function blokir($username){
-	mysql_query($sql);	 
+//	_query($sql);
 	session_destroy();
 	 return false;
 }    
@@ -80,14 +80,14 @@ function blokir($username){
 
 //mengambil status benfit/cost dari tabel kriteria
 function getStatusKriteria($idkriteria){
-  $q = mysql_query("SELECT * FROM kriteria where id_kriteria = '$idkriteria'");
-  $d = mysql_fetch_array($q);
+  $q = _query("SELECT * FROM kriteria where id_kriteria = '$idkriteria'");
+  $d = _fetch_array($q);
   return $d['tipe_kriteria'];
 }
 
 function getBobotKriteria($idkriteria){
-  $q = mysql_query("SELECT * FROM kriteria where id_kriteria = '$idkriteria'");
-  $d = mysql_fetch_array($q);
+  $q = _query("SELECT * FROM kriteria where id_kriteria = '$idkriteria'");
+  $d = _fetch_array($q);
   return round($d['bobot']/100, 2);
 }
 
