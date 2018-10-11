@@ -22,7 +22,7 @@ include "head.php";
              
             <div class="box box-default">
               <div class="box-header with-border">
-                <h3 class="box-title center">Daftar siswa</h3>
+                <h3 class="box-title center">Daftar Warga</h3>
 				<span class="pull-right">
 				Tasikmalaya, <?php echo Indonesia2Tgl(date('Y-m-d'));?> 
 				</span>					
@@ -50,9 +50,9 @@ include "head.php";
 <?php 
 // Tampilkan data dari Database
 $sql =  "select * from data_warga";
-$tampil = mysql_query($sql);
+$tampil = _query($sql);
 $no=1;
-while ($data = mysql_fetch_array($tampil)) { ?>
+while ($data = _fetch_array($tampil)) { ?>
 
 	<tr>
 	<td><?php echo $no++; ?></td>

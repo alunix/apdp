@@ -1,9 +1,9 @@
 <?php
 function sukses_masuk($username,$pass){
 	// Apabila username dan password ditemukan
-	$login=mysql_query("SELECT * FROM user WHERE user='$username' AND pass='$pass' AND blokir='N'");
-	$ketemu=mysql_num_rows($login);
-	$r=mysql_fetch_array($login);
+	$login=_query("SELECT * FROM user WHERE user='$username' AND pass='$pass' AND blokir='N'");
+	$ketemu=_num_rows($login);
+	$r=_fetch_array($login);
 	if ($ketemu > 0){
 	  session_start();
 	  include "timeout.php";
@@ -82,7 +82,7 @@ function salah_password(){
 }
 
 function blokir($username){
-	mysql_query($sql);	 
+	_query($sql);	 
 	session_destroy();
 	 return false;
 }    

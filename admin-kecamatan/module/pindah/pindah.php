@@ -6,7 +6,7 @@ switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- MENAMPILKAN DATA PINDAH ------------------------- ----->			
-<div style="margin-right:10%;margin-left:15%" class="alert alert-success alert-dismissable">
+<div style="margin-right:10%;margin-left:15%" class="alert alert-info alert-dismissable">
 <button type="button" class="btn btn-primary close" data-dismiss="alert" aria-hidden="true">&nbsp;<i class="fa fa-close "></i>&nbsp;</button>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -30,16 +30,14 @@ default:
 </div><!-- /.input group -->
 </div>
 <div class="col-sm-1">
-<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-success"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
+<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-info"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
 </div></div>  
 </form>
-	<div class="box box-solid box-success">
+	<div class="box box-solid box-info">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
 		<i class="glyphicon glyphicon-thumbs-up"></i>
 		Data Pindah Warga </h3>
-		<a class="btn btn-default pull-right" href="?module=pindah&aksi=list_pindah">
-		<i class="fa  fa-plus"></i> Tambah Data Pindah Warga </a>	
 		</div>		
 	<div class="box-body">
 	<table id="example2" class="table table-bordered table-striped">
@@ -52,7 +50,6 @@ default:
 		<th class="col-sm-2">STATUS PINDAH</th>	
 		<th class="col-sm-2">TANGGAL PINDAH</th>	
 		<th class="col-sm-2">ALAMAT PINDAH</th>	
-		<th class="col-sm-1">AKSI</th> 	
 	</tr>
 </thead>
 
@@ -74,11 +71,6 @@ $Kode = $k['id'];?>
 	<td><?php echo $k['status_pindah']; ?></td>
 	<td><?php echo $k['tanggal_pindah']; ?></td>
 	<td><?php echo $k['alamat_pindah']; ?></td>
-	<td align="center">
-	
-	<a  class="btn btn-xs btn-info" href="?module=pindah&aksi=edit&id_pindah=<?php echo $k['id_pindah'];?>" alt="Edit Data"><i class="glyphicon glyphicon-pencil"></i></a>
-	<a class="btn btn-xs btn-warning" href="<?php echo $aksi ?>?module=pindah&aksi=hapus&id_pindah=<?php echo $k['id_pindah'];?>"  alt="Delete Data" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA <?php echo $Kode; ?>	?')"> <i class="glyphicon glyphicon-trash"></i></a>
-	</td>
 	<?php
 	}
 	?>
@@ -97,7 +89,7 @@ case "list_pindah":
 <h3 class="box-title margin text-center">Data Pindah Warga</h3>
 <hr/>
 
-	<div class="box box-solid box-success">
+	<div class="box box-solid box-info">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
 		<i class="fa fa-book"></i>

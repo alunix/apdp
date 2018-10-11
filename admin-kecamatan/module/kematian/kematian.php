@@ -6,7 +6,7 @@ switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- MENAMPILKAN DATA MASTER kematian ------------------------- ----->			
-<div style="margin-right:10%;margin-left:15%" class="alert alert-success alert-dismissable">
+<div style="margin-right:10%;margin-left:15%" class="alert alert-info alert-dismissable">
 <button type="button" class="btn btn-primary close" data-dismiss="alert" aria-hidden="true">&nbsp;<i class="fa fa-close "></i>&nbsp;</button>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -30,16 +30,14 @@ default:
 </div><!-- /.input group -->
 </div>
 <div class="col-sm-1">
-<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-success"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
+<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-info"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
 </div></div>  
 </form>
-	<div class="box box-solid box-success">
+	<div class="box box-solid box-info">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
 		<i class="glyphicon glyphicon-thumbs-up"></i>
 		Data Kematian Warga </h3>
-		<a class="btn btn-default pull-right" href="?module=kematian&aksi=list_kematian">
-		<i class="fa  fa-plus"></i> Tambah Data Kematian Warga </a>	
 		</div>		
 	<div class="box-body">
 	<table id="example2" class="table table-bordered table-striped">
@@ -52,7 +50,6 @@ default:
 		<th class="col-sm-1">TANGGAL WAFAT</th>
 		<th class="col-sm-1">PUKUL WAFAT</th> 
 		<th class="col-sm-2">SEBAB KEMATIAN</th>
-		<th class="col-sm-1">AKSI</th> 	
 	</tr>
 </thead>
 
@@ -74,11 +71,7 @@ $Kode = $k['id'];?>
 	<td><?php echo $k['tanggal_wafat']; ?></td>
 	<td><?php echo $k['pukul_wafat']; ?></td>
 	<td><?php echo $k['sebab_kematian']; ?></td>
-	
-	<td align="center">
-	<a  class="btn btn-xs btn-info" href="?module=kematian&aksi=edit&id_kematian=<?php echo $k['id_kematian'];?>" alt="Edit Data"><i class="glyphicon glyphicon-pencil"></i></a>
-	<a class="btn btn-xs btn-warning" href="<?php echo $aksi ?>?module=kematian&aksi=hapus&id_kematian=<?php echo $k['id_kematian'];?>"  alt="Delete Data" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA <?php echo $Kode; ?>	?')"> <i class="glyphicon glyphicon-trash"></i></a>
-	</td>
+
 	<?php
 	}
 	?>
@@ -96,7 +89,7 @@ case "list_kematian":
 <h3 class="box-title margin text-center">Data Kematian Warga</h3>
 <hr/>
 
-	<div class="box box-solid box-success">
+	<div class="box box-solid box-info">
 		<div class="box-header">
 		    <h3 class="btn btn disabled box-title">
 		        <i class="fa fa-book"></i>
@@ -325,7 +318,7 @@ $edit=_fetch_array($data);
 
 <form class="form-horizontal" action="<?php echo $aksi?>?module=kematian&aksi=edit" role="form" method="post">             
 
-<div class="box box-solid box-success">
+<div class="box box-solid box-info">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="fa fa-user-md"></i> Lihat Informasi Data Warga </h3>

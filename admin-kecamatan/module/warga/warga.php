@@ -6,7 +6,7 @@ switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- Menampilkan Data Warga ------------------------- ----->	
-<div style="margin-right:10%;margin-left:15%" class="alert alert-success alert-dismissable">
+<div style="margin-right:10%;margin-left:15%" class="alert alert-info alert-dismissable">
 <button type="button" class="btn btn-primary close" data-dismiss="alert" aria-hidden="true">&nbsp;<i class="fa fa-close "></i>&nbsp;</button>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -30,16 +30,14 @@ default:
 </div><!-- /.input group -->
 </div>
 <div class="col-sm-1">
-<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-success"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
+<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-info"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
 </div></div>  
 </form>
-	<div class="box box-solid box-success">
+	<div class="box box-solid box-info">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
 		<i class="fa  fa-user-secret"></i>Data Warga </h3>	
-		<a class="btn btn-default pull-right"href="?module=warga&aksi=tambah">
-		<i class="fa  fa-plus"></i> Tambah data Warga</a>		
-		</div>		
+		</div>
 	<div class="box-body">
 	<table id="example2" class="table table-bordered table-striped">
 <thead>
@@ -73,8 +71,6 @@ $Kode = $tampilkan['id'];
 	<td><?php echo $tampilkan['alamat']; ?></td>
 	<td align="center">
 	<a class="btn btn-xs btn-success"data-toggle="tooltip" title="Lihat Data Warga <?php echo $tampilkan['id'];?>" href="?module=warga&aksi=detail_warga&id=<?php echo $tampilkan['id'];?>"><i class="glyphicon glyphicon-eye-open"></i></a>
-	<a class="btn btn-xs btn-danger"data-toggle="tooltip" title="Hapus Data Warga??"href="<?php echo $aksi ?>?module=warga&aksi=hapus&id=<?php echo $tampilkan['id'];?>"  alt="Delete Data" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA <?php echo $Kode; ?>	?')"> <i class="glyphicon glyphicon-trash"></i></a>
-	<a class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit Data Warga??"href="?module=warga&aksi=edit&id=<?php echo $tampilkan['id'];?>" alt="Edit Data"><i class="glyphicon glyphicon-pencil"></i></a>
 	<a class="btn btn-xs btn-warning" data-toggle="tooltip" title="Cetak Data Warga??"href="module/laporan/data_warga.php?module=laporan&aksi=edit&id=<?php echo $tampilkan['id'];?>" alt="Cetak Data"><i class="glyphicon glyphicon-print"></i></a>
 		
 		</td>
@@ -772,7 +768,7 @@ $edit=_fetch_array($data);
 
   
   <!----- ------------------------- EDIT DATA KELAHIRAN ------------------------- ----->
-<div class="box box-solid box-danger">
+<div class="box box-solid box-info">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="glyphicon glyphicon-thumbs-up"></i> Edit Informasi Data Kelahiran </h3>
@@ -872,7 +868,7 @@ while ($edit = _fetch_array($a)) { ?>
 
 
 
-<div class="box box-solid box-danger">
+<div class="box box-solid box-info">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="glyphicon glyphicon-thumbs-up"></i> Edit Informasi Data Pendatang </h3>
@@ -939,7 +935,7 @@ case "detail_warga" :
 <div class="tab-content">
 <div class="tab-pane active" id="data">
 <section id="new">
-<div class="box box-solid box-danger">
+<div class="box box-solid box-info">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="fa fa-user-md"></i> Informasi Data Warga </h3>
@@ -1119,7 +1115,7 @@ $edit=_fetch_array($data);
 	</div></div></section></div>
 <div class="tab-pane" id="data1">
 <section id="new1">
-<div class="box box-solid box-danger">
+<div class="box box-solid box-info">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="fa fa-institution"></i> Data Kelahiran </h3>
@@ -1182,7 +1178,7 @@ $e=_fetch_array($d);
 
 <div class="tab-pane" id="data4">
 <section id="new4">
-<div class="box box-solid box-danger">
+<div class="box box-solid box-info">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="fa fa-book"></i> Data Pendatang </h3>

@@ -6,7 +6,7 @@ switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- MENAMPILKAN DATA KETERANGAN WARGA ------------------------- ----->			
-<div style="margin-right:10%;margin-left:15%" class="alert alert-success alert-dismissable">
+<div style="margin-right:10%;margin-left:15%" class="alert alert-info alert-dismissable">
 <button type="button" class="btn btn-primary close" data-dismiss="alert" aria-hidden="true">&nbsp;<i class="fa fa-close "></i>&nbsp;</button>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -30,16 +30,14 @@ default:
 </div><!-- /.input group -->
 </div>
 <div class="col-sm-1">
-<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-success"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
+<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-info"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
 </div></div>  
 </form>
-	<div class="box box-solid box-success">
+	<div class="box box-solid box-info">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
 		<i class="glyphicon glyphicon-thumbs-up"></i>
 		Data Ketarangan Warga </h3>
-		<a class="btn btn-default pull-right" href="?module=surat_keterangan&aksi=list_keterangan">
-		<i class="fa  fa-plus"></i> Tambah Data Ketarangan Warga </a>	
 		</div>		
 	<div class="box-body">
 	<table id="example2" class="table table-bordered table-striped">
@@ -76,8 +74,6 @@ $Kode = $k['id'];?>
 	<td><?php echo $k['masa_berlaku']; ?></td>
 	<td align="center">
 	
-	<a  class="btn btn-xs btn-info" href="?module=surat_keterangan&aksi=edit&id_surat_keterangan=<?php echo $k['id_surat_keterangan'];?>" alt="Edit Data"><i class="glyphicon glyphicon-pencil"></i></a>
-	<a class="btn btn-xs btn-warning" href="<?php echo $aksi ?>?module=surat_keterangan&aksi=hapus&id_surat_keterangan=<?php echo $k['id_surat_keterangan'];?>"  alt="Delete Data" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA <?php echo $Kode; ?>	?')"> <i class="glyphicon glyphicon-trash"></i></a>
 	<a class="btn btn-xs btn-warning" data-toggle="tooltip" title="Cetak Data Ketarangan??"href="module/laporan/data_keterangan.php?module=laporan&aksi=edit&id=<?php echo $k['id'];?>" alt="Cetak Data"><i class="glyphicon glyphicon-print"></i></a>
 		
 	</td>
@@ -99,7 +95,7 @@ case "list_keterangan":
 <h3 class="box-title margin text-center">Data Keterangan Warga</h3>
 <hr/>
 
-	<div class="box box-solid box-success">
+	<div class="box box-solid box-info">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
 		<i class="fa fa-book"></i>

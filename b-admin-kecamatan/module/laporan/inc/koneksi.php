@@ -1,6 +1,6 @@
 <?php
-$koneksi=mysql_connect("localhost","root","")
+$koneksi=_connect("localhost","root","")
 or
 die("can't connect to database");
-$db=mysql_select_db("apdp",$koneksi);
+$db=_select_db("apdp",$koneksi);
 ?>

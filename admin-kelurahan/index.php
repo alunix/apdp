@@ -187,7 +187,7 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
 
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="active treeview">
             <a href="#">
                 <i class="fa fa-print"></i> <span>Cetak Laporan</span> <i class="fa fa-angle-left pull-right"></i>
             </a>

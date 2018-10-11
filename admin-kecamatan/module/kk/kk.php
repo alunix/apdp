@@ -6,7 +6,7 @@ switch(@$_GET['aksi']){
     default:
     ?>
     <!----- ------------------------- Menampilkan Data Kepala Keluarga ------------------------- ----->
-    <div style="margin-right:10%;margin-left:15%" class="alert alert-success alert-dismissable text-center">
+    <div style="margin-right:10%;margin-left:15%" class="alert alert-info alert-dismissable text-center">
         <button type="button" class="btn btn-primary close" data-dismiss="alert" aria-hidden="true">&nbsp;<i class="fa fa-close "></i>&nbsp;</button>
         <p>
             <i class="icon fa fa-info"></i>
@@ -29,11 +29,11 @@ switch(@$_GET['aksi']){
                 </div><!-- /.input group -->
             </div>
             <div class="col-sm-1">
-                <button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-success"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
+                <button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-info"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
             </div>
         </div>
     </form>
-	<div class="box box-solid box-success">
+	<div class="box box-solid box-info">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
 		<i class="fa  fa-user-secret"></i>Data Kepala Keluarga </h3>
@@ -124,7 +124,7 @@ case "detail_warga2" :
     <div class="tab-content">
         <div class="tab-pane active" id="data">
             <section id="new">
-                <div class="box box-solid box-danger">
+                <div class="box box-solid box-info">
                     <div class="box-header">
                         <h3 class="btn btn disabled box-title">
 						<i class="fa fa-user-md"></i> Informasi Data Kepala Keluarga </h3>
@@ -179,7 +179,7 @@ case "detail_warga2" :
 	<!----- ------------------------- LIST ISTRI ------------------------- ----->
 <div class="tab-pane" id="data1">
 <section id="new1">
-<div class="box box-solid box-danger">
+<div class="box box-solid box-info">
     <div class="box-header">
         <h3 class="btn btn disabled box-title">
             <i class="fa fa-institution"></i>
@@ -244,7 +244,7 @@ case "detail_warga2" :
 
 <div class="tab-pane" id="data4">
 <section id="new4">
-<div class="box box-solid box-danger">
+<div class="box box-solid box-info">
     <div class="box-header">
         <h3 class="btn btn disabled box-title">
             <i class="fa fa-institution"></i>
