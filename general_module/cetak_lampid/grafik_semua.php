@@ -40,6 +40,12 @@
             )
         ) {
             $active = 'btn-primary';
+            if (!$selected_bottom_range_year) {
+                $selected_bottom_range_year = $ryi;
+            }
+            if (!$selected_top_range_year) {
+                $selected_top_range_year = $ryi_1;
+            }
         } else {
             $active = 'btn-default';
         }
@@ -65,8 +71,12 @@ for ($i=$selected_top_range_year;$i<=$selected_bottom_range_year;$i++) {
     $dataFiltered = array_filter($dataUnfiltered, function ($d) use ($i) {
         return $d['tahun'] == $i;
     });
-    $dataFiltered = array_values($dataFiltered);
-    $dataFiltered = @$dataFiltered[0];
+    if (!$dataFiltered) {
+        $dataFiltered = array();
+    } else {
+        $dataFiltered = array_values($dataFiltered);
+        $dataFiltered = @$dataFiltered[0];
+    }
     $dataLampids[0]['data'][] = (int) (@$dataFiltered['jumlah_lahir'] ? @$dataFiltered['jumlah_lahir'] : 0);
     $dataLampids[1]['data'][] = (int) (@$dataFiltered['jumlah_wafat'] ? @$dataFiltered['jumlah_wafat'] : 0);
     $dataLampids[2]['data'][] = (int) (@$dataFiltered['jumlah_pindah'] ? @$dataFiltered['jumlah_pindah'] : 0);
