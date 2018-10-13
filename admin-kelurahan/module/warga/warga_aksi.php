@@ -48,7 +48,7 @@ header('location:../../index.php?module='.$module);
 }
 // EDIT
 else if($module=='warga' AND $aksi=='edit' ){ 
-
+//var_dump($_POST);die();
 $penolong = $_POST['penolong'];
 $nama_penolong = $_POST['nama_penolong'];
 $berat_bayi = $_POST['berat_bayi'];

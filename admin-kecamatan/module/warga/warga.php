@@ -165,54 +165,49 @@ $sql ="SELECT max(id) as terakhir from data_warga";
   <div class="form-group">
                                             <label class="col-sm-4 control-label">AGAMA</label>
 											<div class="col-sm-5">
-                                            <select class="form-control" name="agama">
-                                                <option>Pilih Agama</option>
-                                                <option>Islam</option>
-                                                <option>Kristen</option>
-                                                <option>Hindu</option>
-                                                <option>Budha</option>
-                                                <option>Konghucu</option>
-                                                <option>Lainnya</option>
-                                            </select>
+                                                <select class="form-control" name="agama">
+                                                    <option value="" selected="selected">Pilih Agama</option>
+                                                    <?php
+                                                    $agamas=_fetchMultipleFromSql("SELECT * from agama order by urutan");
+                                                    foreach ($agamas as $agama) {
+                                                        ?>
+                                                        <option value="<?=$agama['id_agama'];?>"><?=$agama['nama_agama'];?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
 											</div>
    </div>
    <div class="form-group">
                                             <label class="col-sm-4 control-label">PENDIDIKAN</label>
 											<div class="col-sm-5">
-                                            <select class="form-control" name="pendidikan">
-                                                <option>Pilih Pendidikan</option>
-                                                <option>Tidak/Belum Sekolah</option>
-                                                <option>Belum Tamat SD/Sederajat</option>
-                                                <option>SMP/Sederajat</option>
-                                                <option>SMA/Sederajat</option>
-                                                <option>Diploma I/II</option>
-                                                <option>Akademi/Diploma III/Sarjana Muda</option>
-                                                <option>Diploma IV/Strata I</option>
-                                                <option>Strata II</option>
-                                                <option>Strata III</option>
-                                                <option>Tidak Tamat SD/Sederajat</option>
-                                            </select>
+                                                <select class="form-control" name="pendidikan">
+                                                    <option value="" selected="selected">Pilih Pendidikan</option>
+                                                    <?php
+                                                    $pendidikans=_fetchMultipleFromSql("SELECT * from pendidikan order by urutan");
+                                                    foreach ($pendidikans as $pendidikan) {
+                                                        ?>
+                                                        <option value="<?=$pendidikan['id_pendidikan'];?>"><?=$pendidikan['nama_pendidikan'];?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
 											</div>
    </div>
    <div class="form-group">
                                             <label class="col-sm-4 control-label">PEKERJAAN</label>
 											<div class="col-sm-5">
-                                            <select class="form-control" name="pekerjaan">
-                                                <option>Pilih Pekerjaan</option>
-                                                <option>PNS</option>
-                                                <option>TNI</option>
-                                                <option>POLRI</option>
-                                                <option>Pegawai Swasta</option>
-                                                <option>Wiraswasta</option>
-                                                <option>Buruh</option>
-                                                <option>Pejabat Negara</option>
-                                                <option>Tenaga Profesi</option>
-                                                <option>Pensiunan</option>
-                                                <option>IRT</option>
-                                                <option>Belum Bekerja</option>
-                                                <option>Tidak Bekerja</option>
-                                                <option>Lainnya</option>
-                                            </select>
+                                                <select class="form-control" name="pekerjaan">
+                                                    <option value="" selected="selected">Pilih Pekerjaan</option>
+                                                    <?php
+                                                    $pekerjaans=_fetchMultipleFromSql("SELECT * from pekerjaan order by urutan");
+                                                    foreach ($pekerjaans as $pekerjaan) {
+                                                        ?>
+                                                        <option value="<?=$pekerjaan['id_pekerjaan'];?>"><?=$pekerjaan['nama_pekerjaan'];?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
 											</div>
    </div>
    <div class="form-group">
@@ -556,79 +551,53 @@ $edit=_fetch_array($data);
   </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">AGAMA</label>
-    <div class="col-sm-3">	
-    <select name="agama" class="form-control"><option> PILIH AGAMA</option>
-	<option name="agama" value="Islam" <?php if(($edit['agama'])== "Islam")
-				{echo "selected=\"selected\"";};?>> Islam </option>
-	<option name="agama" value="Kristen" <?php if(($edit['agama'])== "Kristen")
-				{echo "selected=\"selected\"";};?>> Kristen </option>
-	<option name="agama" value="Hindu" <?php if(($edit['agama'])== "Hindu")
-				{echo "selected=\"selected\"";};?>> Hindu </option>
-	<option name="agama" value="Budha" <?php if(($edit['agama'])== "Budha")
-				{echo "selected=\"selected\"";};?>> Budha</option>
-	<option name="agama" value="Konghucu" <?php if(($edit['agama'])== "Konghucu")
-				{echo "selected=\"selected\"";};?>> Konghucu</option>
-	</select>
+    <div class="col-sm-3">
+        <select class="form-control" name="agama">
+            <option value="" selected="selected">Pilih Agama</option>
+            <?php
+            $agamas=_fetchMultipleFromSql("SELECT * from agama order by urutan");
+            foreach ($agamas as $agama) {
+                $selected = $agama['id_agama'] == $edit['agama'] ? ' selected="selected" ' : "";
+                ?>
+                <option value="<?=$agama['id_agama'];?>" <?=$selected;?>><?=$agama['nama_agama'];?></option>
+                <?php
+            }
+            ?>
+        </select>
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">PENDIDIKAN</label>
-    <div class="col-sm-3">	
-    <select name="pendidikan" class="form-control"><option> PILIH PENDIDIKAN</option>
-	<option name="pendidikan" value="Tidak/Belum Sekolah" <?php if(($edit['pendidikan'])== "Tidak/Belum Sekolah")
-				{echo "selected=\"selected\"";};?>> Tidak/Belum Sekolah </option>
-	<option name="pendidikan" value="Belum Tamat SD/Sederajat" <?php if(($edit['pendidikan'])== "Belum Tamat SD/Sederajat")
-				{echo "selected=\"selected\"";};?>> Belum Tamat SD/Sederajat </option>
-	<option name="pendidikan" value="SMP/Sederajat" <?php if(($edit['pendidikan'])== "SMP/Sederajat")
-				{echo "selected=\"selected\"";};?>> SMP/Sederajat </option>
-	<option name="pendidikan" value="SMA/Sederajat" <?php if(($edit['pendidikan'])== "SMA/Sederajat")
-				{echo "selected=\"selected\"";};?>> SMA/Sederajat </option>	
-	<option name="pendidikan" value="Diploma I/II" <?php if(($edit['pendidikan'])== "Diploma I/II")
-				{echo "selected=\"selected\"";};?>> Diploma I/II </option>	
-	<option name="pendidikan" value="Akademi/Diploma III/Sarjana Muda" <?php if(($edit['pendidikan'])== "Akademi/Diploma III/Sarjana Muda")
-				{echo "selected=\"selected\"";};?>> Akademi/Diploma III/Sarjana Muda </option>
-	<option name="pendidikan" value="Diploma IV/Strata I" <?php if(($edit['pendidikan'])== "Diploma IV/Strata I")
-				{echo "selected=\"selected\"";};?>> Diploma IV/Strata I </option>
-	<option name="pendidikan" value="Strata II" <?php if(($edit['pendidikan'])== "Strata II")
-				{echo "selected=\"selected\"";};?>> Strata II </option>
-	<option name="pendidikan" value="Strata III" <?php if(($edit['pendidikan'])== "Strata III")
-				{echo "selected=\"selected\"";};?>> Strata III </option>
-	<option name="pendidikan" value="Tidak Tamat SD/Sederajat" <?php if(($edit['pendidikan'])== "Tidak Tamat SD/Sederajat")
-				{echo "selected=\"selected\"";};?>> Tidak Tamat SD/Sederajat </option>
-	</select>
+    <div class="col-sm-3">
+        <select class="form-control" name="pendidikan">
+            <option value="" selected="selected">Pilih Pendidikan</option>
+            <?php
+            $pendidikans=_fetchMultipleFromSql("SELECT * from pendidikan order by urutan");
+            foreach ($pendidikans as $pendidikan) {
+                $selected = $pendidikan['id_pendidikan'] == $edit['pendidikan'] ? ' selected="selected" ' : "";
+                ?>
+                <option value="<?=$pendidikan['id_pendidikan'];?>" <?=$selected;?>><?=$pendidikan['nama_pendidikan'];?></option>
+                <?php
+            }
+            ?>
+        </select>
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">PEKERJAAN</label>
-    <div class="col-sm-3">	
-    <select name="pekerjaan" class="form-control"><option> PILIH PEKERJAAN</option>
-	<option name="pekerjaan" value="PNS" <?php if(($edit['pekerjaan'])== "PNS")
-				{echo "selected=\"selected\"";};?>> PNS </option>
-	<option name="pekerjaan" value="TNI" <?php if(($edit['pekerjaan'])== "TNI")
-				{echo "selected=\"selected\"";};?>> TNI </option>
-	<option name="pekerjaan" value="POLRI" <?php if(($edit['pekerjaan'])== "POLRI")
-				{echo "selected=\"selected\"";};?>> POLRI </option>
-	<option name="pekerjaan" value="Pegawai Swasta" <?php if(($edit['pekerjaan'])== "Pegawai Swasta")
-				{echo "selected=\"selected\"";};?>> Pegawai Swasta </option>
-	<option name="pekerjaan" value="Wiraswasta" <?php if(($edit['pekerjaan'])== "Wiraswasta")
-				{echo "selected=\"selected\"";};?>> Wiraswasta </option>
-	<option name="pekerjaan" value="Buruh" <?php if(($edit['pekerjaan'])== "Buruh")
-				{echo "selected=\"selected\"";};?>> Buruh </option>
-	<option name="pekerjaan" value="Pejabat Negara" <?php if(($edit['pekerjaan'])== "Pejabat Negara")
-				{echo "selected=\"selected\"";};?>> Pejabat Negara </option>
-	<option name="pekerjaan" value="Tenaga Profesi" <?php if(($edit['pekerjaan'])== "Tenaga Profesi")
-				{echo "selected=\"selected\"";};?>> Tenaga Profesi </option>
-	<option name="pekerjaan" value="Pensiunan" <?php if(($edit['pekerjaan'])== "Pensiunan")
-				{echo "selected=\"selected\"";};?>> Pensiunan </option>
-	<option name="pekerjaan" value="IRT" <?php if(($edit['pekerjaan'])== "IRT")
-				{echo "selected=\"selected\"";};?>> IRT </option>	
-	<option name="pekerjaan" value="Belum Bekerja" <?php if(($edit['pekerjaan'])== "Belum Bekerja")
-				{echo "selected=\"selected\"";};?>> Belum Bekerja </option>
-	<option name="pekerjaan" value="Tidak Bekerja" <?php if(($edit['pekerjaan'])== "Tidak Bekerja")
-				{echo "selected=\"selected\"";};?>> Tidak Bekerja </option>
-	<option name="pekerjaan" value="Lainnya" <?php if(($edit['pekerjaan'])== "Lainnya")
-				{echo "selected=\"selected\"";};?>> Lainnya </option>
-	</select>
+    <div class="col-sm-3">
+        <select class="form-control" name="pekerjaan">
+            <option value="" selected="selected">Pilih Pekerjaan</option>
+            <?php
+            $pekerjaans=_fetchMultipleFromSql("SELECT * from pekerjaan order by urutan");
+            foreach ($pekerjaans as $pekerjaan) {
+                $selected = $pekerjaan['id_pekerjaan'] == $edit['pekerjaan'] ? ' selected="selected" ' : "";
+                ?>
+                <option value="<?=$pekerjaan['id_pekerjaan'];?>" <?=$selected;?>><?=$pekerjaan['nama_pekerjaan'];?></option>
+                <?php
+            }
+            ?>
+        </select>
     </div>  </div>
 	<div class="form-group">
     <label class="col-sm-4 control-label">STATUS NIKAH</label>
@@ -999,19 +968,19 @@ $edit=_fetch_array($data);
   <div class="form-group">
      <label class="col-sm-4 control-label">AGAMA</label>
 	 <div class="col-sm-5">
-    <input type="text" class="form-control" value="<?php echo $edit['agama']; ?>" placeholder="Agama" readonly name="agama">
+         <input type="text" class="form-control" value="<?php echo @_fetchOneFromSql(sprintf("SELECT * FROM agama where id_agama='%s'", $edit['agama']))['nama_agama']; ?>" placeholder="Agama" readonly name="agama">
 	</div>
   </div>
    <div class="form-group">
      <label class="col-sm-4 control-label">PENDIDIKAN</label>
 	 <div class="col-sm-5">
-    <input type="text" class="form-control" value="<?php echo $edit['pendidikan']; ?>" placeholder="Pendidikan" readonly name="pendidikan">
+         <input type="text" class="form-control" value="<?php echo @_fetchOneFromSql(sprintf("SELECT * FROM pendidikan where id_pendidikan='%s'", $edit['pendidikan']))['nama_pendidikan']; ?>" placeholder="Pendidikan" readonly name="pendidikan">
 	</div>
   </div>
    <div class="form-group">
      <label class="col-sm-4 control-label">PEKERJAAN</label>
 	 <div class="col-sm-5">
-    <input type="text" class="form-control" value="<?php echo $edit['pekerjaan']; ?>" placeholder="Pekerjaan" readonly name="pekerjaan">
+         <input type="text" class="form-control" value="<?php echo @_fetchOneFromSql(sprintf("SELECT * FROM pekerjaan where id_pekerjaan='%s'", $edit['pekerjaan']))['nama_pekerjaan']; ?>" placeholder="Pekerjaan" readonly name="pekerjaan">
 	</div>
   </div>
   <div class="form-group">
