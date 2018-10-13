@@ -1,4 +1,5 @@
 <?php
+include 'inc.lampid.php';
 
 $find = smartRouting('pdf', 'filter_data');
 

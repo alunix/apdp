@@ -8,6 +8,7 @@
 session_start();
 include __DIR__.'/define.php';
 require_once __DIR__.'/vendor/autoload.php';
+include BASE_DIR."/inc/inc.commons.php";
 include BASE_DIR.'/inc/fungsi_hdt.php';
 include BASE_DIR.'/inc/routing.php';
 include BASE_DIR.'/inc/inc.library.php';
