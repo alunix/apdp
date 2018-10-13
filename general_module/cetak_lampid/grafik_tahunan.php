@@ -20,29 +20,35 @@
 <script src="<?=BASE_URL."/modules/exporting.js";?>"></script>
 <script src="<?=BASE_URL."/modules/export-data.js";?>"></script>
 
-<div class="text-center">
-    <?php
-    $current_selected_year = GetSetVar('current_selected_year');
-    if (!$current_selected_year) $current_selected_year = date('Y');
-
-    $selected_bottom_range_year = $current_selected_year-4;
-    $selected_top_range_year = $current_selected_year+4;
-
-    for ($i=$selected_bottom_range_year;$i<=$selected_top_range_year;$i++) {
-        if ($i==$current_selected_year) {
-            $active = 'btn-primary';
-        } else {
-            $active = 'btn-default';
-        }
-        ?>
-        <a class="btn <?=$active;?> submit-me" href="<?=moduleUrlByLevel('cetak/lampid', 'current_selected_year='.$i);?>">
-            <?=$i;?>
-        </a>
+<button class="btn btn-primary do-filter" >
+    Filter
+</button>
+<div id="filter" style="display: none">
+    <div class="text-center">
         <?php
-    }
+        $current_selected_year = GetSetVar('current_selected_year');
+        if (!$current_selected_year) $current_selected_year = date('Y');
 
-    ?>
+        $selected_bottom_range_year = $current_selected_year-4;
+        $selected_top_range_year = $current_selected_year+4;
+
+        for ($i=$selected_bottom_range_year;$i<=$selected_top_range_year;$i++) {
+            if ($i==$current_selected_year) {
+                $active = 'btn-primary';
+            } else {
+                $active = 'btn-default';
+            }
+            ?>
+            <a class="btn <?=$active;?> submit-me" href="<?=moduleUrlByLevel('cetak/lampid', 'current_selected_year='.$i);?>">
+                <?=$i;?>
+            </a>
+            <?php
+        }
+
+        ?>
+    </div>
 </div>
+
 <div id="container"></div>
 
 <?php
@@ -124,5 +130,21 @@ for ($i=1;$i<=12;$i++) {
         }
 
     });
+
+    var last_filter = Number(window.localStorage.getItem('last_filter_enable'));
+    if (last_filter != 0 && last_filter != 1) last_filter = 0;
+    $(".do-filter").click(function (e) {
+        $("#filter").toggle(100);
+        var last = Number(window.localStorage.getItem('last_filter_enable'));
+        if (last == 1) {
+            last=0;
+        } else {
+            last=1;
+        }
+        window.localStorage.setItem('last_filter_enable', last);
+    })
+    if (last_filter) {
+        $("#filter").toggle(100);
+    }
 </script>
 

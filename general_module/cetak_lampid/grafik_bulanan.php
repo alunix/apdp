@@ -20,47 +20,53 @@
 <script src="<?=BASE_URL."/modules/exporting.js";?>"></script>
 <script src="<?=BASE_URL."/modules/export-data.js";?>"></script>
 
-<div class="text-center">
-    <?php
-    $current_selected_year = GetSetVar('current_selected_year');
-    if (!$current_selected_year) $current_selected_year = date('Y');
+<button class="btn btn-primary do-filter" >
+    Filter
+</button>
+<div id="filter" style="display: none">
+    <div class="text-center">
+        <?php
+        $current_selected_year = GetSetVar('current_selected_year');
+        if (!$current_selected_year) $current_selected_year = date('Y');
 
-    $selected_bottom_range_year = $current_selected_year-4;
-    $selected_top_range_year = $current_selected_year+4;
+        $selected_bottom_range_year = $current_selected_year-4;
+        $selected_top_range_year = $current_selected_year+4;
 
-    for ($i=$selected_bottom_range_year;$i<=$selected_top_range_year;$i++) {
-        if ($i==$current_selected_year) {
-            $active = 'btn-primary';
-        } else {
-            $active = 'btn-default';
+        for ($i=$selected_bottom_range_year;$i<=$selected_top_range_year;$i++) {
+            if ($i==$current_selected_year) {
+                $active = 'btn-primary';
+            } else {
+                $active = 'btn-default';
+            }
+            ?>
+            <a class="btn <?=$active;?> submit-me" href="<?=moduleUrlByLevel('cetak/lampid', 'current_selected_year='.($i));?>">
+                <?=$i;?>
+            </a>
+            <?php
         }
         ?>
-        <a class="btn <?=$active;?> submit-me" href="<?=moduleUrlByLevel('cetak/lampid', 'current_selected_year='.($i));?>">
-            <?=$i;?>
-        </a>
+        <br/>
+        <br/>
         <?php
-    }
-    ?>
-    <br/>
-    <br/>
-    <?php
-    $current_selected_month = GetSetVar('current_selected_month');
-    if (!$current_selected_month) $current_selected_month = (date('m')+1);
-    $bulans = getMonthListIndonesia();
-    for ($i=0;$i<12;$i++) {
-        if ($i==($current_selected_month-1)) {
-            $active = 'btn-primary';
-        } else {
-            $active = 'btn-default';
+        $current_selected_month = GetSetVar('current_selected_month');
+        if (!$current_selected_month) $current_selected_month = (date('m')+1);
+        $bulans = getMonthListIndonesia();
+        for ($i=0;$i<12;$i++) {
+            if ($i==($current_selected_month-1)) {
+                $active = 'btn-primary';
+            } else {
+                $active = 'btn-default';
+            }
+            ?>
+            <a class="btn <?=$active;?> submit-me" href="<?=moduleUrlByLevel('cetak/lampid', 'current_selected_month='.($i+1));?>">
+                <?=@$bulans[$i];?>
+            </a>
+            <?php
         }
         ?>
-        <a class="btn <?=$active;?> submit-me" href="<?=moduleUrlByLevel('cetak/lampid', 'current_selected_month='.($i+1));?>">
-            <?=@$bulans[$i];?>
-        </a>
-        <?php
-    }
-    ?>
+    </div>
 </div>
+
 <div id="container"></div>
 
 <?php
@@ -94,7 +100,7 @@ for ($i=1;$i<=$total_days;$i++) {
     Highcharts.chart('container', {
 
         title: {
-            text: 'Grafik LAMPID Tahun <?=$current_selected_year;?>'
+            text: 'Grafik LAMPID Bulan <?=@getMonthListIndonesia()[$current_selected_month-1];?> <?=$current_selected_year;?>'
         },
 
         // subtitle: {
@@ -142,5 +148,21 @@ for ($i=1;$i<=$total_days;$i++) {
         }
 
     });
+
+    var last_filter = Number(window.localStorage.getItem('last_filter_enable'));
+    if (last_filter != 0 && last_filter != 1) last_filter = 0;
+    $(".do-filter").click(function (e) {
+        $("#filter").toggle(100);
+        var last = Number(window.localStorage.getItem('last_filter_enable'));
+        if (last == 1) {
+            last=0;
+        } else {
+            last=1;
+        }
+        window.localStorage.setItem('last_filter_enable', last);
+    })
+    if (last_filter) {
+        $("#filter").toggle(100);
+    }
 </script>
 

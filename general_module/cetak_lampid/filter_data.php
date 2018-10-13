@@ -9,4 +9,5 @@
 $_SESSION['selected_desa'] = @$_POST['selected_desa'];
 $_SESSION['format_type'] = @$_POST['format_type'];
 
+
 echo sprintf('<script>window.location.href = "%s"</script>', moduleUrlByLevel('cetak/lampid'));
