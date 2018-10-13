@@ -52,10 +52,11 @@ $dataLampids = array(
     array('name' => 'Pindah', 'data' => array()),
     array('name' => 'Datang', 'data' => array()),
 );
-$dataUnfiltered = getDataLampid($selected_top_range_year, $selected_bottom_range_year);
-for ($i=$selected_top_range_year;$i<=$selected_bottom_range_year;$i++) {
+$dataUnfiltered = getDataLampidBulan($current_selected_year);
+
+for ($i=1;$i<=12;$i++) {
     $dataFiltered = array_filter($dataUnfiltered, function ($d) use ($i) {
-        return $d['tahun'] == $i;
+        return (int) $d['bulan'] == $i;
     });
     if (!$dataFiltered) {
         $dataFiltered = array();
@@ -82,6 +83,10 @@ for ($i=$selected_top_range_year;$i<=$selected_bottom_range_year;$i++) {
         //     text: 'Source: thesolarfoundation.com'
         // },
 
+        xAxis: {
+            categories: <?=json_encode(getMonthListIndonesia());?>
+        },
+
         yAxis: {
             title: {
                 text: 'Jumlah (Orang)'
@@ -98,7 +103,6 @@ for ($i=$selected_top_range_year;$i<=$selected_bottom_range_year;$i++) {
                 label: {
                     connectorAllowed: false
                 },
-                pointStart: <?=$selected_top_range_year;?>
             }
         },
 

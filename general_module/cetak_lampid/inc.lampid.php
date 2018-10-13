@@ -51,3 +51,36 @@ if (!function_exists('getDataLampid')) {
         return _fetchMultipleFromSql($sql);
     }
 }
+
+if (!function_exists('getDataLampidBulan')) {
+    function getDataLampidBulan($year) {
+        $desaIds = getMultipleDesaId();
+        if (empty($desaIds)) $desaIds = array("false");
+        $imploded = implode("', '", $desaIds);
+        $sql = "SELECT bulan, sum(jumlah_lahir) as jumlah_lahir, sum(jumlah_wafat) as jumlah_wafat, sum(jumlah_datang) as jumlah_datang, sum(jumlah_pindah) as jumlah_pindah from statistik_lampid_bulanan slt where slt.id IN ('$imploded') and tahun is not null and tahun='$year' group by tahun, bulan";
+        return _fetchMultipleFromSql($sql);
+    }
+}
+
+if (!function_exists('getDataLampidTanggal')) {
+    function getDataLampidTanggal($year, $month) {
+        $month = (int) $month;
+        $month = strlen($month) < 2 ? "0{$month}" : $month;
+        $desaIds = getMultipleDesaId();
+        if (empty($desaIds)) $desaIds = array("false");
+        $imploded = implode("', '", $desaIds);
+        $sql = "SELECT tanggal, sum(jumlah_lahir) as jumlah_lahir, sum(jumlah_wafat) as jumlah_wafat, sum(jumlah_datang) as jumlah_datang, sum(jumlah_pindah) as jumlah_pindah from statistik_lampid_harian slt where slt.id IN ('$imploded') and tahun is not null and tahun='$year' and bulan='$month' group by tahun, bulan, tanggal";
+        return _fetchMultipleFromSql($sql);
+    }
+}
+
+if (!function_exists('getMonthListIndonesia')) {
+    function getMonthListIndonesia() {
+        return array(
+            'Januari', 'Pebruari', 'Maret',
+            'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September',
+            'Oktober', 'November', 'Desember'
+        );
+    }
+}
