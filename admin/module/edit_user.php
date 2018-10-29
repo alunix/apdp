@@ -6,6 +6,24 @@ $edit=_fetch_array($data);
 ?>
 <!----- ------------------------- EDIT DATA MASTER user ------------------------- ----->
 <div class="box-body">
+    <?php
+    if (isset($_POST['submit'])) {
+        $id_user = $_GET['id_user'];
+        $nama = $_POST['nama'];
+        $username = @$_POST['username'];
+        $no_hp = $_POST['no_hp'];
+        $password = $_POST['password'];
+        $password_c = $_POST['password-confirmation'];
+        $change_password = $password && $password==$password_c;
+
+        $sql = "UPDATE `user` set nama='$nama', user='$username', no_hp='$no_hp' "
+            .($change_password?", pass='$password' ":"")
+            ." WHERE id_user='$id_user'";
+        _query($sql);
+        $data=_query("select * from user where id_user='$_GET[id_user]'");
+        $edit=_fetch_array($data);
+    }
+    ?>
 	<div class="box box-solid box-success">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
@@ -43,36 +61,46 @@ $edit=_fetch_array($data);
 <div class="form-group">
     <label class="col-sm-4 control-label">Username</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" required="required" name="user" value="<?php echo $edit['user']; ?>">
+      <input type="text" class="form-control" required="required" name="username" value="<?php echo $edit['user']; ?>">
     </div>
-  </div>  
+  </div>
+
   <div class="form-group">
     <label class="col-sm-4 control-label">Password</label>
     <div class="col-sm-5">
-      <input type="password" id="password1"class="form-control" required="required" name="pass" value="<?php echo $edit['pass']; ?>">
+      <input type="password" id="password1" class="form-control" name="password" value="<?php echo $edit['pass']; ?>">
 	  <a class="text-red">*ubah password secara berkala demi menjaga keamanan</a>
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">Konfirmasi Password</label>
     <div class="col-sm-5">
-      <input type="password" id="password2"class="form-control" required="required">	  
+      <input type="password" id="password2"class="form-control" name="password-confirmation">
+        <span class="text-danger password-not-same" style="display: none;">
+            Password Tidak sama.
+        </span>
     </div>
   </div>
   
   <script type="text/javascript">
-window.onload = function () {
-document.getElementById("password1").onchange = validatePassword;
-document.getElementById("password2").onchange = validatePassword;
-}
-function validatePassword(){
-var pass2=document.getElementById("password2").value;
-var pass1=document.getElementById("password1").value;
-if(pass1!=pass2)
-document.getElementById("password2").setCustomValidity("Passwords Tidak Sama");
-else
-document.getElementById("password2").setCustomValidity('');}
-</script>
+      function comparePassword() {
+          var p1 = $("#password1").val();
+          var p2 = $("#password2").val();
+          if ((p1.length > 0 || p2.length > 0) && p1 != p2) {
+              $(".password-not-same").show();
+          } else {
+              $(".password-not-same").hide();
+          }
+      }
+      $(function () {
+          $("#password1").keyup(function (evt) {
+              comparePassword();
+          })
+          $("#password2").keyup(function (evt) {
+              comparePassword();
+          })
+      })
+  </script>
 
 	<div class="form-group">
     <label class="col-sm-4 control-label">  </label>
