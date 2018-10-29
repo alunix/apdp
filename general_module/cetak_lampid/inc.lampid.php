@@ -258,6 +258,91 @@ if (!function_exists('getDataLampidBulan')) {
     }
 }
 
+if (!function_exists('getDataLampidBulanByDesa')) {
+    function getDataLampidBulanByDesa($year) {
+        $desaIds = getMultipleDesaId();
+        if (empty($desaIds)) $desaIds = array("false");
+        $imploded = implode("', '", $desaIds);
+        $sql = "SELECT tahun_lahir as tahun, bulan_lahir as bulan, desa_id, sum(jumlah) as jumlah from statistik_lahir_bulanan slt where slt.desa_id IN ('$imploded') and tahun_lahir is not null and tahun_lahir ='$year' group by tahun_lahir, bulan_lahir, desa_id";
+        $data_lahirs = _fetchMultipleFromSql($sql);
+        $sql = "SELECT tahun_wafat as tahun, bulan_wafat as bulan, desa_id, sum(jumlah) as jumlah from statistik_kematian_bulanan slt where slt.desa_id IN ('$imploded') and tahun_wafat is not null and tahun_wafat ='$year' group by tahun_wafat, bulan_wafat, desa_id";
+        $data_wafats = _fetchMultipleFromSql($sql);
+        $sql = "SELECT tahun_pindah as tahun, bulan_pindah as bulan, desa_id, sum(jumlah) as jumlah from statistik_pindah_bulanan slt where slt.desa_id IN ('$imploded') and tahun_pindah is not null and tahun_pindah ='$year' group by tahun_pindah, bulan_pindah, desa_id";
+        $data_pindahs = _fetchMultipleFromSql($sql);
+        $sql = "SELECT tahun_datang as tahun, bulan_datang as bulan, desa_id, sum(jumlah) as jumlah from statistik_pendatang_bulanan slt where slt.desa_id IN ('$imploded') and tahun_datang is not null and tahun_datang ='$year' group by tahun_datang, bulan_datang, desa_id";
+        $data_datangs = _fetchMultipleFromSql($sql);
+
+        $datas = array();
+        foreach ($desaIds as $desa_id) {
+            for ($i=1;$i<=12;$i++) {
+                $tahun = $year;
+                $bulan = $i;
+
+                $jumlah_lahir = array_filter($data_lahirs, function ($data_lahir) use($tahun, $bulan, $desa_id) {
+                    return $data_lahir['tahun'] == $tahun && $data_lahir['bulan'] == $bulan && $data_lahir['desa_id'] == $desa_id;
+                });
+                if ($jumlah_lahir) {
+                    $jumlah_lahir = array_values($jumlah_lahir);
+                    if (count($jumlah_lahir) > 0) {
+                        $jumlah_lahir = @$jumlah_lahir[0]['jumlah'];
+                    } else {
+                        $jumlah_lahir = 0;
+                    }
+                } else {
+                    $jumlah_lahir = 0;
+                }
+
+                $jumlah_wafat = array_filter($data_wafats, function ($data_wafat) use($tahun, $bulan, $desa_id) {
+                    return $data_wafat['tahun'] == $tahun && $data_wafat['bulan'] == $bulan && $data_wafat['desa_id'] == $desa_id;
+                });
+                if ($jumlah_wafat) {
+                    $jumlah_wafat = array_values($jumlah_wafat);
+                    if (count($jumlah_wafat) > 0) {
+                        $jumlah_wafat = @$jumlah_wafat[0]['jumlah'];
+                    } else {
+                        $jumlah_wafat = 0;
+                    }
+                } else {
+                    $jumlah_wafat = 0;
+                }
+
+                $jumlah_pindah = array_filter($data_pindahs, function ($data_pindah) use($tahun, $bulan, $desa_id) {
+                    return $data_pindah['tahun'] == $tahun && $data_pindah['bulan'] == $bulan && $data_pindah['desa_id'] == $desa_id;
+                });
+                if ($jumlah_pindah) {
+                    $jumlah_pindah = array_values($jumlah_pindah);
+                    if (count($jumlah_pindah) > 0) {
+                        $jumlah_pindah = @$jumlah_pindah[0]['jumlah'];
+                    } else {
+                        $jumlah_pindah = 0;
+                    }
+                } else {
+                    $jumlah_pindah = 0;
+                }
+
+                $jumlah_datang = array_filter($data_datangs, function ($data_datang) use($tahun, $bulan, $desa_id) {
+                    return $data_datang['tahun'] == $tahun && $data_datang['bulan'] == $bulan && $data_datang['desa_id'] == $desa_id;
+                });
+                if ($jumlah_datang) {
+                    $jumlah_datang = array_values($jumlah_datang);
+                    if (count($jumlah_datang) > 0) {
+                        $jumlah_datang = @$jumlah_datang[0]['jumlah'];
+                    } else {
+                        $jumlah_datang = 0;
+                    }
+                } else {
+                    $jumlah_datang = 0;
+                }
+
+                $datas[] = compact('desa_id', 'tahun', 'bulan', 'jumlah_wafat', 'jumlah_lahir', 'jumlah_datang', 'jumlah_pindah');
+
+            }
+        }
+        return $datas;
+
+    }
+}
+
 if (!function_exists('getDataLampidTanggal')) {
     function getDataLampidTanggal($year, $month) {
         $month = (int) $month;

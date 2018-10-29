@@ -1,5 +1,6 @@
 <?php
 include_once '../../bootstrap.php';
+include 'inc.lampid.php';
 include "head.php";
 
 $desas = getMultipleDesa();
@@ -35,11 +36,11 @@ if ($only_one) {
     <section class="content-header">
         <h1>
             Laporan
-            <small>Cetak Laporan Berdasarkan Agama Kota Tasikmalaya</small>
+            <small>Cetak Laporan Lahir, Mati, Pindah &amp; Datang Kota Tasikmalaya</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Laporan</a></li>
-            <li class="active">Cetak Laporan Berdasarkan Agama Kota Tasikmalaya</li>
+            <li class="active">Cetak Laporan Lahir, Mati, Pindah &amp; Datang Kota Tasikmalaya</li>
         </ol>
     </section>
 
@@ -51,93 +52,53 @@ if ($only_one) {
                 <?=$profile['alamat2'];?></b>
         </div><br/>
 
-        <div class="box box-default">
-            <div class="box-header with-border">
-                <h3 class="box-title center">
-                    <?php
-                    if ($only_one) {
-                        echo sprintf(
-                            "Laporan Berdasarkan Agama Desa %s Kecamatan %s %s",
-                            ucwords(strtolower($desa['nama_desa'])),
-                            ucwords(strtolower($desa['nama_kecamatan'])),
-                            ucwords(strtolower($desa['nama_kabupaten']))
-                        );
-                    } else {
-                        echo sprintf(
-                            "Laporan Berdasarkan Agama Kecamatan %s %s",
-                            ucwords(strtolower($desa['nama_kecamatan'])),
-                            ucwords(strtolower($desa['nama_kabupaten']))
-                        );
-                    }
+        <?php
+        $year = date('Y');
+        $monthList = getMonthListIndonesia();
+        $maxMonth = (int) date('m');
+        $lampidDatas = getDataLampidBulanByDesa($year);
+        for ($i=1;$i<=$maxMonth;$i++) {
+            $bulan = $monthList[$i-1];
+            ?>
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title center">
+                        <?php
+                        if ($only_one) {
+                            echo sprintf(
+                                "Laporan Lahir, Mati, Pindah &amp; Datang Desa %s Kecamatan %s %s Bulan %s %s",
+                                ucwords(strtolower($desa['nama_desa'])),
+                                ucwords(strtolower($desa['nama_kecamatan'])),
+                                ucwords(strtolower($desa['nama_kabupaten'])),
+                                $bulan, $year
+                            );
+                        } else {
+                            echo sprintf(
+                                "Laporan Lahir, Mati, Pindah &amp; Datang Kecamatan %s %s Bulan %s %s",
+                                ucwords(strtolower($desa['nama_kecamatan'])),
+                                ucwords(strtolower($desa['nama_kabupaten'])),
+                                $bulan, $year
+                            );
+                        }
 
-                    ?>
+                        ?>
                     </h3>
-                <span class="pull-right">
+                    <span class="pull-right">
 				Tasikmalaya, <?php echo Indonesia2Tgl(date('Y-m-d'));?>
 				</span>
-            </div>
-            <div class="box-body">
-                <?php
-                if ($is_desa) {
-                    ?>
+                </div>
+                <div class="box-body">
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr class="text-red">
-                            <th class="">NO</th>
-                            <th class="">Agama</th>
-                            <th class="">Laki-laki</th>
-                            <th class="">Perempuan</th>
-                            <th class="">Jumlah</th>
+                            <th class="vertical-middle text-center">No.</th>
+                            <th class="vertical-middle">Nama Desa</th>
+                            <th class="vertical-middle">Lahir</th>
+                            <th class="vertical-middle">Mati</th>
+                            <th class="vertical-middle">Datang</th>
+                            <th class="vertical-middle">Pindah</th>
+                            <th class="vertical-middle">Total</th>
                         </tr>
-                        </thead>
-
-                        <tbody>
-                        <?php
-                        // Tampilkan data dari Database
-                        if (empty($desaIds)) $desaIds = array($selected_desa);
-                        $sql = "SELECT agama, laki_laki, perempuan, jumlah from statistik_data_agama WHERE desa_id IN ('".implode("','", $desaIds)."') group by agama";
-                        $datas = _fetchMultipleFromSql($sql);
-                        $no=1;
-                        foreach($datas as $data) { ?>
-
-                        <tr>
-                            <td><?php echo $no++; ?></td>
-                            <td><?php echo $data['agama']; ?></td>
-                            <td><?php echo $data['laki_laki']; ?> org</td>
-                            <td><?php echo $data['perempuan']; ?> org</td>
-                            <td><?php echo $data['jumlah']; ?> org</td>
-                            <?php
-                            }
-                            ?>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <?php
-                } else {
-                    $desaIds = getMultipleDesaId();
-                    if (empty($desaIds)) $desaIds = array("false");
-                    $sql = "SELECT desa_id, agama, laki_laki, perempuan, jumlah from statistik_data_agama WHERE desa_id IN ('".implode("','", $desaIds)."') group by desa_id, agama";
-                    $datas = _fetchMultipleFromSql($sql);
-                    $agamas = array_map(function ($data) {
-                        return $data['agama'];
-                    }, $datas);
-                    ?>
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr class="text-red">
-                            <th class="vertical-middle text-center" rowspan="2">No.</th>
-                            <th class="vertical-middle" rowspan="2">Nama Desa</th>
-                            <?php
-                            foreach ($agamas as $agama) {
-                                echo sprintf('<th class="text-center" colspan="3">%s</th>', $agama);
-                            }
-                            ?>
-                        </tr>
-                        <?php
-                        foreach ($agamas as $agama) {
-                            echo sprintf('<th class="text-center">L</th><th class="text-center">P</th><th class="text-center">T</th>', $agama);
-                        }
-                        ?>
                         </thead>
 
                         <tbody>
@@ -147,42 +108,37 @@ if ($only_one) {
                         $total_agama = array();
 
                         $no=1;
-                        foreach ($desas as $desa) {
-                            $dataFilteredDesa = array_values(array_filter($datas, function ($data) use($desa) {
-                                return $desa['id']==$data['desa_id'];
-                            }));
+                        $total_lahir = 0;
+                        $total_wafat = 0;
+                        $total_pindah = 0;
+                        $total_datang = 0;
+                        $total_total = 0;
 
+                        foreach ($desas as $desa) {
+                            $dataFilteredDesa = array_values(array_filter($lampidDatas, function ($data) use($desa, $i) {
+                                return $desa['id']==$data['desa_id'] && ((int) $data['bulan']) == $i;
+                            }));
+                            $dataFilteredDesa = @$dataFilteredDesa[0];
+                            $total = @$dataFilteredDesa['jumlah_lahir']
+                                + @$dataFilteredDesa['jumlah_wafat']
+                                + @$dataFilteredDesa['jumlah_pindah']
+                                + @$dataFilteredDesa['jumlah_datang'];
+
+                            $total_lahir += @$dataFilteredDesa['jumlah_lahir'];
+                            $total_wafat += @$dataFilteredDesa['jumlah_wafat'];
+                            $total_pindah += @$dataFilteredDesa['jumlah_pindah'];
+                            $total_datang += @$dataFilteredDesa['jumlah_datang'];
+                            $total_total += $total;
                             ?>
                             <tr>
                                 <td><?php echo $no++; ?></td>
                                 <td><?php echo $desa['nama_desa']; ?></td>
-                                <?php
-                                foreach ($agamas as $agama) {
-                                    $filteredAgama = array_values(array_filter($dataFilteredDesa, function ($data) use ($agama) {
-                                        return $agama==$data['agama'];
-                                    }));
-                                    $filteredAgama = @$filteredAgama[0];
+                                <td><?php echo @$dataFilteredDesa['jumlah_lahir']?$dataFilteredDesa['jumlah_lahir']:"0"; ?></td>
+                                <td><?php echo @$dataFilteredDesa['jumlah_wafat']?$dataFilteredDesa['jumlah_wafat']:"0"; ?></td>
+                                <td><?php echo @$dataFilteredDesa['jumlah_datang']?$dataFilteredDesa['jumlah_datang']:"0"; ?></td>
+                                <td><?php echo @$dataFilteredDesa['jumlah_pindah']?$dataFilteredDesa['jumlah_pindah']:"0"; ?></td>
+                                <td><?php echo $total; ?></td>
 
-                                    if (!isset($total_agama[$agama])) {
-                                        $total_agama[$agama] = array(
-                                            'laki_laki' => $filteredAgama['laki_laki'],
-                                            'perempuan' => $filteredAgama['perempuan'],
-                                            'jumlah' => $filteredAgama['jumlah']
-                                        );
-                                    } else {
-                                        $total_agama[$agama]['laki_laki'] += $filteredAgama['laki_laki'];
-                                        $total_agama[$agama]['perempuan'] += $filteredAgama['perempuan'];
-                                        $total_agama[$agama]['jumlah'] += $filteredAgama['jumlah'];
-                                    }
-
-                                    echo sprintf(
-                                        '<td class="text-center">%s</td><td class="text-center">%s</td><td class="text-center">%s</td>',
-                                        $filteredAgama['laki_laki']?$filteredAgama['laki_laki']:"0",
-                                        $filteredAgama['perempuan']?$filteredAgama['perempuan']:"0",
-                                        $filteredAgama['jumlah']?$filteredAgama['jumlah']:"0"
-                                    );
-                                }
-                                ?>
                             </tr>
                             <?php
                         }
@@ -191,32 +147,21 @@ if ($only_one) {
                         <tfoot>
                         <tr class="text-red">
                             <th class="vertical-middle text-center" colspan="2">TOTAL</th>
-                            <?php
-                            foreach ($total_agama as $agama => $values) {
-                                foreach ($values as $value) {
-                                    echo sprintf('<th class="text-center">%s</th>', $value);
-                                }
-                            }
-                            ?>
+                            <th class="vertical-middle" ><?=$total_lahir;?></th>
+                            <th class="vertical-middle" ><?=$total_wafat;?></th>
+                            <th class="vertical-middle" ><?=$total_datang;?></th>
+                            <th class="vertical-middle" ><?=$total_pindah;?></th>
+                            <th class="vertical-middle" ><?=$total_total;?></th>
                         </tr>
                         </tfoot>
                     </table>
-                    <?php
-                }
-                ?>
+                </div><!-- /.box-body -->
+            </div>
+            <?php
 
+        }
+        ?>
 
-
-                <?php
-                $format_type = @$_SESSION['format_type'];
-
-                if (!$format_type) {
-                    $format_type = "semua";
-                }
-                include_once "pdf_{$format_type}.php";
-                ?>
-            </div><!-- /.box-body -->
-        </div>
     </section><!-- /.content -->
 
     <div style="width: 300px" class="text-center">

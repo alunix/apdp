@@ -35,7 +35,7 @@
                 <ul class="nav navbar-nav">                  
                   <!-- User Account Menu -->
                   <li class="dropdown user user-menu">
-                      <a class="" value="Tutuplah" href="<?=moduleUrlByLevel('cetak/lpba');?>"><i class="fa fa-times"></i></a>
+                      <a class="" value="Tutuplah" href="<?=moduleUrlByLevel('cetak/lampid');?>"><i class="fa fa-times"></i></a>
                 </li>
 				</ul>
               </div><!-- /.navbar-custom-menu -->
