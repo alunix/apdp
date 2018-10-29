@@ -1,23 +1,8 @@
-<?php 
-if($_SESSION['level']!="admin" ){ header("location: ../logout.php"); }
-include "user/inc.koneksi.php";
-if (isset($_POST['submit'])){
-if ((!empty($_POST['nama']))) {
-$sql = "UPDATE user SET nama= '".$_POST['nama']."', user = '".$_POST['user']."', 
-		pass = '".$_POST['pass']."', no_hp= '".$_POST['no_hp']."' WHERE id_user = '".$_SESSION['id']."'";
-$simpan = mysql_query($sql);
+<?php
+if (!defined('BASE_DIR')) include_once '../../bootstrap.php';
 
-if ($simpan) {
-echo "<script>alert('Data Berhasil di Update');</script>";
-} else { 
-echo "<script>alert('Gagal Di Update');</script>";
-}
-}
-}
-
-
-$data=mysql_query("select * from user where id_user='$_GET[id_user]'");
-$edit=mysql_fetch_array($data);
+$data=_query("select * from user where id_user='$_GET[id_user]'");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- EDIT DATA MASTER user ------------------------- ----->
 <div class="box-body">
