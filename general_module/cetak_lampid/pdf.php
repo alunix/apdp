@@ -204,6 +204,17 @@ if ($only_one) {
                     <?php
                 }
                 ?>
+
+
+
+                <?php
+                $format_type = @$_SESSION['format_type'];
+
+                if (!$format_type) {
+                    $format_type = "semua";
+                }
+                include_once "pdf_{$format_type}.php";
+                ?>
             </div><!-- /.box-body -->
         </div>
     </section><!-- /.content -->

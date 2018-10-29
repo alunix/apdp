@@ -103,10 +103,10 @@ header('location:../../index.php?module='.$module);
 }
 
 //Tambah
-else if($module=='warga' AND $aksi=='tambah' ){ 
+else if($module=='warga' AND $aksi=='tambah' ){
+
 $sql = "INSERT INTO data_warga  (id, no_kk, nik, nama, jk, tempat_lhr, tanggal_lhr, kewarganegaraan, agama, pendidikan, pekerjaan, status_nikah, status_keluarga, gol_dar, nama_ayah, nama_ibu, alamat, desa_id, rt, rw ) VALUES ('$id', '$no_kk', '$nik', '$nama', '$jk', '$tempat_lhr', '$tanggal_lhr', '$kewarganegaraan', '$agama', '$pendidikan', '$pekerjaan', '$status_nikah', '$status_keluarga', '$gol_dar', '$nama_ayah', '$nama_ibu', '$alamat', '$desa_id', '$rt', '$rw')";
 $simpan = _query($sql);
-
 
 $id_kelahiran = $_POST['id_kelahiran'];
 $penolong = $_POST['penolong'];

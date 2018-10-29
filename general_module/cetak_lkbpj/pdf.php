@@ -122,6 +122,7 @@ if ($only_one) {
                     $pekerjaans = array_map(function ($data) {
                         return $data['pekerjaan'];
                     }, $datas);
+                    $pekerjaans = array_unique($pekerjaans);
                     ?>
                     <table class="table table-bordered table-striped">
                         <thead>

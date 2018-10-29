@@ -121,6 +121,7 @@ if ($only_one) {
                     $pendidikans = array_map(function ($data) {
                         return $data['pendidikan'];
                     }, $datas);
+                    $pendidikans = array_unique($pendidikans);
                     ?>
                     <table class="table table-bordered table-striped">
                         <thead>

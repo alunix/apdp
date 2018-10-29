@@ -57,7 +57,10 @@ default:
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql = "SELECT * FROM data_warga";
+$desaIds = getMultipleDesaId();
+if (empty($desaIds)) $desaIds = array("false");
+$imploded = implode("', '", $desaIds);
+$sql = "SELECT * FROM data_warga where desa_id IN ($imploded)";
 $no=1;
 $tampil = _query($sql);
 while ($tampilkan = _fetch_array($tampil)) {
@@ -300,6 +303,12 @@ $sql ="SELECT max(id) as terakhir from data_warga";
         </select>
     </div>
   </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">DESA</label>
+            <div class="col-sm-5">
+                <select name="desa_id" id="desa_id" class="form-control"></select>
+            </div>
+        </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">RT</label>
     <div class="col-sm-5">

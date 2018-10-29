@@ -121,6 +121,7 @@ if ($only_one) {
                     $agamas = array_map(function ($data) {
                         return $data['agama'];
                     }, $datas);
+                    $agamas = array_unique($agamas);
                     ?>
                     <table class="table table-bordered table-striped">
                         <thead>

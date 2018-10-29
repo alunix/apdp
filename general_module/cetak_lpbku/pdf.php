@@ -121,6 +121,7 @@ if ($only_one) {
                     $usias = array_map(function ($data) {
                         return $data['usia'];
                     }, $datas);
+                    $usias = array_unique($usias);
                     ?>
                     <table class="table table-bordered table-striped">
                         <thead>
