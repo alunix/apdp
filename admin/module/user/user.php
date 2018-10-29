@@ -2,7 +2,7 @@
 $aksi="module/user/user_aksi.php";
 
 
-switch($_GET[aksi]){
+switch(@$_GET['aksi']){
 default:
 ?>
 <!----- ------------------------- MENAMPILKAN DATA ADMIN ------------------------- ----->	
@@ -18,21 +18,6 @@ default:
 </div> 				
 <div class="text-center">
 <h3>Data User Login</h3><hr/></div>
-<form class="form-horizontal" action="module/laporan/cetak_user.php" method="post">             
-  <div class="form-group">
-    <label class="col-sm-4 control-label">Tanggal</label>
-    <div class="col-sm-3">
-    <div class="input-group">
-  <div class="input-group-addon">
-	<i class="fa fa-calendar"></i>
-  </div>
-  <input type="text" name="tanggal" required="required" class="form-control pull-right" id="reservation"/>
-</div><!-- /.input group -->
-</div>
-<div class="col-sm-1">
-<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-danger"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
-</div></div>  
-</form>
 	<div class="box box-solid box-danger">
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
@@ -44,24 +29,28 @@ default:
 	<table id="example1" class="table table-bordered table-striped">
 <thead>
 	<tr class="text-red">
-		<th class="col-sm-1">ID user</th>
-		<th class="col-sm-2">Nama</th>
-		<th class="col-sm-2">Username</th>
-		<th class="col-sm-2">No. HP</th>
-		<th class="col-sm-2">Level</th> 
-		<th class="col-sm-1">Nama Kelurahan</th> 
-		<th class="col-sm-1">Status</th> 
+		<th class="">ID user</th>
+		<th class="">Nama</th>
+		<th class="">Username</th>
+		<th class="">No. HP</th>
+		<th class="">Level</th>
+		<th class="">Kelurahan / Kecamatan</th>
+		<th class="">Status</th>
 		
-		<th class="col-sm-1">AKSI</th> 
+		<th class="">AKSI</th>
 	</tr>
 </thead>
 
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql = "SELECT id_user, user, pass, nama, no_hp, level, blokir, id_kelurahan, nm_kelurahan, nm_lurah FROM user INNER JOIN kelurahan USING (id_kelurahan)";
-$tampil = mysql_query($sql);
-while ($tampilkan = mysql_fetch_array($tampil)) { 
+$sql = "select u.*, IF(u.level='admin-kelurahan', vd.nama_desa, vd.nama_kecamatan) as 'nama_daerah', dda.nama_lurah, dda.nip, dda.alamat1, dda.alamat2
+from `user` u 
+join view_desa vd on IF(u.level='admin-kelurahan', vd.id, vd.kecamatan_id)=u.id_kelurahan
+left join daerah_desa_attribut dda on dda.desa_id=u.id_kelurahan
+where u.level<>'admin' group by u.id_user";
+$tampil = _query($sql);
+while ($tampilkan = _fetch_array($tampil)) {
 $Kode = $tampilkan['id_user'];
 $blokir = $tampilkan['blokir'];?>
 
@@ -71,7 +60,7 @@ $blokir = $tampilkan['blokir'];?>
 	<td><?php echo $tampilkan['user']; ?></td>
 	<td><?php echo $tampilkan['no_hp']; ?></td>
 	<td><?php echo $tampilkan['level']; ?></td>
-		<td><?php echo $tampilkan['nm_kelurahan']; ?></td>
+		<td><?php echo $tampilkan['nama_daerah']; ?></td>
 	<td><?php if  ( $blokir== 'Y' ) {
 				echo "<a class='btn btn-xs btn-warning' disabled >NonAktif</a>";}
 				else {echo "<a class='btn btn-xs btn-success' disabled>Aktif</a>"; }   ?></td>
@@ -100,8 +89,8 @@ break;
  case "tambah": 
 //ID
 $sql ="SELECT max(id_user) as terakhir from user";
-  $hasil = mysql_query($sql);
-  $data = mysql_fetch_array($hasil);
+  $hasil = _query($sql);
+  $data = _fetch_array($hasil);
   $lastID = $data['terakhir'];
   $lastNoUrut = substr($lastID, 3, 9);
   $nextNoUrut = $lastNoUrut + 1;
@@ -142,12 +131,23 @@ $sql ="SELECT max(id_user) as terakhir from user";
 	<div class="form-group">
     <label class="col-sm-4 control-label">Level </label>
     <div class="col-sm-5">
-      <select name="level" class="form-control">
-<option value=" "> -- Pilih Level -- </option>
-<option value="admin">Admin</option>
-<option value="admin-kelurahan">Admin Kelurahan</option>
-<option value="admin-kecamatan">Admin Kecamatan</option>
-</select>
+        <script>
+            function loadTrueDataOption(event, element) {
+                var opt = $(element).find('option:selected').val();
+                if (opt == 'admin-kecamatan') {
+                    $(".show-on-kecamatan").show();
+                    $(".show-on-kelurahan").hide();
+                } else {
+                    $(".show-on-kecamatan").hide();
+                    $(".show-on-kelurahan").show();
+                }
+            }
+        </script>
+      <select name="level" class="form-control" onchange="loadTrueDataOption(event, this)">
+        <option value=" "> -- Pilih Level -- </option>
+        <option value="admin-kelurahan">Admin Kelurahan</option>
+        <option value="admin-kecamatan">Admin Kecamatan</option>
+      </select>
     </div>
   </div>
 <div class="form-group">
@@ -161,20 +161,99 @@ $sql ="SELECT max(id_user) as terakhir from user";
     <div class="col-sm-5">
       <input type="password" class="form-control" required="required" name="pass" minlength="5"value="12345">
     </div>
-  </div>  
-<div class="form-group">
-    <label class="col-sm-4 control-label">Kelurahan</label>
-    <div class="col-sm-3">
-<select name="kelurahan" class="form-control">
-<option value=" "> -- Pilih Kelurahan -- </option>
-<?php $q = mysql_query ("select * from kelurahan");
-while ($k = mysql_fetch_array($q)){ ?>
-<option value="<?php echo $k['id_kelurahan']; ?>" <?php if(($k['id_kelurahan'])== ($data['id_kelurahan']))
-				{echo "selected=\"selected\"";};?>
-<?php (@$h['kelurahan']==$k['kelurahan'])?print(" "):print(""); ?>	> <?php echo $k['id_kelurahan']; echo " / ".$k['nm_kelurahan']; ?>
-</option> <?php	} ?>
-</select>
-  </div></div>  
+  </div>
+        <?php
+        include BASE_DIR."/inc/desa_selector.php";
+        load_scripts();
+        ?>
+        <div class="form-group show-on-kecamatan" style="display: none;">
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">PROVINSI</label>
+                <div class="col-sm-5">
+                    <select name="provinsi_id" id="provinsi_id_kecamatan" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id_kecamatan');">
+                        <?php
+                        $provinsis = get_provinsi();
+                        echo optionLoop($provinsis);
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">KABUPATEN</label>
+                <div class="col-sm-5">
+                    <select name="kabupaten_id" id="kabupaten_id_kecamatan" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id_kecamatan');">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">KECAMATAN</label>
+                <div class="col-sm-5">
+                    <select name="id_kecamatan" id="kecamatan_id_kecamatan" class="form-control">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">NAMA CAMAT</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="nama_camat">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">NIP</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="nip_camat">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group show-on-kelurahan" style="display: none;">
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">PROVINSI</label>
+                <div class="col-sm-5">
+                    <select name="provinsi_id" id="provinsi_id_kelurahan" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id_kelurahan');">
+                        <?php
+                        $provinsis = get_provinsi();
+                        echo optionLoop($provinsis);
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">KABUPATEN</label>
+                <div class="col-sm-5">
+                    <select name="kabupaten_id" id="kabupaten_id_kelurahan" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id_kelurahan');">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">KECAMATAN</label>
+                <div class="col-sm-5">
+                    <select name="kecamatan_id" id="kecamatan_id_kelurahan" class="form-control" onchange="changeKecamatan(event, this, '#desa_id_kelurahan');">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">DESA</label>
+                <div class="col-sm-5">
+                    <select name="id_kelurahan" id="desa_id_kelurahan" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">NAMA LURAH</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="nama_lurah">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">NIP</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="nip_lurah">
+                </div>
+            </div>
+        </div>
+
   <div class="form-group">
     <label class="col-sm-4 control-label">  </label>
     <div class="col-sm-5">
@@ -188,8 +267,15 @@ while ($k = mysql_fetch_array($q)){ ?>
 <?php	
 break;
 case "edit" :
-$data=mysql_query("SELECT id_user, user, pass, nama, no_hp, level, id_kelurahan, nm_kelurahan, nm_lurah FROM user INNER JOIN kelurahan USING (id_kelurahan) where id_user='$_GET[id_user]'");
-$edit=mysql_fetch_array($data);
+    $id_user = @$_GET['id_user'];
+$data=_query("
+  select u.*, IF(u.level='admin-kelurahan', vd.nama_desa, vd.nama_kecamatan) as 'nama_daerah', dda.nama_lurah, dda.nip, dda.alamat1, dda.alamat2
+    from `user` u 
+    join view_desa vd on IF(u.level='admin-kelurahan', vd.id, vd.kecamatan_id)=u.id_kelurahan
+    left join daerah_desa_attribut dda on dda.desa_id=u.id_kelurahan
+    where u.level<>'admin' and u.id_user='$id_user' group by u.id_user 
+");
+$edit=_fetch_array($data);
 ?>
 <!----- ------------------------- EDIT DATA USER ------------------------- ----->
 <h3 class="box-title margin text-center">Edit Data User "<?php echo $_GET['id_user']; ?>"</h3>
@@ -221,20 +307,37 @@ $edit=mysql_fetch_array($data);
     <div class="col-sm-5">
       <input type="text" class="form-control" required="required" name="no_hp" value="<?php echo $edit['no_hp']; ?>">
     </div>
-  </div> 
-  <div class="form-group">
-    <label class="col-sm-4 control-label">Level</label>
-    <div class="col-sm-3">	
-    <select name="level" class="form-control"><option>-- Pilih Level --</option>
-	<option name="level" value="admin" <?php if(($edit['level'])== "admin")
-				{echo "selected=\"selected\"";};?>> Admin</option>
-	<option name="level" value="admin-kecamatan" <?php if(($edit['level'])== "admin-kecamatan")
-				{echo "selected=\"selected\"";};?>> Admin Kecamatan </option>
-	<option name="level" value="admin-kelurahan" <?php if(($edit['level'])== "admin-kelurahan")
-				{echo "selected=\"selected\"";};?>>Admin Kelurahan </option>
-	</select>
-    </div>
   </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label">Level </label>
+        <div class="col-sm-5">
+            <script>
+                function loadObjectSelect(opt) {
+                    if (opt == 'admin-kecamatan') {
+                        $(".show-on-kecamatan").show();
+                        $(".show-on-kelurahan").hide();
+                    } else {
+                        $(".show-on-kecamatan").hide();
+                        $(".show-on-kelurahan").show();
+                    }
+                }
+                function loadTrueDataOption(event, element) {
+                    var opt = $(element).find('option:selected').val();
+                    loadObjectSelect(opt);
+                }
+            </script>
+            <select name="level" class="form-control" onchange="loadTrueDataOption(event, this)">
+                <option value=" "> -- Pilih Level -- </option>
+                <option value="admin-kelurahan" <?=$edit['level']=='admin-kelurahan'?' selected="selected" ':'';?> >Admin Kelurahan</option>
+                <option value="admin-kecamatan" <?=$edit['level']=='admin-kecamatan'?' selected="selected" ':'';?> >Admin Kecamatan</option>
+            </select>
+            <script>
+                $(function () {
+                    loadObjectSelect('<?=$edit['level'];?>');
+                })
+            </script>
+        </div>
+    </div>
     <div class="form-group">
     <label class="col-sm-4 control-label">Username</label>
     <div class="col-sm-5">
@@ -247,22 +350,122 @@ $edit=mysql_fetch_array($data);
       <input type="password" class="form-control" value="<?php echo $edit['pass']; ?>" name="pass" placeholder="Password">
     </div>
   </div>
-  <div class="form-group">
-    <label class="col-sm-4 control-label">Kelurahan</label>
-    <div class="col-sm-5">
-<select name="kelurahan" class="form-control">
-<option value=" "> -- Pilih Kelurahan -- </option>
-<?php $q = mysql_query ("select * from kelurahan");
-while ($k = mysql_fetch_array($q)){ ?>
-<option value="<?php echo $k['id_kelurahan']; ?>" <?php if(($k['id_kelurahan'])== ($edit['id_kelurahan']))
-				{echo "selected=\"selected\"";};?>
-<?php (@$h['kelurahan']==$k['kelurahan'])?print(" "):print(""); ?>	> <?php echo $k['id_kelurahan']; echo " / ".$k['nm_kelurahan']; ?>
-</option> <?php	} ?>
-</select>
-  </div></div>  
-  
-  
-<div class="form-group">
+        <?php
+        include BASE_DIR."/inc/desa_selector.php";
+        load_scripts();
+        ?>
+        <div class="form-group show-on-kecamatan" style="display: none;">
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">PROVINSI</label>
+                <div class="col-sm-5">
+                    <select name="provinsi_id" id="provinsi_id_kecamatan" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id_kecamatan');">
+                        <?php
+                        $provinsis = get_provinsi();
+                        echo optionLoop($provinsis, substr($edit['id_kelurahan'], 0, 2));
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">KABUPATEN</label>
+                <div class="col-sm-5">
+                    <select name="kabupaten_id" id="kabupaten_id_kecamatan" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id_kecamatan');">
+                        <?php
+                        $kabupatens = get_kabupaten(substr($edit['id_kelurahan'], 0, 2));
+                        echo optionLoop($kabupatens, substr($edit['id_kelurahan'], 0, 4));
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">KECAMATAN</label>
+                <div class="col-sm-5">
+                    <select name="id_kecamatan" id="kecamatan_id_kecamatan" class="form-control">
+                        <?php
+                        $kecamatans = get_kecamatan(substr($edit['id_kelurahan'], 0, 4));
+                        echo optionLoop($kecamatans, substr($edit['id_kelurahan'], 0, 7));
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">NAMA CAMAT</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="nama_camat" value="<?=$edit['nama_lurah'];?>" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">NIP</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="nip_camat" value="<?=$edit['nip'];?>" >
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group show-on-kelurahan" style="display: none;">
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">PROVINSI</label>
+                <div class="col-sm-5">
+                    <select name="provinsi_id" id="provinsi_id_kelurahan" class="form-control" onchange="changeProvinsi(event, this, '#kabupaten_id_kelurahan');">
+                        <?php
+                        $provinsis = get_provinsi();
+                        echo optionLoop($provinsis, substr($edit['id_kelurahan'], 0, 2));
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">KABUPATEN</label>
+                <div class="col-sm-5">
+                    <select name="kabupaten_id" id="kabupaten_id_kelurahan" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id_kelurahan');">
+                        <?php
+                        $kecamatans = get_kecamatan(substr($edit['id_kelurahan'], 0, 4));
+                        echo optionLoop($kecamatans, substr($edit['id_kelurahan'], 0, 7));
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">KECAMATAN</label>
+                <div class="col-sm-5">
+                    <select name="kecamatan_id" id="kecamatan_id_kelurahan" class="form-control" onchange="changeKecamatan(event, this, '#desa_id_kelurahan');">
+                        <?php
+                        $kecamatans = get_kecamatan(substr($edit['id_kelurahan'], 0, 4));
+                        echo optionLoop($kecamatans, substr($edit['id_kelurahan'], 0, 7));
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">DESA</label>
+                <div class="col-sm-5">
+                    <select name="id_kelurahan" id="desa_id_kelurahan" class="form-control">
+                        <?php
+                        $desas = get_desa(substr($edit['id_kelurahan'], 0, 7));
+                        echo optionLoop($desas, $edit['id_kelurahan']);
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">NAMA LURAH</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="nama_lurah" value="<?=$edit['nama_lurah'];?>" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">NIP</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="nip_lurah" value="<?=$edit['nip'];?>" >
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
     <label class="col-sm-4"></label>
     <div class="col-sm-5">
 	<hr/>

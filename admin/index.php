@@ -1,9 +1,6 @@
 <?php
-include '../define.php';
-include 'inc/cek_session.php';
-include 'inc/fungsi_hdt.php';
-include 'inc/inc.library.php';
-include 'koneksi.php';
+include '../bootstrap.php';
+include  BASE_DIR."inc/cek_session.php";
 
 ?>
 
@@ -154,7 +151,7 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
 			<table>
 			<tr>
 			<td rowspan="3"><img src="../aset/dist/img/admin.jpg"style="margin-right:15px;width:45px;height:45px;" class="img-circle" alt="User Image" /></td>
-			<th><h5 class="text-red"> <?php echo $_SESSION['nama']; ?><p>((ADMIN KELURAHAN))</p></h5>
+			<th><h5 class="text-red"> <?php echo $_SESSION['nama']; ?><p>((SUPER ADMIN))</p></h5>
 			</th>
 			
 			<tr>
@@ -172,30 +169,18 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
             include STRING_MATCHING_DIR."/form.php";
             ?>
           <!-- sidebar menu: : style can be found in sidebar.less -->
-<ul class="sidebar-menu">
+        <ul class="sidebar-menu">
             <li class="header">MENU NAVIGASI</li>
 			<li><a href="?module=home"><i class="fa fa-home"></i> <span>Beranda</span></a></li>
 			<li><a href="?module=user"><i class="fa fa-user"></i> <span>User</span></a></li>
-			<li class="active treeview">
-			 <a href="#">
-                <i class="fa fa-tasks"></i> <span>Data Master</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-<ul class="treeview-menu">			  
-				<li><a href='?module=kelurahan' ><i class="fa fa-user"></i><span>Data Kelurahan</span></a></li>
-				
-			
-</ul>
-				 <!-- <li class="active treeview"> -->
-						<!--<a href="#"> --> 
-							<!--<i class="fa fa-files-o"></i> <span>Surat Keterangan</span> <i class="fa fa-angle-left pull-right"></i>-->
-						<!--</a> -->
-						<!--<ul class="treeview-menu"> -->
-							<!--<?php include "report.php"; ?>  -->
-							<!--<li><a href='module/laporan/matrik_awal.php' ><i class="fa fa-print"></i><span>Cetak Surat Keterangan</span></a></li>  -->
-						<!--</ul>  -->
-					<!-- </li> -->
-					<!-- </li> -->
-</ul>			
+<!--			<li class="active treeview">-->
+<!--			 <a href="#">-->
+<!--                <i class="fa fa-tasks"></i> <span>Data Master</span> <i class="fa fa-angle-left pull-right"></i>-->
+<!--              </a>-->
+<!--                <ul class="treeview-menu">-->
+<!--                    <li><a href='?module=kelurahan' ><i class="fa fa-user"></i><span>Data Kelurahan</span></a></li>-->
+<!--                </ul>-->
+<!--            </li>-->
           </ul>
         </section>
         <!-- /.sidebar -->

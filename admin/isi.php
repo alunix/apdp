@@ -1,5 +1,5 @@
 <?php
-include "include/koneksi.php";
+//include "include/koneksi.php";
 
 if ($_GET['module'] == "home") {
 	include "module/home/home.php";
