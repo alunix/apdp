@@ -38,6 +38,8 @@ default:
 		<h3 class="btn btn disabled box-title">
 		<i class="glyphicon glyphicon-thumbs-up"></i>
 		Data Ketarangan Warga </h3>
+		<a class="btn btn-default pull-right" href="?module=surat_keterangan&aksi=list_keterangan">
+		<i class="fa  fa-plus"></i> Tambah Data Ketarangan Warga </a>	
 		</div>		
 	<div class="box-body">
 	<table id="example2" class="table table-bordered table-striped">
@@ -74,6 +76,8 @@ $Kode = $k['id'];?>
 	<td><?php echo $k['masa_berlaku']; ?></td>
 	<td align="center">
 	
+	<a  class="btn btn-xs btn-info" href="?module=surat_keterangan&aksi=edit&id_surat_keterangan=<?php echo $k['id_surat_keterangan'];?>" alt="Edit Data"><i class="glyphicon glyphicon-pencil"></i></a>
+	<a class="btn btn-xs btn-warning" href="<?php echo $aksi ?>?module=surat_keterangan&aksi=hapus&id_surat_keterangan=<?php echo $k['id_surat_keterangan'];?>"  alt="Delete Data" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA <?php echo $Kode; ?>	?')"> <i class="glyphicon glyphicon-trash"></i></a>
 	<a class="btn btn-xs btn-warning" data-toggle="tooltip" title="Cetak Data Ketarangan??"href="module/laporan/data_keterangan.php?module=laporan&aksi=edit&id=<?php echo $k['id'];?>" alt="Cetak Data"><i class="glyphicon glyphicon-print"></i></a>
 		
 	</td>
@@ -104,7 +108,7 @@ case "list_keterangan":
 	<div class="box-body">
 	<table id="example1" class="table table-bordered table-striped">
 <thead>
-	<tr class="text-green">
+	<tr class="text-aqua">
 	<th class="col-sm-1">NO</th>
 		<th class="col-sm-2">NO. KK</th>
 		<th class="col-sm-1">NIK</th> 
@@ -128,7 +132,7 @@ $Kode = $data['id'];?>
 	<td><?php echo $data['nik']; ?></td>
 	<td><?php echo $data['nama']; ?></td>
 	<td align="center">
-	<a class="btn btn-xs btn-success" href="?module=surat_keterangan&aksi=tambah&id=<?php echo $data['id'];?>" onclick="return confirm('Pilih Data Pindah? <?php echo $data['id']; ?>?')"> <i class="fa fa-book"></i> Pilih?</a>
+	<a class="btn btn-xs btn-info" href="?module=surat_keterangan&aksi=tambah&id=<?php echo $data['id'];?>" onclick="return confirm('Pilih Data Pindah? <?php echo $data['id']; ?>?')"> <i class="fa fa-book"></i> Pilih?</a>
 	</td>
 	<?php
 	}

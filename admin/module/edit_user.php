@@ -68,7 +68,7 @@ $edit=_fetch_array($data);
   <div class="form-group">
     <label class="col-sm-4 control-label">Password</label>
     <div class="col-sm-5">
-      <input type="password" id="password1" class="form-control" name="password" value="<?php echo $edit['pass']; ?>">
+      <input type="password" id="password1" class="form-control" name="password" value="">
 	  <a class="text-red">*ubah password secara berkala demi menjaga keamanan</a>
     </div>
   </div>

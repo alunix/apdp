@@ -58,7 +58,7 @@ default:
 $desaIds = getMultipleDesaId();
 if (empty($desaIds)) $desaIds = array("false");
 $imploded = implode("', '", $desaIds);
-$sql = "SELECT * FROM data_warga where desa_id IN ($imploded)";
+$sql = "SELECT * FROM data_warga where desa_id IN ('$imploded')";
 $no=1;
 $tampil = _query($sql);
 while ($tampilkan = _fetch_array($tampil)) {
