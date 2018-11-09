@@ -49,7 +49,7 @@ include "head.php";
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql =  "select * from data_warga";
+$sql =  "select dw.*, a.nama_agama, p.nama_pekerjaan from data_warga dw left join agama a on a.id_agama=dw.agama  left join pekerjaan p on p.id_pekerjaan=dw.pekerjaan ";
 $tampil = _query($sql);
 $no=1;
 while ($data = _fetch_array($tampil)) { ?>
@@ -60,8 +60,8 @@ while ($data = _fetch_array($tampil)) { ?>
 	<td><?php echo $data['nik']; ?></td>
 	<td> <?php echo $data['nama']; ?></td>
 	<td> <?php echo $data['jk']; ?></td>
-	<td> <?php echo $data['agama']; ?></td>
-	<td> <?php echo $data['pekerjaan']; ?></td>
+	<td> <?php echo $data['nama_agama']; ?></td>
+	<td> <?php echo $data['nama_pekerjaan']; ?></td>
 	<td> <?php echo $data['status_keluarga']; ?></td>
 	<td> <?php echo $data['alamat']; ?></td>
 	<td> <?php echo $data['desa']; ?></td>

@@ -34,7 +34,7 @@ include "head.php";
 </div>
 <div class="text-left">
 <?php 
-	$b=_fetch_array(_query("select rt, rw, nama, nik, tempat_lhr, tanggal_lhr, jk, agama, pekerjaan, status_nikah, alamat from data_warga where id='$_GET[id]'"));
+	$b=_fetch_array(_query("select dw.rt, dw.rw, dw.nama, dw.nik, dw.tempat_lhr, dw.tanggal_lhr, dw.jk, a.nama_agama as agama, p.nama_pekerjaan as pekerjaan, dw.status_nikah, dw.alamat from data_warga dw left join agama a on a.id_agama=dw.agama left join pekerjaan p on p.id_pekerjaan=dw.pekerjaan where dw.id='$_GET[id]'"));
 	?>
 <?php 
 	$c=_fetch_array(_query("select tanggal from surat_keterangan where id='$_GET[id]'"));
