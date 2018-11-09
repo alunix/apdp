@@ -60,7 +60,6 @@ $edit=_fetch_array($data);
         <?php
     } else {
         ?>
-        ?>
         <div class="form-group">
             <label class="col-sm-4 control-label">KECAMATAN</label>
             <div class="col-sm-5">
