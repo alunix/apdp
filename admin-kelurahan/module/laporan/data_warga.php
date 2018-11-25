@@ -30,7 +30,11 @@ include "head.php";
              
 <?php 
 // Tampilkan data dari Database
-$sql2 = "SELECT * FROM data_warga where id='$_GET[id]'";
+$sql2 = "SELECT dw.*, p.nama_pendidikan, pk.nama_pekerjaan, a.nama_agama FROM data_warga dw 
+  left join pendidikan p on p.id_pendidikan=dw.pendidikan  
+  left join pekerjaan pk on pk.id_pekerjaan=dw.pekerjaan  
+  left join agama a on a.id_agama=dw.agama  
+  where dw.id='$_GET[id]'";
 $no=1;
 $tampil = _query($sql2);
 while ($edit = _fetch_array($tampil)) { 
@@ -97,19 +101,19 @@ $Kode = $edit['id'];
   <div class="form-group">
      <label class="col-sm-4 control-label">AGAMA</label>
 	 <div class="col-sm-5">
-    <input type="text" class="form-control" value="<?php echo $edit['agama']; ?>" placeholder="Agama" readonly name="agama">
+    <input type="text" class="form-control" value="<?php echo $edit['nama_agama']; ?>" placeholder="Agama" readonly name="agama">
 	</div>
   </div>
    <div class="form-group">
      <label class="col-sm-4 control-label">PENDIDIKAN</label>
 	 <div class="col-sm-5">
-    <input type="text" class="form-control" value="<?php echo $edit['pendidikan']; ?>" placeholder="Pendidikan" readonly name="pendidikan">
+    <input type="text" class="form-control" value="<?php echo $edit['nama_pendidikan']; ?>" placeholder="Pendidikan" readonly name="pendidikan">
 	</div>
   </div>
    <div class="form-group">
      <label class="col-sm-4 control-label">PEKERJAAN</label>
 	 <div class="col-sm-5">
-    <input type="text" class="form-control" value="<?php echo $edit['pekerjaan']; ?>" placeholder="Pekerjaan" readonly name="pekerjaan">
+    <input type="text" class="form-control" value="<?php echo $edit['nama_pekerjaan']; ?>" placeholder="Pekerjaan" readonly name="pekerjaan">
 	</div>
   </div>
   <div class="form-group">

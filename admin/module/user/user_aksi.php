@@ -9,7 +9,8 @@ $pass = @$_POST['pass'];
 $nama = @$_POST['nama'];
 $no_hp = @$_POST['no_hp'];
 $level = @$_POST['level'];
-$id_kelurahan = @$_POST['kelurahan'];
+$id_kelurahan = @$_POST['id_kelurahan'];
+if (!$id_kelurahan) $id_kelurahan = @$_POST['kecamatan_id'];
 $nama_lurah = @$_POST['nama_lurah'];
 $nip = @$_POST['nip'];
 $nama_camat = @$_POST['nama_camat'];
@@ -18,7 +19,6 @@ $nama_lurah = @$_POST['nama_lurah'];
 $nip_lurah = @$_POST['nip_lurah'];
 $nama = $nama_camat != '' ? $nama_camat : $nama_lurah;
 $nip = $nip_camat != '' ? $nip_camat : $nip_lurah;
-
 // BLOKIR
 if($module=='user' AND $aksi=='no' ){ 
 $sql = "UPDATE user SET blokir='N' WHERE id_user = '".$_GET['id_user']."'";
@@ -58,7 +58,6 @@ else if($module=='user' AND $aksi=='tambah' ){
     header('location:../../index.php?module='.$module);
 }
 else if($module=='user' AND $aksi=='edit' ){
-    $id_kelurahan = isset($_POST['id_kecamatan']) && $_POST['id_kecamatan'] != '' ? $_POST['id_kecamatan'] : $_POST['id_kelurahan'];
     _query("UPDATE user SET 
         nama='$nama',
         no_hp='$no_hp',

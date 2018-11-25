@@ -29,7 +29,7 @@ switch(@$_GET['aksi']){
                 </div><!-- /.input group -->
             </div>
             <div class="col-sm-1">
-                <button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-info"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
+                <button type="submit"name="submit" onclick="this.form.target='_self';return true;" class="btn btn-info"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
             </div>
         </div>
     </form>

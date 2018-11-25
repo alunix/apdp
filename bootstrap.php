@@ -18,5 +18,5 @@ include BASE_DIR.'/koneksi.php';
 
 
 if ($_SESSION['level'] == "admin-kelurahan") {
-    $_SESSION['selected_desa'] = getSessionProfile()['id_kelurahan'];
+    $_SESSION['selected_desa'] = @getSessionProfile()['id_kelurahan'];
 }
