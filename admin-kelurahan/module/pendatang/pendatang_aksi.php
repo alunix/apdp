@@ -9,7 +9,7 @@ $nik = $_POST['nik'];
 $no_kk = $_POST['no_kk'];
 $nama = $_POST['nama'];
 $tanggal_datang = $_POST['tanggal_datang'];
-$alamat_datang = $_POST['alamat_datang'];
+$alamat_asal = $_POST['alamat_asal'];
 // HAPUS
 if($module=='pendatang' AND $aksi=='hapus' ){ 
 $mySql = "DELETE FROM pendatang WHERE id_pendatang='".$_GET['id_pendatang']."'";
@@ -23,14 +23,14 @@ $query = _query("UPDATE pendatang SET
 				  no_kk = '$no_kk',
 				  nama = '$nama',
 				  tanggal_datang = '$tanggal_datang',
-				  alamat_datang  = '$alamat_datang'
+				  alamat_asal  = '$alamat_asal'
 				  WHERE id_pendatang = '$id_pendatang'");
 header('location:../../index.php?module='.$module);
 }
 //Tambah
 else if($module=='pendatang' AND $aksi=='tambah' ){ 
 	header('location:../../index.php?module='.$module);
-$sql = "INSERT INTO pendatang (id_pendatang, nik, no_kk, nama, tanggal_datang, alamat_datang ) VALUES ('$id_pendatang', '$nik', '$no_kk', '$nama', '$tanggal_datang', '$alamat_datang')";
+$sql = "INSERT INTO pendatang (id_pendatang, nik, no_kk, nama, tanggal_datang, alamat_asal ) VALUES ('$id_pendatang', '$nik', '$no_kk', '$nama', '$tanggal_datang', '$alamat_asal')";
 $simpan = _query($sql);
 }
 ?>

@@ -50,7 +50,7 @@ default:
 		<th class="col-sm-1">NO.KK</th> 
 		<th class="col-sm-2">NAMA</th>
 		<th class="col-sm-1">TANGGAL DATANG</th> 	
-		<th class="col-sm-1">ALAMAT DATANG</th> 			
+		<th class="col-sm-1">ALAMAT ASAL</th> 			
 		<th class="col-sm-1">AKSI</th> 	
 	</tr>
 </thead>
@@ -71,10 +71,10 @@ $Kode = $k['id'];?>
 	<td><?php echo $k['no_kk']; ?></td>
 	<td><?php echo $k['nama']; ?></td>
 	<td><?php echo $k['tanggal_datang']; ?></td>
-	<td><?php echo $k['alamat_datang']; ?></td>
+	<td><?php echo $k['alamat_asal']; ?></td>
 	
 	<td align="center">
-	<a class="btn btn-xs btn-success"data-toggle="tooltip" title="Lihat Data Pindah <?php echo $k['id_pendatang'];?>" href="?module=pendatang&aksi=detail_pendatang&id_pendatang=<?php echo $k['id_pendatang'];?>"><i class="glyphicon glyphicon-eye-open"></i></a>
+	<a class="btn btn-xs btn-success"data-toggle="tooltip" title="Lihat Data Pendatang <?php echo $k['id_pendatang'];?>" href="?module=pendatang&aksi=detail_pendatang&id_pendatang=<?php echo $k['id_pendatang'];?>"><i class="glyphicon glyphicon-eye-open"></i></a>
 	<a  class="btn btn-xs btn-info" href="?module=pendatang&aksi=edit&id_pendatang=<?php echo $k['id_pendatang'];?>" alt="Edit Data"><i class="glyphicon glyphicon-pencil"></i></a>
 	<a class="btn btn-xs btn-warning" href="<?php echo $aksi ?>?module=pendatang&aksi=hapus&id_pendatang=<?php echo $k['id_pendatang'];?>"  alt="Delete Data" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA <?php echo $Kode; ?>	?')"> <i class="glyphicon glyphicon-trash"></i></a>
 	</td>
@@ -148,9 +148,9 @@ $sql ="SELECT max(id_pendatang) as terakhir from pendatang";
     </div>
   </div>
 <div class="form-group">
-    <label class="col-sm-4 control-label">ALAMAT DATANG</label>
+    <label class="col-sm-4 control-label">ALAMAT ASAL</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" required="required" name="alamat_datang" placeholder="Masukan Nama Lengkap ...">
+      <input type="text" class="form-control" required="required" name="alamat_asal" placeholder="Masukan Alamat Asal ...">
     </div>
   </div>
    
@@ -225,9 +225,9 @@ $edit=_fetch_array($data);
 	</div>
 	
 <div class="form-group">
-     <label class="col-sm-4 control-label">ALAMAT PENDATANG</label>
+     <label class="col-sm-4 control-label">ALAMAT ASAL</label>
 	 <div class="col-sm-4">
-           <input type="text" class="form-control" required="required" value="<?php echo $edit['alamat_datang'];?>" name="alamat_datang">
+           <input type="text" class="form-control" required="required" value="<?php echo $edit['alamat_asal'];?>" name="alamat_asal">
 	</div>
   </div>  
 
@@ -252,7 +252,7 @@ $data=_query("SELECT * FROM pendatang WHERE id_pendatang='$_GET[id_pendatang]'")
 $edit=_fetch_array($data);
 ?>
 <!----- ------------------------- LIHAT DATA PENDATANG ------------------------- ----->
-<h3 class="box-title margin text-center">Edit Data Pendatang "<?php echo $_GET['id_pendatang']; ?>"</h3>
+<h3 class="box-title margin text-center">Lihat Data Pendatang "<?php echo $_GET['id_pendatang']; ?>"</h3>
 <hr/>
 	 	
 <form class="form-horizontal" action="<?php echo $aksi?>?module=pendatang&aksi=edit" role="form" method="post">             
@@ -260,7 +260,7 @@ $edit=_fetch_array($data);
 <div class="box box-solid box-danger">
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
-<i class="glyphicon glyphicon-thumbs-up"></i> Edit Informasi Data Pendatang </h3>
+<i class="glyphicon glyphicon-thumbs-up"></i> Lihat Informasi Data Pendatang </h3>
 	<a class="btn btn-default btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
 	<i class="fa fa-minus"></i></a>
 		</div>	
@@ -297,9 +297,9 @@ $edit=_fetch_array($data);
 	</div>
 	</div>
 <div class="form-group">
-     <label class="col-sm-4 control-label">ALAMAT PENDATANG</label>
+     <label class="col-sm-4 control-label">ALAMAT ASAL</label>
 	 <div class="col-sm-4">
-           <input type="text" class="form-control" required="required" value="<?php echo $edit['alamat_datang'];?>" readonly name="alamat_datang">
+           <input type="text" class="form-control" required="required" value="<?php echo $edit['alamat_asal'];?>" readonly name="alamat_asal">
 	</div>
   </div>
 

@@ -91,11 +91,11 @@ $query = _query("UPDATE data_warga SET
 				  
 $id_pendatang = $_POST['id_pendatang'];
 $tanggal_datang = $_POST['tanggal_datang'];
-$alamat_datang = $_POST['alamat_datang'];
+$alamat_asal = $_POST['alamat_asal'];
 				 $query3 = _query("UPDATE pendatang SET				  
 				  id_pendatang = '$id_pendatang',
 				  tanggal_datang  = '$tanggal_datang',
-				  alamat_datang = '$alamat_datang'
+				  alamat_asal = '$alamat_asal'
 				  WHERE id = '$id'");
 				  
 header('location:../../index.php?module='.$module);
@@ -118,8 +118,8 @@ $simpa = _query($sql1);
 
 $id_pendatang = $_POST['id_pendatang'];
 $tanggal_datang = $_POST['tanggal_datang'];
-$alamat_datang = $_POST['alamat_datang'];
-$sql2 = "INSERT INTO pendatang (id_pendatang, tanggal_datang, alamat_datang, id) VALUES ('$id_pendatang', '$tanggal_datang', '$alamat_datang', '$id')";
+$alamat_asal = $_POST['alamat_asal'];
+$sql2 = "INSERT INTO pendatang (id_pendatang, tanggal_datang, alamat_asal, id) VALUES ('$id_pendatang', '$tanggal_datang', '$alamat_asal', '$id')";
 $simpan2 = _query($sql2);
 header('location:../../index.php?module='.$module);
 

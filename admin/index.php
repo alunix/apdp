@@ -165,9 +165,6 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
 			</tr>
 			</table>
 			</li>
-            <?php
-            include STRING_MATCHING_DIR."/form.php";
-            ?>
           <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MENU NAVIGASI</li>

@@ -17,6 +17,6 @@ include BASE_DIR."/inc/profile.php";
 include BASE_DIR.'/koneksi.php';
 
 
-if ($_SESSION['level'] == 'admin-kelurahan') {
+if ($_SESSION['level'] == "admin-kelurahan") {
     $_SESSION['selected_desa'] = getSessionProfile()['id_kelurahan'];
 }

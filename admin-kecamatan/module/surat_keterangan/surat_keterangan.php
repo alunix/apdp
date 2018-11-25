@@ -18,20 +18,7 @@ default:
 </div> 		
 <div class="text-center">
 <h3>Data Keterangan Warga</h3><hr/></div>
-<form class="form-horizontal" action="module/laporan/cetak_pindah.php" method="post">             
-  <div class="form-group">
-    <label class="col-sm-4 control-label">Tanggal</label>
-    <div class="col-sm-3">
-    <div class="input-group">
-  <div class="input-group-addon">
-	<i class="fa fa-calendar"></i>
-  </div>
-  <input type="text" name="tanggal" required="required" class="form-control pull-right" id="reservation"/>
-</div><!-- /.input group -->
-</div>
-<div class="col-sm-1">
-<button type="submit"name="submit" onclick="this.form.target='_blank';return true;" class="btn btn-info"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
-</div></div>  
+<form class="form-horizontal" action="module/laporan/cetak_pindah.php" method="post">               
 </form>
 	<div class="box box-solid box-info">
 		<div class="box-header">

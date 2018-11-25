@@ -166,7 +166,7 @@ Anda berada di halaman "<?php echo $_SESSION['level']; ?>"
 
                             Highcharts.chart('status-pendatang', {
                                 title: {
-                                    text: 'Statistik Pendaftang Bulanan',
+                                    text: 'Statistik Pendatang Bulanan',
                                 },
                                 yAxis: {
                                     title: {

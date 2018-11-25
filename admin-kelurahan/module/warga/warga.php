@@ -290,7 +290,7 @@ $sql ="SELECT max(id) as terakhir from data_warga";
     </div>
   </div>
   <div class="form-group">
-    <label class="col-sm-4 control-label">KABUPATEN</label>
+    <label class="col-sm-4 control-label">KABUPATEN / KOTA</label>
     <div class="col-sm-5">
         <select name="kabupaten_id" id="kabupaten_id" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id');">
         </select>
@@ -462,9 +462,9 @@ $sql9 ="SELECT max(id_pendatang) as terakhir from pendatang";
     </div>
   </div>
 <div class="form-group">
-    <label class="col-sm-4 control-label">ALAMAT DATANG</label>
+    <label class="col-sm-4 control-label">ALAMAT ASAL</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control"  name="alamat_datang" placeholder="Masukan Nama Lengkap ...">
+      <input type="text" class="form-control"  name="alamat_asal" placeholder="Masukan Alamat Asal ...">
     </div>
   </div>
 
@@ -688,7 +688,7 @@ $edit=_fetch_array($data);
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-4 control-label">KABUPATEN</label>
+            <label class="col-sm-4 control-label">KABUPATEN / KOTA</label>
             <div class="col-sm-5">
                 <select name="kabupaten_id" id="kabupaten_id" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id');">
                     <?php
@@ -861,9 +861,9 @@ while ($edi = _fetch_array($a)) { ?>
 	</div>
   </div>
 <div class="form-group">
-    <label class="col-sm-4 control-label">ALAMAT DATANG</label>
+    <label class="col-sm-4 control-label">ALAMAT ASAL</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" value="<?php echo $edi['alamat_datang']; ?>" name="alamat_datang" placeholder="Masukan Alamat Datang">
+      <input type="text" class="form-control" value="<?php echo $edi['alamat_asal']; ?>" name="alamat_asal" placeholder="Masukan Alamat Asal">
     </div>
   </div>
   
@@ -1036,7 +1036,7 @@ $edit=_fetch_array($data);
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-4 control-label">KABUPATEN</label>
+            <label class="col-sm-4 control-label">KABUPATEN / KOTA</label>
             <div class="col-sm-5">
                 <select name="kabupaten_id" id="kabupaten_id" class="form-control" onchange="changeKabupaten(event, this, '#kecamatan_id');" readonly="readonly" disabled="disabled">
                     <?php
@@ -1155,7 +1155,7 @@ $e=_fetch_array($d);
 	<i class="fa fa-minus"></i>
 	</a></div>	
 	<div class="box-body">
-<?php $d=_query("select * from pendatang where  id='$_GET[id]'");
+<?php $d=_query("select * from pendatang where id='$_GET[id]'");
 $f=_fetch_array($d);
 ?>
 <div class="form-group">
@@ -1164,14 +1164,14 @@ $f=_fetch_array($d);
       <input type="text" class="form-control" disabled value="<?php echo $f['id_pendatang']; ?>">
     </div></div> 
 <div class="form-group">
-    <label class="col-sm-4 control-label">Tanggal Datang </label>
+    <label class="col-sm-4 control-label">Tanggal Datang</label>
     <div class="col-sm-5">
       <input type="date" class="form-control" disabled value="<?php echo $f['tanggal_datang']; ?>">
     </div></div>
 	<div class="form-group">
-    <label class="col-sm-4 control-label">Alamat Datang </label>
+    <label class="col-sm-4 control-label">Alamat Asal</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" disabled value="<?php echo $f['alamat_datang']; ?>">
+      <input type="text" class="form-control" disabled value="<?php echo $f['alamat_asal']; ?>">
     </div></div>
 	
 </div></div></section></div>
