@@ -423,13 +423,22 @@ $sql6 ="SELECT max(id_kelahiran) as terakhir from kelahiran";
 <div class="form-group">
     <label class="col-sm-4 control-label">BERAT BAYI</label>
     <div class="col-sm-5">
-      <textarea rowspan="2" class="form-control" name="berat_bayi"placeholder="Berat Bayi"></textarea>
+        <div class="input-group">
+            <input type="text" class="form-control" name="berat_bayi">
+            <span class="input-group-addon">Kg</span>
+        </div>
+
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">PANJANG BAYI</label>
     <div class="col-sm-5">
-      <textarea rowspan="2" class="form-control" name="panjang_bayi"placeholder="Panjang Bayi"></textarea>
+
+        <div class="input-group">
+            <input type="text" class="form-control" name="panjang_bayi">
+            <span class="input-group-addon">Cm</span>
+        </div>
+
     </div> </div>
   </div>
   </div>
@@ -828,13 +837,22 @@ while ($edit = _fetch_array($a)) { ?>
 <div class="form-group">
     <label class="col-sm-4 control-label">BERAT BAYI</label>
     <div class="col-sm-5">
-      <input type="text" rowspan="2" class="form-control" value="<?php echo $edit['berat_bayi']; ?>" name="berat_bayi" placeholder="Berat Bayi">
+
+        <div class="input-group">
+            <input type="text" rowspan="2" class="form-control" value="<?php echo $edit['berat_bayi']; ?>" name="berat_bayi" placeholder="Berat Bayi">
+            <span class="input-group-addon">Kg</span>
+        </div>
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-4 control-label">PANJANG BAYI</label>
     <div class="col-sm-5">
-      <input type="text" rowspan="2" class="form-control" value="<?php echo $edit['panjang_bayi']; ?>" name="panjang_bayi" placeholder="Panjang Bayi">
+
+        <div class="input-group">
+            <input type="text" rowspan="2" class="form-control" value="<?php echo $edit['panjang_bayi']; ?>" name="panjang_bayi" placeholder="Panjang Bayi">
+            <span class="input-group-addon">Cm</span>
+        </div>
+
     </div>
 </div></div>
   </div>
@@ -1139,12 +1157,19 @@ $e=_fetch_array($d);
 <div class="form-group">
     <label class="col-sm-4 control-label">Berat Bayi </label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" disabled value="<?php echo $e['berat_bayi']; ?>">
+      <div class="input-group">
+          <input type="text" class="form-control" disabled value="<?php echo $e['berat_bayi']; ?>">
+          <span class="input-group-addon">Kg</span>
+      </div>
     </div></div>
 <div class="form-group">
     <label class="col-sm-4 control-label">Panjang Bayi </label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" disabled value="<?php echo $e['panjang_bayi']; ?>">
+        <div class="input-group">
+            <input type="text" class="form-control" disabled value="<?php echo $e['panjang_bayi']; ?>">
+            <span class="input-group-addon">Cm</span>
+        </div>
+
     </div></div>
 </div></div></section></div>
 
