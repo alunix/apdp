@@ -868,7 +868,7 @@ while ($edi = _fetch_array($a)) { ?>
 <div class="form-group">
     <label class="col-sm-4 control-label">ALAMAT ASAL</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" value="<?php echo $edi['alamat_asal']; ?>" name="alamat_asal" placeholder="Masukan Alamat Asal">
+      <input type="text" class="form-control" value="<?php echo @$edi['alamat_asal']; ?>" name="alamat_asal" placeholder="Masukan Alamat Asal">
     </div>
   </div>
   

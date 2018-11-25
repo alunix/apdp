@@ -84,7 +84,7 @@ $Kode = $k['id'];?>
 <!----- ------------------------- END MENAMPILKAN DATA KEMATIAN ------------------------- ----->
 <?php 
 break;
-case "list_kematian": 
+case "list_kematian":
 ?>
 <h3 class="box-title margin text-center">Data Kematian Warga</h3>
 <hr/>
@@ -112,9 +112,9 @@ case "list_kematian":
 </thead>
 
 <tbody>
-<?php 
+<?php
 // Tampilkan data dari Database
-$sql = "SELECT dw.* FROM data_warga dw left join kematian k on k.id=dw.id where k.id IS NULL ";
+$sql = "SELECT dw.* FROM data_warga dw left join kematian k on k.id=dw.id where dw.desa_id IN  k.id IS NULL ";
 $tampil = _query($sql);
 $no=1;
 while ($data = _fetch_array($tampil)) { 

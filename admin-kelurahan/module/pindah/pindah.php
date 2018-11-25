@@ -121,7 +121,11 @@ case "list_pindah":
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql = "select * from data_warga ";
+$desa_ids = getMultipleDesaId();
+$stringDesaId = implode("', '", $desa_ids);
+
+$sql = "select * from data_warga where desa_id IN ('$stringDesaId') ";
+
 $tampil = _query($sql);
 $no=1;
 while ($data = _fetch_array($tampil)) { 
