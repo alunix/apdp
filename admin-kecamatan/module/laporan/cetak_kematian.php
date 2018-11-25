@@ -52,7 +52,12 @@ include "head.php";
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql = "SELECT * FROM data_warga a, kematian b where a.id=b.id ";
+$sql = "SELECT a.*, b.*, p.nama_pendidikan, pk.nama_pekerjaan, ah.nama_agama FROM data_warga a
+    join kematian b on a.id=b.id
+    left join pendidikan p on p.id_pendidikan=a.pendidikan  
+    left join pekerjaan pk on pk.id_pekerjaan=a.pekerjaan  
+    left join agama ah on ah.id_agama=a.agama
+    where a.id=b.id ";
 $tampil = _query($sql);
 $no=1;
 while ($data = _fetch_array($tampil)) { ?>
@@ -66,8 +71,8 @@ while ($data = _fetch_array($tampil)) { ?>
 	<td> <?php echo $data['tempat_lhr']; ?></td>
 	<td> <?php echo $data['tanggal_lhr']; ?></td>
 	<td> <?php echo $data['tanggal_wafat']; ?></td>
-	<td> <?php echo $data['agama']; ?></td>
-	<td> <?php echo $data['pekerjaan']; ?></td>
+	<td> <?php echo $data['nama_agama']; ?></td>
+	<td> <?php echo $data['nama_pekerjaan']; ?></td>
 	<td> <?php echo $data['status_keluarga']; ?></td>
 	<td> <?php echo $data['alamat']; ?></td>
 	<td> <?php echo $data['desa']; ?></td>

@@ -60,8 +60,8 @@ while ($data = _fetch_array($tampil)) { ?>
 	<td><?php echo $data['nik']; ?></td>
 	<td> <?php echo $data['nama']; ?></td>
 	<td> <?php echo $data['jk']; ?></td>
-	<td> <?php echo $data['agama']; ?></td>
-	<td> <?php echo $data['pekerjaan']; ?></td>
+	<td> <?php echo $data['nama_agama']; ?></td>
+	<td> <?php echo $data['nama_pekerjaan']; ?></td>
 	<td> <?php echo $data['status_keluarga']; ?></td>
 	<td> <?php echo $data['alamat']; ?></td>
 	<td> <?php echo $data['desa']; ?></td>
