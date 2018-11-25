@@ -88,7 +88,10 @@ case "list_keterangan":
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
 		<i class="fa fa-book"></i>
-		Data Keterangan Warga  </h3>		
+		Data Keterangan Warga  </h3>
+            <a class="btn btn-default btn-sm pull-right" style="margin-right: 5px;" href="<?=moduleUrlByLevel('surat_keterangan');?>">
+                <i class="fa fa-times"></i> Batal
+            </a>
 		</div>			
 	<div class="box-body">
 	<table id="example1" class="table table-bordered table-striped">

@@ -101,7 +101,10 @@ case "list_pindah":
 		<div class="box-header">
 		<h3 class="btn btn disabled box-title">
 		<i class="fa fa-book"></i>
-		Data Pindah  </h3>		
+		Data Pindah  </h3>
+            <a class="btn btn-default btn-sm pull-right" style="margin-right: 5px;" href="<?=moduleUrlByLevel('pindah');?>">
+                <i class="fa fa-times"></i> Batal
+            </a>
 		</div>			
 	<div class="box-body">
 	<table id="example1" class="table table-bordered table-striped">

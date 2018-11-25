@@ -113,8 +113,13 @@ $sql ="SELECT max(id) as terakhir from data_warga";
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="fa fa-user-md"></i> Informasi Data Warga </h3>
+    <a class="btn btn-default btn-sm pull-right" style="margin-right: 5px;" href="<?=moduleUrlByLevel('warga');?>">
+        <i class="fa fa-times"></i> Batal
+    </a>
+
 	<a class="btn btn-default btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
 	<i class="fa fa-minus"></i></a>
+
 		</div>	
 	<div class="box-body">        
   <div class="form-group">

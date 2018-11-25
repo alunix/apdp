@@ -525,14 +525,17 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
     </script>
     <script type="text/javascript">
       $(function () {
-        $("#example1").dataTable();
+        $("#example1").dataTable({
+            "searching": false
+        });
         $('#example2').dataTable({
           "bPaginate": true,
           "bLengthChange": false,
           "bFilter": false,
           "bSort": true,
           "bInfo": true,
-          "bAutoWidth": false
+          "bAutoWidth": false,
+            "searching": false
         });
       });
     </script>	
