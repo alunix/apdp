@@ -371,8 +371,8 @@ $edit=_fetch_array($data);
 <div class="form-group">
     <label class="col-sm-4 control-label">AGAMA</label>
     <div class="col-sm-5">
-	<?php 
-	$s=_fetch_array(_query("select agama from data_warga where id='$edit[id]'"));
+	<?php
+    $s=_fetch_array(_query("select a.nama_agama as agama from data_warga dw join agama a on a.id_agama=dw.agama where dw.id='$edit[id]'"));
 	?>
             <input type="text" class="form-control" disabled value="<?php echo $s['agama'];?>">
     </div>
@@ -380,8 +380,8 @@ $edit=_fetch_array($data);
   <div class="form-group">
     <label class="col-sm-4 control-label">PEKERJAAN</label>
     <div class="col-sm-5">
-	<?php 
-	$s=_fetch_array(_query("select pekerjaan from data_warga where id='$edit[id]'"));
+	<?php
+    $s=_fetch_array(_query("select p.nama_pekerjaan as pekerjaan from data_warga dw join pekerjaan p on p.id_pekerjaan=dw.pekerjaan where dw.id='$edit[id]'"));
 	?>
             <input type="text" class="form-control" disabled value="<?php echo $s['pekerjaan'];?>">
     </div>
