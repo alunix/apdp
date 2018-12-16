@@ -211,13 +211,19 @@ while ($e = _fetch_array($a)) { ?>
 
     <label class="col-sm-4 control-label">AGAMA</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" disabled value="<?php echo $e['agama'];?>">
+        <?php
+        $s=_fetch_array(_query("select p.nama_agama as agama from data_warga dw join agama p on p.id_agama=dw.agama where dw.id='$e[id]'"));
+        ?>
+        <input type="text" class="form-control" disabled value="<?php echo $s['agama'];?>">
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-4 control-label">PEKERJAAN</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" disabled value="<?php echo $e['pekerjaan'];?>">
+        <?php
+        $s=_fetch_array(_query("select p.nama_pekerjaan as pekerjaan from data_warga dw join pekerjaan p on p.id_pekerjaan=dw.pekerjaan where dw.id='$e[id]'"));
+        ?>
+        <input type="text" class="form-control" disabled value="<?php echo $s['pekerjaan'];?>">
     </div>
   </div>
   <div class="form-group">

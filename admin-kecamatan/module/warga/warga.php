@@ -1200,7 +1200,7 @@ $f=_fetch_array($d);
 	<div class="form-group">
     <label class="col-sm-4 control-label">Alamat Asal</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" disabled value="<?php echo $f['alamat_asal']; ?>">
+      <input type="text" class="form-control" disabled value="<?php echo @$f['alamat_asal']; ?>">
     </div></div>
 	
 </div></div></section></div>
