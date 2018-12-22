@@ -95,7 +95,7 @@ Anda berada di halaman "<?php echo $_SESSION['level']; ?>"
                 <div class="icon">
                     <i class="fa fa-user-md"></i>
                 </div>
-                <a href="?module=user" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div><!-- ./col -->
 

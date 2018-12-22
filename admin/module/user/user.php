@@ -106,8 +106,9 @@ $sql ="SELECT max(id_user) as terakhir from user";
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="fa fa-user-md"></i> Informasi Data User </h3>
-	<a class="btn btn-default btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
-	<i class="fa fa-minus"></i></a>
+    <a class="btn btn-default btn-sm pull-right" style="margin-right: 5px;" href="?module=user">
+        Kembali
+    </a>
 		</div>	
 	<div class="box-body">        
   <div class="form-group">
@@ -286,8 +287,9 @@ $edit=_fetch_array($data);
 <div class="box-header">
 <h3 class="btn btn disabled box-title">
 <i class="fa fa-user-md"></i> Edit Informasi Data User </h3>
-	<a class="btn btn-default btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
-	<i class="fa fa-minus"></i></a>
+    <a class="btn btn-default btn-sm pull-right" style="margin-right: 5px;" href="?module=user">
+        Kembali
+    </a>
 		</div>	
 	<div class="box-body">
   <div class="form-group">
