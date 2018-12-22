@@ -12,11 +12,11 @@ $level = @$_POST['level'];
 $id_kelurahan = @$_POST['id_kelurahan'];
 if (!$id_kelurahan) $id_kelurahan = @$_POST['kecamatan_id'];
 $nip = @$_POST['nip'];
-$nama_camat = @$_POST['nama_camat'];
+$nama_camat = _escape_string(@$_POST['nama_camat']);
 $nip_camat = @$_POST['nip_camat'];
 $nama_lurah = _escape_string(@$_POST['nama_lurah']);
 $nip_lurah = @$_POST['nip_lurah'];
-$nama_lurah = $nama_camat != '' ? $nama_camat : $nama_lurah;
+$nama_lurah = @$_POST['id_kelurahan'] ? $nama_lurah : $nama_camat;
 $nip = $nip_camat != '' ? $nip_camat : $nip_lurah;
 // BLOKIR
 if($module=='user' AND $aksi=='no' ){ 
