@@ -523,7 +523,7 @@ case "detail_warga" :
 	</a></div>	</div>	
 	<div class="box-body">
 <?php 
-$data=_query("select * from data_warga where id='$_GET[id]'");
+$data=_query("select * from data_warga where id='$_GET[id]' and ".buildQueryDesaId());
 $edit=_fetch_array($data);
 ?>	
   <div class="form-group">
