@@ -40,104 +40,104 @@ $Kode = $edit['id'];
  
     <div class="form-group  row row">
         <label class="col-sm-4 control-label">NO</label>
-        <div class="col-sm-8">
+        <div class="col-sm-8">:
             <?php echo $edit['id']; ?>
         </div>
     </div>
 
     <div class="form-group  row">
         <label class="col-sm-4 control-label">NO. KK</label>
-        <div class="col-sm-8">
+        <div class="col-sm-8">:
             <?php echo $edit['no_kk']; ?>
         </div>
     </div>
    <div class="form-group  row">
     <label class="col-sm-4 control-label">NIK</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8">:
         <?php echo $edit['nik']; ?>
     </div>
   </div>
   <div class="form-group  row">
     <label class="col-sm-4 control-label">NAMA</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8">:
         <?php echo strtoupper($edit['nama']); ?>
     </div>
   </div>
   <div class="form-group  row">
     <label class="col-sm-4 control-label">JENIS KELAMIN</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8">:
         <?php echo $edit['jk']; ?>
     </div>
   </div>
   <div class="form-group  row">
     <label class="col-sm-4 control-label">TEMPAT LAHIR</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8">:
         <?php echo $edit['tempat_lhr']; ?>
     </div>
   </div>
   <div class="form-group  row">
      <label class="col-sm-4 control-label">TANGGAL LAHIR</label>
-	 <div class="col-sm-8">
+	 <div class="col-sm-8">:
          <?php echo $edit['tanggal_lhr']; ?>
 	</div>
   </div>
   <div class="form-group  row">
      <label class="col-sm-4 control-label">KEWARGANEGARAAN</label>
-	 <div class="col-sm-8">
-         <?php echo $edit['kewarganegaraan']; ?>
+	 <div class="col-sm-8">:
+         <?php echo strtoupper($edit['kewarganegaraan']); ?>
 	</div>
   </div>
   <div class="form-group  row">
      <label class="col-sm-4 control-label">AGAMA</label>
-	 <div class="col-sm-8">
+	 <div class="col-sm-8">:
          <?php echo $edit['nama_agama']; ?>
 	</div>
   </div>
    <div class="form-group  row">
      <label class="col-sm-4 control-label">PENDIDIKAN</label>
-	 <div class="col-sm-8">
+	 <div class="col-sm-8">:
          <?php echo $edit['nama_pendidikan']; ?>
 	</div>
   </div>
    <div class="form-group  row">
      <label class="col-sm-4 control-label">PEKERJAAN</label>
-	 <div class="col-sm-8">
+	 <div class="col-sm-8">:
          <?php echo $edit['nama_pekerjaan']; ?>
 	</div>
   </div>
   <div class="form-group  row">
      <label class="col-sm-4 control-label">STATUS PERNIKAHAN</label>
-	 <div class="col-sm-8">
+	 <div class="col-sm-8">:
          <?php echo $edit['status_nikah']; ?>
 	</div>
   </div>
   <div class="form-group  row">
      <label class="col-sm-4 control-label">STATUS KELUARGA</label>
-	 <div class="col-sm-8">
+	 <div class="col-sm-8">:
          <?php echo $edit['status_keluarga']; ?>
 	</div>
   </div>
   <div class="form-group  row">
      <label class="col-sm-4 control-label">Golongan Darah</label>
-	 <div class="col-sm-8">
+	 <div class="col-sm-8">:
          <?php echo $edit['gol_dar']; ?>
 	</div>
   </div>
   <div class="form-group  row">
     <label class="col-sm-4 control-label">NAMA AYAH</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8">:
         <?php echo $edit['nama_ayah']; ?>
     </div>
   </div>
   <div class="form-group  row">
     <label class="col-sm-4 control-label">NAMA IBU</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8">:
         <?php echo $edit['nama_ibu']; ?>
     </div>
   </div>
   <div class="form-group  row">
     <label class="col-sm-4 control-label">ALAMAT</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8">:
         <?php echo $edit['alamat']; ?>
     </div>
   </div>
@@ -148,7 +148,7 @@ $Kode = $edit['id'];
         ?>
         <div class="form-group  row">
             <label class="col-sm-4 control-label">PROVINSI</label>
-            <div class="col-sm-8">
+            <div class="col-sm-8">:
                 <?php
                 echo @get_detail_provinsi(substr($edit['desa_id'], 0, 2))['name'];
                 ?>
@@ -156,7 +156,7 @@ $Kode = $edit['id'];
         </div>
         <div class="form-group  row">
             <label class="col-sm-4 control-label">KABUPATEN</label>
-            <div class="col-sm-8">
+            <div class="col-sm-8">:
                 <?php
                 echo @get_detail_kabupaten(substr($edit['desa_id'], 0, 4))['name'];
                 ?>
@@ -164,7 +164,7 @@ $Kode = $edit['id'];
         </div>
         <div class="form-group  row">
             <label class="col-sm-4 control-label">KECAMATAN</label>
-            <div class="col-sm-8">
+            <div class="col-sm-8">:
                 <?php
                 echo @get_detail_kecamatan(substr($edit['desa_id'], 0, 7))['name'];
                 ?>
@@ -172,7 +172,7 @@ $Kode = $edit['id'];
         </div>
         <div class="form-group  row">
             <label class="col-sm-4 control-label">DESA</label>
-            <div class="col-sm-8">
+            <div class="col-sm-8">:
                 <?php
                 echo @get_detail_desa($edit['desa_id'])['name'];
                 ?>
@@ -181,13 +181,13 @@ $Kode = $edit['id'];
 
   <div class="form-group  row">
     <label class="col-sm-4 control-label">RT</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8">:
         <?php echo $edit['rt']; ?>
     </div>
   </div>
   <div class="form-group  row">
     <label class="col-sm-4 control-label">RW</label>
-    <div class="col-sm-8">
+    <div class="col-sm-8">:
         <?php echo $edit['rw']; ?>
     </div>
   </div>

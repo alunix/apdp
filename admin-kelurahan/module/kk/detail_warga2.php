@@ -1,6 +1,6 @@
 <!----- ------------------------- LIHAT DATA KEPALA KELUARGA ------------------------- ----->
 <center>
-    <h3> Data Warga</h3>
+    <h3> Data Kepala Keluarga</h3>
 </center>
 
 <form class="form-horizontal" action="<?php echo $aksi?>?module=kk&aksi=edit" role="form" method="post">
