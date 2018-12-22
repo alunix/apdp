@@ -16,7 +16,7 @@ $nama_camat = @$_POST['nama_camat'];
 $nip_camat = @$_POST['nip_camat'];
 $nama_lurah = _escape_string(@$_POST['nama_lurah']);
 $nip_lurah = @$_POST['nip_lurah'];
-$nama = $nama_camat != '' ? $nama_camat : $nama_lurah;
+$nama_lurah = $nama_camat != '' ? $nama_camat : $nama_lurah;
 $nip = $nip_camat != '' ? $nip_camat : $nip_lurah;
 // BLOKIR
 if($module=='user' AND $aksi=='no' ){ 
@@ -47,10 +47,10 @@ else if($module=='user' AND $aksi=='tambah' ){
 	$simpan = _query($sql);
 
     if (!_fetchOneFromSql("SELECT * from daerah_desa_attribut where desa_id='$id_kelurahan'")) {
-        $sql = "INSERT INTO daerah_desa_attribut (desa_id, nama_lurah, nip ) VALUES ('$id_kelurahan', '$nama', '$nip')";
+        $sql = "INSERT INTO daerah_desa_attribut (desa_id, nama_lurah, nip ) VALUES ('$id_kelurahan', '$nama_lurah', '$nip')";
         $simpan = _query($sql);
     } else {
-        $sql = "UPDATE daerah_desa_attribut set nama_lurah='$nama', nip='$nip' WHERE desa_id='$id_kelurahan' ";
+        $sql = "UPDATE daerah_desa_attribut set nama_lurah='$nama_lurah', nip='$nip' WHERE desa_id='$id_kelurahan' ";
         $simpan = _query($sql);
     }
 
@@ -66,10 +66,10 @@ else if($module=='user' AND $aksi=='edit' ){
         pass='$pass'
         WHERE id_user = '$id'");
     if (!_fetchOneFromSql("SELECT * from daerah_desa_attribut where desa_id='$id_kelurahan'")) {
-        $sql = "INSERT INTO daerah_desa_attribut (desa_id, nama_lurah, nip ) VALUES ('$id_kelurahan', '$nama', '$nip')";
+        $sql = "INSERT INTO daerah_desa_attribut (desa_id, nama_lurah, nip ) VALUES ('$id_kelurahan', '$nama_lurah', '$nip')";
         $simpan = _query($sql);
     } else {
-        $sql = "UPDATE daerah_desa_attribut set nama_lurah='$nama', nip='$nip' WHERE desa_id='$id_kelurahan' ";
+        $sql = "UPDATE daerah_desa_attribut set nama_lurah='$nama_lurah', nip='$nip' WHERE desa_id='$id_kelurahan' ";
         $simpan = _query($sql);
     }
     header('location:../../index.php?module='.$module);

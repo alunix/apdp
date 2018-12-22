@@ -7,6 +7,7 @@ $edit=_fetch_array($data);
 <!----- ------------------------- EDIT DATA MASTER user ------------------------- ----->
 <div class="box-body">
     <?php
+
     if (isset($_POST['submit'])) {
         $id_user = $_GET['id_user'];
         $nama = $_POST['nama'];
@@ -105,7 +106,7 @@ $edit=_fetch_array($data);
 	<div class="form-group">
     <label class="col-sm-4 control-label">  </label>
     <div class="col-sm-5">
-<button type="submit"name="submit" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
+<button type="submit"name="submit" value="submit" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
 <a href="javascript:history.back()" class="btn btn-info pull-right"><i class="fa fa-backward"></i> Kembali</a>	 
     </div>
   </div>   
