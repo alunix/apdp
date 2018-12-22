@@ -18,7 +18,7 @@ if (!ctype_alnum($username) OR !ctype_alnum($pass)){
 	$ketemu	=_num_rows($login);
 	if ($ketemu>0){
 		$r		=_fetch_array($login);
-		$pwd	=$r['pass'];
+		$pwd	=@$r['pass'];
 		if ($r['blokir'] == 'Y'){
 			salah_blokir($username);
 			return false;

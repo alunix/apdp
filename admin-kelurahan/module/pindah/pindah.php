@@ -59,7 +59,7 @@ default:
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql = "SELECT * FROM data_warga a, pindah b where a.id=b.id ";
+$sql = "SELECT * FROM data_warga a, pindah b where a.id=b.id and ".buildQueryDesaId(NULL,"a");
 
 $tampil = _query($sql);
 $no=1;
@@ -121,10 +121,7 @@ case "list_pindah":
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$desa_ids = getMultipleDesaId();
-$stringDesaId = implode("', '", $desa_ids);
-
-$sql = "select * from data_warga where desa_id IN ('$stringDesaId') ";
+$sql = "select * from data_warga where ".buildQueryDesaId();
 
 $tampil = _query($sql);
 $no=1;

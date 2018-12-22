@@ -59,7 +59,7 @@ switch(@$_GET['aksi']){
 
                     <?php
                     // Tampilkan data dari Database
-                    $sql = "SELECT * FROM data_warga WHERE status_keluarga = 'Kepala Keluarga'";
+                    $sql = "SELECT * FROM data_warga WHERE status_keluarga = 'Kepala Keluarga' AND ".buildQueryDesaId();
                     $no=1;
                     $tampil = _query($sql);
                     while ($tampilkan = _fetch_array($tampil)) {

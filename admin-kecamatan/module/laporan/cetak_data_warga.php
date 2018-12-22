@@ -49,7 +49,8 @@ include "head.php";
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql =  "select dw.*, a.nama_agama, p.nama_pekerjaan, dd.name as nama_desa from data_warga dw left join daerah_desa dd on dd.id=dw.desa_id left join agama a on a.id_agama=dw.agama  left join pekerjaan p on p.id_pekerjaan=dw.pekerjaan ";
+$desaQuery = buildQueryDesaId(NULL, "dw");
+$sql =  "select dw.*, a.nama_agama, p.nama_pekerjaan, dd.name as nama_desa from data_warga dw left join daerah_desa dd on dd.id=dw.desa_id left join agama a on a.id_agama=dw.agama  left join pekerjaan p on p.id_pekerjaan=dw.pekerjaan WHERE $desaQuery";
 $tampil = _query($sql);
 $no=1;
 while ($data = _fetch_array($tampil)) { ?>

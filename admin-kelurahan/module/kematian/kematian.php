@@ -59,7 +59,8 @@ default:
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql = "SELECT * FROM data_warga a, kematian b where a.id=b.id ";
+$desaId = buildQueryDesaId(NULL, "a");
+$sql = "SELECT * FROM data_warga a, kematian b where a.id=b.id and $desaId";
 
 $tampil = _query($sql);
 $no=1;
@@ -121,10 +122,9 @@ case "list_kematian":
 <tbody>
 <?php
 
-$desa_ids = getMultipleDesaId();
-$stringDesaId = implode("', '", $desa_ids);
+$desaId = buildQueryDesaId(NULL, "dw");
 // Tampilkan data dari Database
-$sql = "SELECT dw.* FROM data_warga dw left join kematian k on k.id=dw.id where dw.desa_id IN ('$stringDesaId') and k.id IS NULL ";
+$sql = "SELECT dw.* FROM data_warga dw left join kematian k on k.id=dw.id where $desaId and k.id IS NULL ";
 $tampil = _query($sql);
 $no=1;
 while ($data = _fetch_array($tampil)) { 
@@ -317,7 +317,8 @@ $edit=_fetch_array($data);
 <?php	
 break;
 case "detail_kematian" :
-$data=_query("SELECT * FROM data_warga a, kematian b where a.id=b.id");
+$desaId = buildQueryDesaId(NULL, "a");
+$data=_query("SELECT * FROM data_warga a, kematian b where a.id=b.id and $desaId");
 $edit=_fetch_array($data);
 ?>
 <!----- ------------------------- LIHAT DATA KEMATIAN WARGA ------------------------- ----->

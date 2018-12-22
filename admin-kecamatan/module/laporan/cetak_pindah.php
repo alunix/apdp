@@ -47,7 +47,8 @@ include "head.php";
 <tbody>
 <?php 
 // Tampilkan data dari Database
-$sql = "SELECT a.*, b.*, dd.name as nama_desa FROM data_warga a join pindah b on b.id=a.id left join daerah_desa dd on dd.id=a.desa_id where a.id=b.id ";
+$a = buildQueryDesaId(NULL, "a");
+$sql = "SELECT a.*, b.*, dd.name as nama_desa FROM data_warga a join pindah b on b.id=a.id left join daerah_desa dd on dd.id=a.desa_id where a.id=b.id and $a ";
 $tampil = _query($sql);
 $no=1;
 while ($data = _fetch_array($tampil)) { ?>

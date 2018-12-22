@@ -49,12 +49,13 @@ include "head.php";
 <tbody>
 <?php 
 // Tampilkan data dari Database
+$desaId = buildQueryDesaId(NULL, "dw");
 $sql =  "SELECT dw.*, p.nama_pendidikan, pk.nama_pekerjaan, a.nama_agama, dd.name as nama_desa FROM data_warga dw
   left join daerah_desa dd on dd.id=dw.desa_id
   left join pendidikan p on p.id_pendidikan=dw.pendidikan  
   left join pekerjaan pk on pk.id_pekerjaan=dw.pekerjaan  
   left join agama a on a.id_agama=dw.agama 
-  where dw.status_keluarga='Kepala Keluarga' 
+  where dw.status_keluarga='Kepala Keluarga' and $desaId 
   ";
 $tampil = _query($sql);
 $no=1;

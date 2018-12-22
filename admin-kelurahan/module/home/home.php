@@ -23,7 +23,7 @@ Anda berada di halaman "<?php echo $_SESSION['level']; ?>"
         <div class="col-lg-3 col-xs-6">
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <?php $siswa = _num_rows(_query("SELECT * FROM data_warga")); ?>
+                    <?php $siswa = _num_rows(_query("SELECT * FROM data_warga where ".buildQueryDesaId())); ?>
                     <h3><?php echo $siswa; ?></h3>
                     <p>Data Warga</p>
                 </div>
@@ -38,7 +38,7 @@ Anda berada di halaman "<?php echo $_SESSION['level']; ?>"
             <!-- small box -->
             <div class="small-box bg-red">
                 <div class="inner">
-                    <?php $kematian = _num_rows(_query("SELECT * FROM kematian")); ?>
+                    <?php $kematian = _num_rows(_query("SELECT k.* FROM kematian k join data_warga dw on dw.id=k.id where ".buildQueryDesaId(NULL, "dw"))); ?>
                     <h3><?php echo $kematian; ?></h3>
                     <p>Kematian</p>
                 </div>
@@ -53,7 +53,7 @@ Anda berada di halaman "<?php echo $_SESSION['level']; ?>"
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <?php $pindah = _num_rows(_query("SELECT * FROM pindah")); ?>
+                    <?php $pindah = _num_rows(_query("SELECT * FROM pindah  k join data_warga dw on dw.id=k.id where ".buildQueryDesaId(NULL, "dw"))); ?>
                     <h3><?php echo $pindah; ?></h3>
                     <p>Pindah</p>
                 </div>
