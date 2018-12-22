@@ -46,4 +46,7 @@ else if (@$_GET['module'] == "cetak/lpbku") {
 else if (@$_GET['module'] == "cetak/lampid") {
     include GENERAL_MODULE_DIR."cetak_lampid/cetak_lampid.php";
 }
+else if ($_GET['module'] == "edit_user") {
+    include "module/edit_user.php";
+}
 ?>

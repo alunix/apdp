@@ -16,8 +16,19 @@ $nama_camat = _escape_string(@$_POST['nama_camat']);
 $nip_camat = @$_POST['nip_camat'];
 $nama_lurah = _escape_string(@$_POST['nama_lurah']);
 $nip_lurah = @$_POST['nip_lurah'];
-$nama_lurah = @$_POST['id_kelurahan'] ? $nama_lurah : $nama_camat;
+$nama_lurah_before = @$_POST['nama_lurah_before'];
+if ($nama_lurah_before) {
+    $isNamaCamat = $nama_lurah_before == $nama_camat;
+    $nama_lurah = !$isNamaCamat ? $nama_camat : $nama_lurah;
+}
 $nip = $nip_camat != '' ? $nip_camat : $nip_lurah;
+$nip_lurah_before = @$_POST['nip_lurah_before'];
+if ($nip_lurah_before) {
+    $isNipCamat = $nip_lurah_before == $nip_camat;
+    $nip_lurah = !$isNipCamat ? $nip_camat : $nip_lurah;
+    $nip = $nip_lurah;
+}
+
 // BLOKIR
 if($module=='user' AND $aksi=='no' ){ 
 $sql = "UPDATE user SET blokir='N' WHERE id_user = '".$_GET['id_user']."'";
@@ -50,6 +61,7 @@ else if($module=='user' AND $aksi=='tambah' ){
         $sql = "INSERT INTO daerah_desa_attribut (desa_id, nama_lurah, nip ) VALUES ('$id_kelurahan', '$nama_lurah', '$nip')";
         $simpan = _query($sql);
     } else {
+
         $sql = "UPDATE daerah_desa_attribut set nama_lurah='$nama_lurah', nip='$nip' WHERE desa_id='$id_kelurahan' ";
         $simpan = _query($sql);
     }

@@ -394,6 +394,7 @@ $edit=_fetch_array($data);
             <div class="form-group">
                 <label class="col-sm-4 control-label">NAMA CAMAT</label>
                 <div class="col-sm-5">
+                    <input type="hidden" class="form-control" name="nama_lurah_before" value="<?=$edit['nama_lurah'];?>" >
                     <input type="text" class="form-control" name="nama_camat" value="<?=$edit['nama_lurah'];?>" >
                 </div>
             </div>
