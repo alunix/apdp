@@ -34,6 +34,34 @@ if (!function_exists('get_desa')) {
         return $datas;
     }
 }
+if (!function_exists('get_detail_provinsi')) {
+    function get_detail_provinsi($provinsi_id) {
+        $sql = "SELECT * FROM daerah_provinsi where id='$provinsi_id' ";
+        $datas = _fetchOneFromSql($sql);
+        return $datas;
+    }
+}
+if (!function_exists('get_detail_kabupaten')) {
+    function get_detail_kabupaten($kabupaten_id) {
+        $sql = "SELECT * FROM daerah_kabupaten where id='$kabupaten_id' ";
+        $datas = _fetchOneFromSql($sql);
+        return $datas;
+    }
+}
+if (!function_exists('get_detail_kecamatan')) {
+    function get_detail_kecamatan($kecamatan_id) {
+        $sql = "SELECT * FROM daerah_kecamatan where id='$kecamatan_id' ";
+        $datas = _fetchOneFromSql($sql);
+        return $datas;
+    }
+}
+if (!function_exists('get_detail_desa')) {
+    function get_detail_desa($id) {
+        $sql = "SELECT * FROM daerah_desa where id='$id' ";
+        $datas = _fetchOneFromSql($sql);
+        return $datas;
+    }
+}
 
 if (!function_exists('optionLoop')) {
     function optionLoop($datas, $selectedId = false) {
