@@ -32,7 +32,7 @@
                         </div>
                         <div class="box-body">
                             <?php
-                            $data=_query("select * from data_warga where id='$_GET[id]'".buildQueryDesaId());
+                            $data=_query("select * from data_warga where id='$_GET[id]' and ".buildQueryDesaId());
                             $edit=_fetch_array($data);
                             ?>
                             <div class="form-group">
@@ -189,10 +189,6 @@
                                             <a class="btn btn-xs btn-success"data-toggle="tooltip" title="Lihat Data Anak <?php echo $tampilkan['id'];?>"
                                                href="?module=warga&aksi=detail_warga&id=<?php echo $tampilkan['id']; ?>">
                                                 <i class="glyphicon glyphicon-eye-open"></i>
-                                            </a>
-                                            <a class="btn btn-xs btn-success"data-toggle="tooltip" title="Cetak Detail Keluarga"
-                                               href="?module=laporan/data_kk_detail&id=<?php echo $tampilkan['id']; ?>">
-                                                <i class="fa fa-print"></i>
                                             </a>
                                         </td>
                                     </tr>
