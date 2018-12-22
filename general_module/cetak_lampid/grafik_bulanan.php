@@ -77,7 +77,7 @@ $dataLampids = array(
     array('name' => 'Datang', 'data' => array()),
 );
 $dataUnfiltered = getDataLampidTanggal($current_selected_year, $current_selected_month);
-$total_days = cal_days_in_month(CAL_GREGORIAN,$current_selected_month,$current_selected_year);
+$total_days = cal_days_in_month(CAL_GREGORIAN, $current_selected_month, $current_selected_year);
 for ($i=1;$i<=$total_days;$i++) {
     $dataFiltered = array_filter($dataUnfiltered, function ($d) use ($i) {
         return (int) $d['tanggal'] == $i;

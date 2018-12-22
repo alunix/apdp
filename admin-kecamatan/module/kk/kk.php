@@ -84,7 +84,7 @@ switch(@$_GET['aksi']){
                                 <a class="btn btn-xs btn-warning"data-toggle="tooltip" title="Cetak Data Kepala Keluarga <?php echo $tampilkan['id'];?>"
                                    href="<?=baseUrlByLevel('module/laporan/cetak_kk_detail.php');?>?aksi=detail_warga2&id=<?php echo $tampilkan['id'];?>"
                                 >
-                                    <i class="fa fa-print"></i>
+                                    <i class="glyphicon glyphicon-print"></i>
                                 </a>
 
                             </td>
@@ -104,7 +104,7 @@ case "detail_warga2" :
 <!----- ------------------------- LIHAT DATA KEPALA KELUARGA ------------------------- ----->
 
 	<center>
-		<h3> Data Warga</h3>
+		<h3> Data Kepala Keluarga</h3>
 	</center>
 
 	<form class="form-horizontal" action="<?php echo $aksi?>?module=kk&aksi=edit" role="form" method="post">
@@ -294,10 +294,7 @@ case "detail_warga2" :
                             href="?module=warga&aksi=detail_warga&id=<?php echo $tampilkan['id']; ?>">
                             <i class="glyphicon glyphicon-eye-open"></i>
                         </a>
-                        <a class="btn btn-xs btn-success"data-toggle="tooltip" title="Cetak Detail Keluarga"
-                            href="?module=laporan/data_kk_detail&id=<?php echo $tampilkan['id']; ?>">
-                            <i class="fa fa-print"></i>
-                        </a>
+                        
                     </td>
                 </tr>
                 <?php

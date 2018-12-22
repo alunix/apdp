@@ -22,7 +22,7 @@ include "head.php";
              
             <div class="box box-default">
               <div class="box-header with-border">
-                <h3 class="box-title center">Daftar Kematian Warga</h3>
+                <h3 class="box-title center">Data Kematian Warga</h3>
 				<span class="pull-right">
 				Tasikmalaya, <?php echo Indonesia2Tgl(date('Y-m-d'));?> 
 				</span>					

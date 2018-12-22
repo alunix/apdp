@@ -30,7 +30,7 @@ include_once '../../../bootstrap.php';
         <nav class="navbar navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="<?=BASE_URL;?>" class="navbar-brand"><b>Sistem Informasi Kependudukan Kecamatan Tawang</b>&nbsp; Kota Tasikmalaya</a>
+                    <a href="<?=BASE_URL;?>" class="navbar-brand"><b>Aplikasi Pengolahan Data Penduduk Kecamatan Tawang</b>&nbsp; Kota Tasikmalaya</a>
                 </div>
 
                 <!-- Navbar Right Menu -->

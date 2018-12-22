@@ -360,7 +360,7 @@ if (!function_exists('getDataLampidTanggal')) {
         $data_datangs = _fetchMultipleFromSql($sql);
 
         $datas = array();
-        $daysCount = cal_days_in_month(CAL_GREGORIAN,$month,$year);
+        $daysCount = cal_days_in_month(CAL_GREGORIAN, $month, $year);
         for ($i=1;$i<=$daysCount;$i++) {
             $tahun = $year;
             $bulan = $month;
