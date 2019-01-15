@@ -65,8 +65,8 @@ if (!function_exists('process_bmh')) {
 
 if (!function_exists('process_kmp')) {
     function process_kmp($pattern, $text){
-        $haystack = $text;
-        $needle = $pattern;
+        $haystack = strtolower($text);
+        $needle = strtolower($pattern);
         $n = strlen($haystack);
         $m = strlen($needle);
 
