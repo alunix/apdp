@@ -33,14 +33,20 @@
             </div>
             <div class="col-sm-1">
                 <button type="submit"name="submit" onclick="this.form.target='_self';return true;" class="btn btn-success"><i class="glyphicon glyphicon-print"></i>&nbsp; Cetak</button>
-            </div></div>
+            </div>
+        </div>
     </form>
 <div class="box box-solid box-success">
     <div class="box-header">
         <h3 class="btn btn disabled box-title">
             <i class="fa  fa-user-secret"></i>Data Warga </h3>
+
+        <a class="btn btn-default pull-right"href="?module=warga&aksi=export&buffer=start">
+            <i class="fa  fa-file-excel-o"></i> Export</a>
+        <a class="btn btn-default pull-right"href="?module=warga&aksi=import">
+            <i class="fa  fa-file-excel-o"></i> Import</a>
         <a class="btn btn-default pull-right"href="?module=warga&aksi=tambah">
-            <i class="fa  fa-plus"></i> Tambah Data Warga</a>
+            <i class="fa  fa-plus"></i> Tambah data Warga</a>
     </div>
     <div class="box-body">
         <table id="example2" class="table table-bordered table-striped">

@@ -15,6 +15,7 @@ include BASE_DIR.'/inc/inc.library.php';
 include BASE_DIR."/inc/database.php";
 include BASE_DIR."/inc/profile.php";
 include BASE_DIR.'/inc/query_builder.php';
+include BASE_DIR.'/inc/inc.excel.php';
 include BASE_DIR.'/koneksi.php';
 
 

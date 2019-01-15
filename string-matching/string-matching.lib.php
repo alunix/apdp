@@ -57,3 +57,45 @@ if (!function_exists('process_bmh')) {
         return $find ? $currentShift : false;
     }
 }
+
+if (!function_exists('process_kmp')) {
+    function process_kmp($pattern, $text){
+        $haystack = $text;
+        $needle = $pattern;
+        $n = strlen($haystack);
+        $m = strlen($needle);
+
+        $p = preprocess_kmp($needle, $m);
+
+        $j = 0;
+        for($i=0;$i<$n;$i++){
+            while($j > 0 && $needle[$j] <> $haystack[$i]){
+                $j = $p[$j];
+            }
+            if($needle[$j] == $haystack[$i]){
+                $j++;
+            }
+            if($j == $m){
+                return ($i - $m + 1);
+            }
+        }
+        return false;
+    }
+}
+
+if (!function_exists('preprocess_kmp')) {
+    function preprocess_kmp($needle, $m){
+        $p = array(0);
+        $j = 0;
+        for($i=1;$i<$m;$i++){
+            while($j > 0 && $needle[$j] <> $needle[$i]){
+                $j = $p[$j];
+            }
+            if($needle[$j] == $needle[$i]){
+                $j++;
+            }
+            $p[$i] = $j;
+        }
+        return $p;
+    }
+}
