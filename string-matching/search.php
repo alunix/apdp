@@ -31,12 +31,17 @@ if ($q) {
         while ($tampilkan = _fetch_array($tampil)) {
             $Kode = $tampilkan['id'];
             $nama = $tampilkan['nama'];
+            $start = microtime(true);
             $find = process_bmh($q, $nama);
+            $end = microtime(true);
+            $selisih = $end-$start;
             if ($find !== false) {
                 ?>
-                <tr>
+                
+                 <tr>
                     <td><a href="?module=warga&aksi=detail_warga&id=<?php echo $tampilkan['id']; ?>"><?php echo $tampilkan['nama']; ?></a> </td>
                 </tr>
+
                 <?php
                 $count++;
             }

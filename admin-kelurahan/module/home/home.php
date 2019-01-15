@@ -174,7 +174,7 @@ Anda berada di halaman "<?php echo $_SESSION['level']; ?>"
                                     }
                                 },
                                 series: [{
-                                    name: 'Orang',
+                                    name: 'Bulan',
                                     data: [
                                         <?php
                                         $desaIds = getMultipleDesaId();

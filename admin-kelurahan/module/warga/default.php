@@ -40,7 +40,7 @@
         <h3 class="btn btn disabled box-title">
             <i class="fa  fa-user-secret"></i>Data Warga </h3>
         <a class="btn btn-default pull-right"href="?module=warga&aksi=tambah">
-            <i class="fa  fa-plus"></i> Tambah data Warga</a>
+            <i class="fa  fa-plus"></i> Tambah Data Warga</a>
     </div>
     <div class="box-body">
         <table id="example2" class="table table-bordered table-striped">

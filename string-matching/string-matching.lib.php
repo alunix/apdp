@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: --
- * Date: 9/1/18
- * Time: 1:28 PM
- */
+
 
 if (!function_exists('preprocess_bmh')) {
     function preprocess_bmh($pattern){
