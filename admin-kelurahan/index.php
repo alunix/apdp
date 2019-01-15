@@ -1,4 +1,5 @@
 <?php
+if (isset($_GET['buffer']) && @$_GET['buffer']=='start') ob_start();
 include '../bootstrap.php';
 include  BASE_DIR."inc/cek_session.php";
 
@@ -541,3 +542,6 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
     </script>	
   </body>
 </html>
+
+<?php
+if (isset($_GET['buffer']) && @$_GET['buffer']=='start') echo ob_get_clean();

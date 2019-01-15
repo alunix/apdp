@@ -12,6 +12,14 @@ case "tambah":
 case "edit" :
     include "edit.php";
     break;
+case "export" :
+    ob_end_clean();
+    include "export.php";
+    exit();
+    break;
+case "import" :
+    include "import.php";
+    break;
 case "detail_warga" :
 ?>
 <center>
