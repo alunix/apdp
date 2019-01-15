@@ -38,8 +38,9 @@ if ($q) {
             if ($find !== false) {
                 ?>
                 <tr>
-                    <td><a href="?module=warga&aksi=detail_warga&id=<?php echo $tampilkan['id']; ?>"><?php echo $tampilkan['nama']; ?> (<?=number_format($selisih*1000, 9, ".", ",");?> ms.) </a> </td>
+                    <td><a href="?module=warga&aksi=detail_warga&id=<?php echo $tampilkan['id']; ?>"><?php echo $tampilkan['nama']; ?> (<?=number_format($selisih*1000, 5, ".", ",");?> ms.) </a> </td>
                 </tr>
+
                 <?php
                 $count++;
             }

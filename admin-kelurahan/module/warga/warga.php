@@ -134,7 +134,7 @@ $edit=_fetch_array($data);
 	</div>
   </div>
   <div class="form-group">
-     <label class="col-sm-4 control-label">Golongan Darah</label>
+     <label class="col-sm-4 control-label">GOLONGAN DARAH</label>
 	 <div class="col-sm-5">
     <input type="text" class="form-control" value="<?php echo $edit['gol_dar']; ?>" placeholder="Golongan Darah" readonly name="gol_dar">
 	</div>

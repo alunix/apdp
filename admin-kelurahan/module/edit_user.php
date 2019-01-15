@@ -47,7 +47,7 @@ $edit=_fetch_array($data);
     if ($edit['level'] == 'admin-kelurahan') {
         ?>
         <div class="form-group">
-            <label class="col-sm-4 control-label">DESA</label>
+            <label class="col-sm-4 control-label">Desa</label>
             <div class="col-sm-5">
                 <select name="desa_id" id="desa_id" class="form-control" readonly="readonly" disabled="disabled">
                     <?php

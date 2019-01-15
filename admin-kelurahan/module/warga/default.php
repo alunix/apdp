@@ -47,7 +47,6 @@
             <i class="fa  fa-file-excel-o"></i> Import</a>
         <a class="btn btn-default pull-right"href="?module=warga&aksi=tambah">
             <i class="fa  fa-plus"></i> Tambah data Warga</a>
-
     </div>
     <div class="box-body">
         <table id="example2" class="table table-bordered table-striped">
