@@ -20,6 +20,15 @@ case "export" :
 case "import" :
     include "import.php";
     break;
+case "delete_import_file" :
+    include "delete_import_file.php";
+    break;
+case "proses_import_file" :
+    include "proses_import_file.php";
+    break;
+case "delete_import_result" :
+    include "delete_import_result.php";
+    break;
 case "detail_warga" :
 ?>
 <center>

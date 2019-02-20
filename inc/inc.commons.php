@@ -20,3 +20,18 @@ if (!function_exists('GetSetVar')) {
         return @$_SESSION[$varName];
     }
 }
+
+
+if (!function_exists('redirect')) {
+    function redirect($url='')
+    {
+        header("Location:".$url);die();
+    }
+}
+
+if (!function_exists('redirectJs')) {
+    function redirectJs($url='')
+    {
+        echo sprintf("<script>window.location.href='%s'</script>", $url);die();
+    }
+}

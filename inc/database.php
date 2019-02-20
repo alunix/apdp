@@ -78,20 +78,22 @@ if (!function_exists('_fetchOneFromSql')) {
 }
 
 if (!function_exists('_getMultipleData')) {
-    function _getMultipleData($table, $where="1=1", $column="*", $group_by="", $order_by="") {
+    function _getMultipleData($table, $where="1=1", $column="*", $group_by="", $order_by="", $limit=NULL) {
         $sql = sprintf("SELECT %s FROM %s WHERE %s %s %s", $column, $table, $column,
             $group_by?("GROUP BY ".$group_by):"",
-            $order_by?("ORDER BY ".$order_by):""
+            $order_by?("ORDER BY ".$order_by):"",
+            $limit? $limit : ""
         );
         return _fetchMultipleFromSql($sql);
     }
 }
 
 if (!function_exists('_getOneData')) {
-    function _getOneData($table, $where="1=1", $column="*", $group_by="", $order_by="") {
-        $sql = sprintf("SELECT %s FROM %s WHERE %s %s %s", $column, $table, $where,
+    function _getOneData($table, $where="1=1", $column="*", $group_by="", $order_by="", $limit=NULL) {
+        $sql = sprintf("SELECT %s FROM %s WHERE %s %s %s %s", $column, $table, $where,
             $group_by?("GROUP BY ".$group_by):"",
-            $order_by?("ORDER BY ".$order_by):""
+            $order_by?("ORDER BY ".$order_by):"",
+            $limit? $limit : ""
         );
         return _fetchOneFromSql($sql);
     }
