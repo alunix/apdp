@@ -41,9 +41,15 @@ if (!function_exists('_num_rows')) {
         return mysqli_num_rows($query);
     }
 }
+
 if (!function_exists('_escape_string')) {
     function _escape_string($string) {
         return mysqli_real_escape_string(_connect(), $string);
+    }
+}
+if (!function_exists('_error')) {
+    function _error() {
+        return mysqli_error(_connect());
     }
 }
 

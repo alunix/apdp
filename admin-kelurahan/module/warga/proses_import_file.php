@@ -13,6 +13,7 @@ if ($file_id) {
         $total = 0;
         $success_total = 0;
         $custom_keterangan = "";
+        $inserted_error_messages =[];
         if (file_exists($file_location)) {
             $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($file_location);
             $count = $spreadsheet->getSheetCount();
@@ -25,21 +26,25 @@ if ($file_id) {
                     $nomor_excel = @$sheetDatum[0];
                     if ($key==0) continue;
                     if (!@$sheetDatum[1]) {
-                        $custom_keterangan .= "No KK dengan nomor $nomor_excel kosong";
+                        $custom_keterangan .= "No KK dengan nomor $nomor_excel kosong<br/>";
                         continue;
                     }
                     if (!@$sheetDatum[2]) {
-                        $custom_keterangan .= "NIK dengan nomor $nomor_excel kosong";
+                        $custom_keterangan .= "NIK dengan nomor $nomor_excel kosong<br/>";
                         continue;
                     }
                     if (@$sheetDatum[1] && @$sheetDatum[2]) {
                         $nik = @$sheetDatum[2];
                         $exists = _getOneData("data_warga", "nik='$nik'");
-                        if ($exists) continue;
+                        if ($exists) {
+                            $custom_keterangan .= "NIK $nik sudah ada di database<br/>";
+                            continue;
+                        };
                         $no_kk = @$sheetDatum[1];
                         $nama = @$sheetDatum[3];
+                        $nama = _escape_string($nama);
                         $jk = @$sheetDatum[4]=="L"?"Laki-laki":@$sheetDatum[4];
-                        if ($jk!="Laki-laki") @$sheetDatum[4]=="P"?"Perempuan":@$sheetDatum[4];
+                        if ($jk!="Laki-laki") $jk = @$sheetDatum[4]=="P"?"Perempuan":@$sheetDatum[4];
                         $tempat_lhr = @$sheetDatum[5];
                         $tanggal_lhr = @$sheetDatum[6];
                         $tanggal_lhr_array = explode("/", $tanggal_lhr);
@@ -104,6 +109,11 @@ if ($file_id) {
                             'nama_ibu', 'alamat', 'rt', 'rw', 'desa_id'
 //                            'uploaded_file_id'
                         ));
+                        $error = _error();
+                        if (!in_array($error, $inserted_error_messages)) {
+                            $inserted_error_messages[] = $error;
+                            $custom_keterangan .= _error()."<br/>";
+                        }
                         if (!$status) continue;
                         $success_total++;
                     }
@@ -115,7 +125,7 @@ if ($file_id) {
         $processed = 1;
         $status_prosess = 1;
         $total--;
-        $keterangan = "Memproses $success_total from $total data. $custom_keterangan";
+        $keterangan = "Memproses $success_total from $total data. <br/>$custom_keterangan";
         _updateData(
             'uploaded_file',
             compact('processed', 'status_prosess', 'keterangan'),

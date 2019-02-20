@@ -539,6 +539,12 @@ tanggallengkap = namahari[hari] + ", " +tanggal + " " + namabulan[bulan] + " " +
             "searching": false
         });
       });
+
+      $(".toggle-event-data").click(function(event) {
+          event.preventDefault();
+          var file_id = $(this).data('id');
+          $( ".toggle-element-data[data-id='"+file_id+"']" ).toggle('slow');
+      });
     </script>	
   </body>
 </html>

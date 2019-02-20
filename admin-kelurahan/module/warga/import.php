@@ -106,7 +106,17 @@
                                 ?>
                             </td>
                             <td>
-                                <?=$uploaded_file['keterangan'];?>
+                                <?php
+                                $exploded = explode("<br/>", $uploaded_file['keterangan']);
+                                echo @$exploded[0];
+                                ?>
+                                <a href="" class="toggle-event-data" data-id="<?=$uploaded_file['id'];?>">Detail</a>
+                                <div class="well toggle-element-data" style="display: none" data-id="<?=$uploaded_file['id'];?>">
+                                    <?php
+                                    unset($exploded[0]);
+                                    echo implode("<br/>", $exploded);
+                                    ?>
+                                </div>
                             </td>
                             <td>
                                 <?php
