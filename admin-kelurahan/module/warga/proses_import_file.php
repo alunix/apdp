@@ -37,13 +37,13 @@ if ($file_id) {
                         $nik = @$sheetDatum[2];
                         $no_kk = @$sheetDatum[1];
                         $nama = @$sheetDatum[3];
+                        $nama = _escape_string($nama);
                         $exists = _getOneData("data_warga", "nik='$nik'");
                         if ($exists) {
                             $custom_keterangan .= "NIK $nik ({$nama}) sudah ada di database<br/>";
                             continue;
                         };
 
-                        $nama = _escape_string($nama);
                         $jk = @$sheetDatum[4]=="L"?"Laki-laki":@$sheetDatum[4];
                         if ($jk!="Laki-laki") $jk = @$sheetDatum[4]=="P"?"Perempuan":@$sheetDatum[4];
                         $tempat_lhr = @$sheetDatum[5];
