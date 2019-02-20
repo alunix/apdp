@@ -92,6 +92,7 @@ if ($file_id) {
                         $nama_ayah = @$sheetDatum[14];
                         $nama_ibu = @$sheetDatum[13];
                         $alamat = @$sheetDatum[15];
+                        $alamat = _escape_string($alamat);
                         $rt = @$sheetDatum[16];
                         $rw = @$sheetDatum[17];
                         $desa_id = @getMultipleDesaId()[0];
